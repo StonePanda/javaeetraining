@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hos.one.dao.HotelMapper">
+  <resultMap id="BaseResultMap" type="com.hos.one.entity.Hotel">
+    <constructor>
+      <idArg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="hotelname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="positiontext" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="positionwei" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="positionjing" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="brandid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="hotelphone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hotelurl" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="overview" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="photourl" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="getstars" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    hotelid, hotelname, positiontext, positionwei, positionjing, brandid, hotelphone, 
+    hotelurl, overview, photourl, getstars
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hotel
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hotel
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hos.one.entity.Hotel">
+    insert into hotel (hotelid, hotelname, positiontext, 
+      positionwei, positionjing, brandid, 
+      hotelphone, hotelurl, overview, 
+      photourl, getstars)
+    values (#{hotelid,jdbcType=INTEGER}, #{hotelname,jdbcType=VARCHAR}, #{positiontext,jdbcType=VARCHAR}, 
+      #{positionwei,jdbcType=DOUBLE}, #{positionjing,jdbcType=DOUBLE}, #{brandid,jdbcType=INTEGER}, 
+      #{hotelphone,jdbcType=VARCHAR}, #{hotelurl,jdbcType=VARCHAR}, #{overview,jdbcType=VARCHAR}, 
+      #{photourl,jdbcType=VARCHAR}, #{getstars,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotel">
+    insert into hotel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        hotelid,
+      </if>
+      <if test="hotelname != null">
+        hotelname,
+      </if>
+      <if test="positiontext != null">
+        positiontext,
+      </if>
+      <if test="positionwei != null">
+        positionwei,
+      </if>
+      <if test="positionjing != null">
+        positionjing,
+      </if>
+      <if test="brandid != null">
+        brandid,
+      </if>
+      <if test="hotelphone != null">
+        hotelphone,
+      </if>
+      <if test="hotelurl != null">
+        hotelurl,
+      </if>
+      <if test="overview != null">
+        overview,
+      </if>
+      <if test="photourl != null">
+        photourl,
+      </if>
+      <if test="getstars != null">
+        getstars,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="hotelname != null">
+        #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="positiontext != null">
+        #{positiontext,jdbcType=VARCHAR},
+      </if>
+      <if test="positionwei != null">
+        #{positionwei,jdbcType=DOUBLE},
+      </if>
+      <if test="positionjing != null">
+        #{positionjing,jdbcType=DOUBLE},
+      </if>
+      <if test="brandid != null">
+        #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="hotelphone != null">
+        #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelurl != null">
+        #{hotelurl,jdbcType=VARCHAR},
+      </if>
+      <if test="overview != null">
+        #{overview,jdbcType=VARCHAR},
+      </if>
+      <if test="photourl != null">
+        #{photourl,jdbcType=VARCHAR},
+      </if>
+      <if test="getstars != null">
+        #{getstars,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Hotel">
+    update hotel
+    <set>
+      <if test="hotelname != null">
+        hotelname = #{hotelname,jdbcType=VARCHAR},
+      </if>
+      <if test="positiontext != null">
+        positiontext = #{positiontext,jdbcType=VARCHAR},
+      </if>
+      <if test="positionwei != null">
+        positionwei = #{positionwei,jdbcType=DOUBLE},
+      </if>
+      <if test="positionjing != null">
+        positionjing = #{positionjing,jdbcType=DOUBLE},
+      </if>
+      <if test="brandid != null">
+        brandid = #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="hotelphone != null">
+        hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelurl != null">
+        hotelurl = #{hotelurl,jdbcType=VARCHAR},
+      </if>
+      <if test="overview != null">
+        overview = #{overview,jdbcType=VARCHAR},
+      </if>
+      <if test="photourl != null">
+        photourl = #{photourl,jdbcType=VARCHAR},
+      </if>
+      <if test="getstars != null">
+        getstars = #{getstars,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Hotel">
+    update hotel
+    set hotelname = #{hotelname,jdbcType=VARCHAR},
+      positiontext = #{positiontext,jdbcType=VARCHAR},
+      positionwei = #{positionwei,jdbcType=DOUBLE},
+      positionjing = #{positionjing,jdbcType=DOUBLE},
+      brandid = #{brandid,jdbcType=INTEGER},
+      hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      hotelurl = #{hotelurl,jdbcType=VARCHAR},
+      overview = #{overview,jdbcType=VARCHAR},
+      photourl = #{photourl,jdbcType=VARCHAR},
+      getstars = #{getstars,jdbcType=INTEGER}
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+</mapper>

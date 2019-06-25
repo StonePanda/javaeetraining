@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hos.one.dao.ClientMapper">
+  <resultMap id="BaseResultMap" type="com.hos.one.entity.Client">
+    <constructor>
+      <idArg column="clientid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="accountname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="accountpw" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phonenumber" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    clientid, accountname, accountpw, phonenumber, email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from client
+    where clientid = #{clientid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from client
+    where clientid = #{clientid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hos.one.entity.Client">
+    insert into client (clientid, accountname, accountpw, 
+      phonenumber, email)
+    values (#{clientid,jdbcType=INTEGER}, #{accountname,jdbcType=VARCHAR}, #{accountpw,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Client">
+    insert into client
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clientid != null">
+        clientid,
+      </if>
+      <if test="accountname != null">
+        accountname,
+      </if>
+      <if test="accountpw != null">
+        accountpw,
+      </if>
+      <if test="phonenumber != null">
+        phonenumber,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clientid != null">
+        #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="accountname != null">
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountpw != null">
+        #{accountpw,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null">
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Client">
+    update client
+    <set>
+      <if test="accountname != null">
+        accountname = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountpw != null">
+        accountpw = #{accountpw,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null">
+        phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where clientid = #{clientid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Client">
+    update client
+    set accountname = #{accountname,jdbcType=VARCHAR},
+      accountpw = #{accountpw,jdbcType=VARCHAR},
+      phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where clientid = #{clientid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hos.one.dao.RoomtypeMapper">
+  <resultMap id="BaseResultMap" type="com.hos.one.entity.Roomtype">
+    <constructor>
+      <idArg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="roomtype" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="num" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="price" javaType="java.lang.Double" jdbcType="DOUBLE" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    hotelid, roomtype, num, price
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from roomtype
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+      and roomtype = #{roomtype,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from roomtype
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+      and roomtype = #{roomtype,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hos.one.entity.Roomtype">
+    insert into roomtype (hotelid, roomtype, num, 
+      price)
+    values (#{hotelid,jdbcType=INTEGER}, #{roomtype,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Roomtype">
+    insert into roomtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        hotelid,
+      </if>
+      <if test="roomtype != null">
+        roomtype,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="roomtype != null">
+        #{roomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Roomtype">
+    update roomtype
+    <set>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+      and roomtype = #{roomtype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Roomtype">
+    update roomtype
+    set num = #{num,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE}
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+      and roomtype = #{roomtype,jdbcType=VARCHAR}
+  </update>
+</mapper>

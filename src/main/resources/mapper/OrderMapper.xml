@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hos.one.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.hos.one.entity.Order">
+    <constructor>
+      <idArg column="orderid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="clientid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="roomtype" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="timestart" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="timeend" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="price" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="commentstar" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="commentcontent" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    orderid, clientid, hotelid, roomtype, timestart, timeend, price, status, commentstar, 
+    commentcontent
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hos.one.entity.Order">
+    insert into order (orderid, clientid, hotelid, 
+      roomtype, timestart, timeend, 
+      price, status, commentstar, 
+      commentcontent)
+    values (#{orderid,jdbcType=INTEGER}, #{clientid,jdbcType=INTEGER}, #{hotelid,jdbcType=INTEGER}, 
+      #{roomtype,jdbcType=VARCHAR}, #{timestart,jdbcType=INTEGER}, #{timeend,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{commentstar,jdbcType=INTEGER}, 
+      #{commentcontent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        orderid,
+      </if>
+      <if test="clientid != null">
+        clientid,
+      </if>
+      <if test="hotelid != null">
+        hotelid,
+      </if>
+      <if test="roomtype != null">
+        roomtype,
+      </if>
+      <if test="timestart != null">
+        timestart,
+      </if>
+      <if test="timeend != null">
+        timeend,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="commentstar != null">
+        commentstar,
+      </if>
+      <if test="commentcontent != null">
+        commentcontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="clientid != null">
+        #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="hotelid != null">
+        #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="roomtype != null">
+        #{roomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="timestart != null">
+        #{timestart,jdbcType=INTEGER},
+      </if>
+      <if test="timeend != null">
+        #{timeend,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="commentstar != null">
+        #{commentstar,jdbcType=INTEGER},
+      </if>
+      <if test="commentcontent != null">
+        #{commentcontent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Order">
+    update order
+    <set>
+      <if test="clientid != null">
+        clientid = #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="hotelid != null">
+        hotelid = #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="roomtype != null">
+        roomtype = #{roomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="timestart != null">
+        timestart = #{timestart,jdbcType=INTEGER},
+      </if>
+      <if test="timeend != null">
+        timeend = #{timeend,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="commentstar != null">
+        commentstar = #{commentstar,jdbcType=INTEGER},
+      </if>
+      <if test="commentcontent != null">
+        commentcontent = #{commentcontent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Order">
+    update order
+    set clientid = #{clientid,jdbcType=INTEGER},
+      hotelid = #{hotelid,jdbcType=INTEGER},
+      roomtype = #{roomtype,jdbcType=VARCHAR},
+      timestart = #{timestart,jdbcType=INTEGER},
+      timeend = #{timeend,jdbcType=INTEGER},
+      price = #{price,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      commentstar = #{commentstar,jdbcType=INTEGER},
+      commentcontent = #{commentcontent,jdbcType=VARCHAR}
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>
