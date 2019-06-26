@@ -5,6 +5,10 @@ public class Hotel {
 
     private String hotelname;
 
+    private String hotelphone;
+
+    private String hotelpw;
+
     private String positiontext;
 
     private Double positionwei;
@@ -13,25 +17,21 @@ public class Hotel {
 
     private Integer brandid;
 
-    private String hotelphone;
-
-    private String hotelurl;
-
     private String overview;
 
     private String photourl;
 
     private Integer getstars;
 
-    public Hotel(Integer hotelid, String hotelname, String positiontext, Double positionwei, Double positionjing, Integer brandid, String hotelphone, String hotelurl, String overview, String photourl, Integer getstars) {
+    public Hotel(Integer hotelid, String hotelname, String hotelphone, String hotelpw, String positiontext, Double positionwei, Double positionjing, Integer brandid, String overview, String photourl, Integer getstars) {
         this.hotelid = hotelid;
         this.hotelname = hotelname;
+        this.hotelphone = hotelphone;
+        this.hotelpw = hotelpw;
         this.positiontext = positiontext;
         this.positionwei = positionwei;
         this.positionjing = positionjing;
         this.brandid = brandid;
-        this.hotelphone = hotelphone;
-        this.hotelurl = hotelurl;
         this.overview = overview;
         this.photourl = photourl;
         this.getstars = getstars;
@@ -55,6 +55,22 @@ public class Hotel {
 
     public void setHotelname(String hotelname) {
         this.hotelname = hotelname == null ? null : hotelname.trim();
+    }
+
+    public String getHotelphone() {
+        return hotelphone;
+    }
+
+    public void setHotelphone(String hotelphone) {
+        this.hotelphone = hotelphone == null ? null : hotelphone.trim();
+    }
+
+    public String getHotelpw() {
+        return hotelpw;
+    }
+
+    public void setHotelpw(String hotelpw) {
+        this.hotelpw = hotelpw == null ? null : hotelpw.trim();
     }
 
     public String getPositiontext() {
@@ -87,22 +103,6 @@ public class Hotel {
 
     public void setBrandid(Integer brandid) {
         this.brandid = brandid;
-    }
-
-    public String getHotelphone() {
-        return hotelphone;
-    }
-
-    public void setHotelphone(String hotelphone) {
-        this.hotelphone = hotelphone == null ? null : hotelphone.trim();
-    }
-
-    public String getHotelurl() {
-        return hotelurl;
-    }
-
-    public void setHotelurl(String hotelurl) {
-        this.hotelurl = hotelurl == null ? null : hotelurl.trim();
     }
 
     public String getOverview() {

@@ -2,22 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Team10-HOS</title>
+    <title>酒店登录</title>
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login-admin.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="js/login.js"></script>
 </head>
 <body>
     <div class="main">
         <div class="login-box">
             <div class="body">
                 <div class="content">
-                    <a href=""><!--/index!-->
+                    <a href="index.html">
                         <img src="img/xcy.png"><!--宣传语!-->
                     </a>
                     <h2 style="color:rgb(0,0,0,0.8);">Team10-HOS</h2>
 
-                    <input type="text" placeholder="您的邮箱" id="email"> <br>
-                    <input type="password" placeholder="您的登录密码" id="pass"> <br>
+                    <input type="text" placeholder="邮箱" id="email"> <br>
+                    <input type="password" placeholder="登录密码" id="pass"> <br>
                     <!--show err info in span-->
                     <span class="err"></span>
                     <button id="submit">登 录</button>
@@ -25,13 +27,10 @@
             </div>
             <div class="info">
                 <span style="color:rgb(0,0,0,0.8);">还没有帐号？ </span>
-                <a href="/register">立即注册 </a>
-                 •
-                <a href="/login-admin"> 酒店登录</a>
+                •
+                <a href="register-admin.html">立即注册酒店 </a>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/login.js"></script>
 </body>
 </html>

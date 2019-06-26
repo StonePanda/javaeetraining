@@ -27,7 +27,7 @@
     values (#{brandid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR}, #{brandpicurl,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hos.one.entity.Brand">
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Brand" useGeneratedKeys="true" keyProperty="brandid">
     insert into brand
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="brandid != null">

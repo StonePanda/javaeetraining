@@ -4,14 +4,13 @@
   <resultMap id="BaseResultMap" type="com.hos.one.entity.Client">
     <constructor>
       <idArg column="clientid" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="accountname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="accountpw" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="phonenumber" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    clientid, accountname, accountpw, phonenumber, email
+    clientid, phone, accountpw, email
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,25 +23,22 @@
     where clientid = #{clientid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hos.one.entity.Client">
-    insert into client (clientid, accountname, accountpw, 
-      phonenumber, email)
-    values (#{clientid,jdbcType=INTEGER}, #{accountname,jdbcType=VARCHAR}, #{accountpw,jdbcType=VARCHAR}, 
-      #{phonenumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+    insert into client (clientid, phone, accountpw, 
+      email)
+    values (#{clientid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{accountpw,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hos.one.entity.Client">
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Client" useGeneratedKeys="true" keyProperty="clientid">
     insert into client
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="clientid != null">
         clientid,
       </if>
-      <if test="accountname != null">
-        accountname,
+      <if test="phone != null">
+        phone,
       </if>
       <if test="accountpw != null">
         accountpw,
-      </if>
-      <if test="phonenumber != null">
-        phonenumber,
       </if>
       <if test="email != null">
         email,
@@ -52,14 +48,11 @@
       <if test="clientid != null">
         #{clientid,jdbcType=INTEGER},
       </if>
-      <if test="accountname != null">
-        #{accountname,jdbcType=VARCHAR},
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="accountpw != null">
         #{accountpw,jdbcType=VARCHAR},
-      </if>
-      <if test="phonenumber != null">
-        #{phonenumber,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -69,14 +62,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Client">
     update client
     <set>
-      <if test="accountname != null">
-        accountname = #{accountname,jdbcType=VARCHAR},
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="accountpw != null">
         accountpw = #{accountpw,jdbcType=VARCHAR},
-      </if>
-      <if test="phonenumber != null">
-        phonenumber = #{phonenumber,jdbcType=VARCHAR},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -86,9 +76,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Client">
     update client
-    set accountname = #{accountname,jdbcType=VARCHAR},
+    set phone = #{phone,jdbcType=VARCHAR},
       accountpw = #{accountpw,jdbcType=VARCHAR},
-      phonenumber = #{phonenumber,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR}
     where clientid = #{clientid,jdbcType=INTEGER}
   </update>

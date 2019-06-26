@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class clientserviceimpl {
+public class Clientserviceimpl implements Clientservice{
 
-    @Autowired
+    @Autowired//不能使用autowired？
     private ClientMapper clientmapper;
 
     @Override
     public void addclient(Client client){
-        clientmapper.insert(client);
+        clientmapper.insertSelective(client);
     }
 }

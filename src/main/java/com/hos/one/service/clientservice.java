@@ -2,6 +2,6 @@ package com.hos.one.service;
 import com.hos.one.entity.Client;
 
 
-public interface clientservice {
+public interface Clientservice {
     void addclient(Client client);
 }

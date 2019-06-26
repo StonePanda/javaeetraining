@@ -27,7 +27,7 @@
     values (#{cityid,jdbcType=INTEGER}, #{cityname,jdbcType=VARCHAR}, #{hotelid,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotelcity">
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotelcity" useGeneratedKeys="true" keyProperty="cityid">
     insert into hotelcity
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="cityid != null">

@@ -5,20 +5,20 @@
     <constructor>
       <idArg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="hotelname" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hotelphone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hotelpw" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="positiontext" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="positionwei" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="positionjing" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="brandid" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="hotelphone" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="hotelurl" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="overview" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="photourl" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="getstars" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    hotelid, hotelname, positiontext, positionwei, positionjing, brandid, hotelphone, 
-    hotelurl, overview, photourl, getstars
+    hotelid, hotelname, hotelphone, hotelpw, positiontext, positionwei, positionjing, 
+    brandid, overview, photourl, getstars
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,16 +31,16 @@
     where hotelid = #{hotelid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hos.one.entity.Hotel">
-    insert into hotel (hotelid, hotelname, positiontext, 
-      positionwei, positionjing, brandid, 
-      hotelphone, hotelurl, overview, 
+    insert into hotel (hotelid, hotelname, hotelphone, 
+      hotelpw, positiontext, positionwei, 
+      positionjing, brandid, overview, 
       photourl, getstars)
-    values (#{hotelid,jdbcType=INTEGER}, #{hotelname,jdbcType=VARCHAR}, #{positiontext,jdbcType=VARCHAR}, 
-      #{positionwei,jdbcType=DOUBLE}, #{positionjing,jdbcType=DOUBLE}, #{brandid,jdbcType=INTEGER}, 
-      #{hotelphone,jdbcType=VARCHAR}, #{hotelurl,jdbcType=VARCHAR}, #{overview,jdbcType=VARCHAR}, 
+    values (#{hotelid,jdbcType=INTEGER}, #{hotelname,jdbcType=VARCHAR}, #{hotelphone,jdbcType=VARCHAR}, 
+      #{hotelpw,jdbcType=VARCHAR}, #{positiontext,jdbcType=VARCHAR}, #{positionwei,jdbcType=DOUBLE}, 
+      #{positionjing,jdbcType=DOUBLE}, #{brandid,jdbcType=INTEGER}, #{overview,jdbcType=VARCHAR}, 
       #{photourl,jdbcType=VARCHAR}, #{getstars,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotel">
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotel" useGeneratedKeys="true" keyProperty="hotelid">
     insert into hotel
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="hotelid != null">
@@ -48,6 +48,12 @@
       </if>
       <if test="hotelname != null">
         hotelname,
+      </if>
+      <if test="hotelphone != null">
+        hotelphone,
+      </if>
+      <if test="hotelpw != null">
+        hotelpw,
       </if>
       <if test="positiontext != null">
         positiontext,
@@ -60,12 +66,6 @@
       </if>
       <if test="brandid != null">
         brandid,
-      </if>
-      <if test="hotelphone != null">
-        hotelphone,
-      </if>
-      <if test="hotelurl != null">
-        hotelurl,
       </if>
       <if test="overview != null">
         overview,
@@ -84,6 +84,12 @@
       <if test="hotelname != null">
         #{hotelname,jdbcType=VARCHAR},
       </if>
+      <if test="hotelphone != null">
+        #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpw != null">
+        #{hotelpw,jdbcType=VARCHAR},
+      </if>
       <if test="positiontext != null">
         #{positiontext,jdbcType=VARCHAR},
       </if>
@@ -95,12 +101,6 @@
       </if>
       <if test="brandid != null">
         #{brandid,jdbcType=INTEGER},
-      </if>
-      <if test="hotelphone != null">
-        #{hotelphone,jdbcType=VARCHAR},
-      </if>
-      <if test="hotelurl != null">
-        #{hotelurl,jdbcType=VARCHAR},
       </if>
       <if test="overview != null">
         #{overview,jdbcType=VARCHAR},
@@ -119,6 +119,12 @@
       <if test="hotelname != null">
         hotelname = #{hotelname,jdbcType=VARCHAR},
       </if>
+      <if test="hotelphone != null">
+        hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpw != null">
+        hotelpw = #{hotelpw,jdbcType=VARCHAR},
+      </if>
       <if test="positiontext != null">
         positiontext = #{positiontext,jdbcType=VARCHAR},
       </if>
@@ -130,12 +136,6 @@
       </if>
       <if test="brandid != null">
         brandid = #{brandid,jdbcType=INTEGER},
-      </if>
-      <if test="hotelphone != null">
-        hotelphone = #{hotelphone,jdbcType=VARCHAR},
-      </if>
-      <if test="hotelurl != null">
-        hotelurl = #{hotelurl,jdbcType=VARCHAR},
       </if>
       <if test="overview != null">
         overview = #{overview,jdbcType=VARCHAR},
@@ -152,12 +152,12 @@
   <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Hotel">
     update hotel
     set hotelname = #{hotelname,jdbcType=VARCHAR},
+      hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      hotelpw = #{hotelpw,jdbcType=VARCHAR},
       positiontext = #{positiontext,jdbcType=VARCHAR},
       positionwei = #{positionwei,jdbcType=DOUBLE},
       positionjing = #{positionjing,jdbcType=DOUBLE},
       brandid = #{brandid,jdbcType=INTEGER},
-      hotelphone = #{hotelphone,jdbcType=VARCHAR},
-      hotelurl = #{hotelurl,jdbcType=VARCHAR},
       overview = #{overview,jdbcType=VARCHAR},
       photourl = #{photourl,jdbcType=VARCHAR},
       getstars = #{getstars,jdbcType=INTEGER}

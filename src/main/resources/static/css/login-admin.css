@@ -1,5 +1,5 @@
 body {
-    background: url("../img/bg.jpg") no-repeat;
+    background: url("../img/bg-admin.jpg") no-repeat;
 }
 
 h2{
@@ -71,6 +71,7 @@ h2{
 
 .info span {
     color: #666;
+    padding-left: 30px;
 }
 
 .info a {

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller //在这里不能用restcontroller
 @RequestMapping("/")
-public class jumpcontroller {
+public class Jumpcontroller {
     @RequestMapping("/login")
     public String getLogin(){
         return "login.html";
@@ -15,4 +15,7 @@ public class jumpcontroller {
 
     @RequestMapping("/register")
     public String getRegister(){return "register.html";}
+
+    @RequestMapping("/login-admin")
+    public String getLoginadmin(){return "login-admin.html";}
 }

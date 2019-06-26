@@ -3,19 +3,16 @@ package com.hos.one.entity;
 public class Client {
     private Integer clientid;
 
-    private String accountname;
+    private String phone;
 
     private String accountpw;
 
-    private String phonenumber;
-
     private String email;
 
-    public Client(Integer clientid, String accountname, String accountpw, String phonenumber, String email) {
+    public Client(Integer clientid, String phone, String accountpw, String email) {
         this.clientid = clientid;
-        this.accountname = accountname;
+        this.phone = phone;
         this.accountpw = accountpw;
-        this.phonenumber = phonenumber;
         this.email = email;
     }
 
@@ -31,12 +28,12 @@ public class Client {
         this.clientid = clientid;
     }
 
-    public String getAccountname() {
-        return accountname;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAccountname(String accountname) {
-        this.accountname = accountname == null ? null : accountname.trim();
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getAccountpw() {
@@ -45,14 +42,6 @@ public class Client {
 
     public void setAccountpw(String accountpw) {
         this.accountpw = accountpw == null ? null : accountpw.trim();
-    }
-
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber == null ? null : phonenumber.trim();
     }
 
     public String getEmail() {
