@@ -11,6 +11,10 @@ public interface ClientMapper {
 
     Client selectByPrimaryKey(Integer clientid);
 
+    Client selectByEmail(String email);
+
+    Client selectByPhone(String phone);
+
     int updateByPrimaryKeySelective(Client record);
 
     int updateByPrimaryKey(Client record);

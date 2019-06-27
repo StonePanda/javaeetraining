@@ -1,8 +1,8 @@
 var time = 3;
 $(function () {
 
-    $("#name, #email, #pass, #pass-ag").focus(restore);
-    $("#email").blur(checkEmail);
+    $("#name, #phone, #pass, #pass-ag").focus(restore);
+    $("#phone").blur(checkPhone);
     $("#name").blur(checkName);
     $("#pass").blur(checkPass);
     $("#pass-ag").blur(checkPassAg);
@@ -15,24 +15,21 @@ function checkName() {
     var flag = true;
 
     if(name === ""){
-        setError("请输入用户名！");
+        setError("请输入酒店名！");
         flag = false;
     }else if(name.length < 4 && name.length > 10){
-        setError("4~10个字符长度了解一下！");
+        setError("酒店名在4~10个字符长度！");
         flag = false;
     }
     return flag;
 }
 
-function checkEmail() {
+function checkPhone() {
     var flag = true;
-    var email = $("#email").val();
+    var phone = $("#phone").val();
 
-    if(email === ""){
-        setError("请输入邮箱！");
-        flag = false;
-    } else if (!email.match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
-        setError("请输入合法邮箱！");
+    if(phone === ""){
+        setError("请输入酒店电话！");
         flag = false;
     }
     return flag;
@@ -60,27 +57,34 @@ function checkPassAg() {
 }
 
 function checkAll() {
-    if(!(checkName() && checkPass() && checkEmail() && checkPassAg())){
+    if(!(checkName() && checkPass() && checkPhone() && checkPassAg())){
         return false;
     } else {
-        var nickname = $("#name").val();
-        var email = $("#email").val();
+        var name = $("#name").val();
+        var phone = $("#phone").val();
         var pass = $("#pass").val();
 
         var obj={
-                    "accountname": nickname,
-                    "accountpw": pass,
-                    "email": email
+                    "name": name,
+                    "password": pass,
+                    "phone": phone
                 }
         $.ajax({
             type: "POST",
-            url: "/user/register",
+            url: "/hotel/register",
             dataType: "json",//返回值类型
             contentType: "application/json",//传过去的值的类型
-            //async: true,
             data: JSON.stringify(obj),
             success: function (data) {
-               console.log(data)
+               if(data=="success"){
+                window.sessionStorage.setItem("phone",phone)
+                window.location.href="/login-admin"
+                console.log(data)
+               }
+               else{
+                console.log(data)
+                setError("酒店电话或名字已被注册！")
+               }
              },
             }
         );

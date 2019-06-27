@@ -15,4 +15,10 @@ public class Clientserviceimpl implements Clientservice{
     public void addclient(Client client){
         clientmapper.insertSelective(client);
     }
+
+    @Override
+    public Client findClientByEmail(String email){return clientmapper.selectByEmail(email);}
+
+    @Override
+    public Client findClientByPhone(String phone){return clientmapper.selectByPhone(phone);}
 }

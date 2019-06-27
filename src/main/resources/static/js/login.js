@@ -1,4 +1,10 @@
 $(function () {
+    //if(window.sessionStorage.hasOwnProperty("email")==true){}
+    document.getElementById('email').value=window.sessionStorage.getItem("email");
+    //document.getElementById('pass').value="";
+    console.log(window.sessionStorage.getItem("email"))
+    console.log($("#email").val())
+    $("#pass").value="";
     $("#email, #pass").focus(restore);
     $("#email").blur(checkEmail);
     $("#pass").blur(checkPass);
@@ -41,26 +47,30 @@ function checkAll() {
         //ajax submit
         let email = $("#email").val();
         let pass = $("#pass").val();
-
+        var obj= {
+                "email": email,
+                "password": pass
+            }
         $.ajax({
-            url: "http://localhost:8080/user/login",
+            url: "/user/login",
             dataType: "json",
+            contentType: "application/json",//传过去的值的类型
             async: true,
             type: "post",
-            data: {
-                "username": email,
-                "password": pass
-            },
-            success: function (res) {
-
-                if(res.status){
-                    sessionStorage.user = JSON.stringify(res.data);
-                    window.location.href = "../index.html";
-                } else {
-                    setError(res.message);
+            data: JSON.stringify(obj),
+            success: function (data) {//这里仅仅是post成功
+                //sessionStorage.user = JSON.stringify(data);
+                //session存储账户名
+                var status=data
+                if(status=="success"){
+                    console.log(data)
+                    //window.location.href = "/index";
                 }
-            }
-        });
+                else{
+                    console.log(data)
+                    setError("邮箱或密码错误！")
+                }
+        }});
     }
 }
 //clear error info

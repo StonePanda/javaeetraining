@@ -19,7 +19,7 @@ a.meanmenu-reveal {
 	width: 100%;
 	position: absolute;
 	background: #292929;
-	padding: 4px 0;
+	padding: 0px 0px 0px 0px;
 	min-height: 42px;
 	z-index: 999;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -32,7 +32,7 @@ a.meanmenu-reveal {
     left: 14px;
     position: absolute;
     text-transform: uppercase;
-    top: 16px;
+    top: 0px;
     z-index: 1;
 }
 

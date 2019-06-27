@@ -11,6 +11,10 @@ public interface HotelMapper {
 
     Hotel selectByPrimaryKey(Integer hotelid);
 
+    Hotel selectByPhone(String phone);
+
+    Hotel selectByName(String name);
+
     int updateByPrimaryKeySelective(Hotel record);
 
     int updateByPrimaryKey(Hotel record);

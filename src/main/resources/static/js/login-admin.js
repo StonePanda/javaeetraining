@@ -1,25 +1,26 @@
 $(function () {
-    $("#email, #pass").focus(restore);
-    $("#email").blur(checkEmail);
+    document.getElementById('phone').value=window.sessionStorage.getItem("phone");
+    //document.getElementById('pass').value="";
+    console.log(window.sessionStorage.getItem("phone"))
+    console.log($("#phone").val())
+    $("#phone, #pass").focus(restore);
+    $("#phone").blur(checkPhone);
     $("#pass").blur(checkPass);
     $("#submit").click(checkAll);
 });
 
-function checkEmail() {
-    let flag;
-    let email = $("#email").val();
+//check whether phone is empty
+function checkPhone() {
 
-    if(email === ""){
-        setError("请输入邮箱！");
+    let flag = true;
+
+    if($("#phone").val() === ""){
         flag = false;
-    } else if (!email.match(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/)){
-        setError("请输入合法邮箱！");
-        flag = false;
-    } else {
-        flag = true;
+        setError("请输入酒店电话！");
     }
     return flag;
 }
+
 
 //check whether pass is empty
 function checkPass() {
@@ -35,29 +36,31 @@ function checkPass() {
 
 function checkAll() {
 
-    if(!(checkEmail() && checkPass())){
+    if(!(checkPhone() && checkPass())){
         return false;
     } else {
         //ajax submit
-        let email = $("#email").val();
+        let phone = $("#phone").val();
         let pass = $("#pass").val();
-
+        var obj= {
+                "phone": phone,
+                "password": pass
+            }
         $.ajax({
-            url: "http://localhost:8080/user/login",
+            url: "/hotel/login",
             dataType: "json",
             async: true,
             type: "post",
-            data: {
-                "username": email,
-                "password": pass
-            },
-            success: function (res) {
-
-                if(res.status){
-                    sessionStorage.user = JSON.stringify(res.data);
-                    window.location.href = "../index.html";
+            contentType: "application/json",//传过去的值的类型
+            data: JSON.stringify(obj),
+            success: function (data) {
+                var status=data
+                if(status=="success"){
+                    console.log(status)
+                    //window.location.href = "/index";
                 } else {
-                    setError(res.message);
+                    console.log(status)
+                    setError("酒店电话或密码错误！")
                 }
             }
         });

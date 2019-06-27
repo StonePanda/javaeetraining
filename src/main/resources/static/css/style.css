@@ -2,7 +2,7 @@
 Template Name: TravelStar - Tour, Travel & Travel Agency Template
 Version: 1.0
 Author: Ecology Theme
-���ྫƷģ������ʣ�http://www.bootstrapmb.com
+¸ü¶à¾«Æ·Ä£°åÇë·ÃÎÊ£ºhttp://www.bootstrapmb.com
 Tags:   hotel, resort, tour, tourism, tourist, tours website, travel, traveler, traveling, traveling websites, rest, Travelo, vacation.
 ================================================================*/
 
@@ -43,19 +43,6 @@ Tags:   hotel, resort, tour, tourism, tourist, tours website, travel, traveler, 
 32. online shop section css
 33. thailand-trip section css 
 34. Testimonial two section css
-
-35. Home version 4 header top section 
-36. Home version 4 slider section start
-37. Home version 4 tabbased search section start here
-38. Home version 4 popular package section start
-39. Home version 4 discount package 4 section start
-40. Home version 4 top destination section start
-41. Home version 4 counter section
-42. Home version 4 hotel section start
-43. Home version partner 2 section start
-44. Home version 4 footer section start
-
-
 ======================================================================================================*/
 
 /*======================
@@ -63,7 +50,7 @@ Tags:   hotel, resort, tour, tourism, tourist, tours website, travel, traveler, 
 =========================*/
 
 .ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
-  z-index: 28 !important;
+  z-index: 28 !important;/*利用!important，我们可以针对IE和IE以外浏览器设置不同的样式，只要在IE以外浏览器样式的后面加上!important。*/
 }
 .pt-100 {
   padding-top: 100px;
@@ -96,6 +83,14 @@ body {
 }
 body {
   position: relative;
+}
+.mean-bar{
+  height: 0px;
+}
+.slider-area{
+  position: relative;
+  top: -10px;
+  /*height:740px;*/
 }
 .floatleft {
   float: left;
@@ -208,6 +203,9 @@ div#preloader {
   background: #ffffff url("../images/preloader.gif") no-repeat center center;
   z-index: 9999999;
 }
+.rev_slider_wrapper{
+  height: 740px;
+}
 .rev_slider_wrapper .tp-bullet {
   width: 3px;
   height: 50px;
@@ -279,7 +277,7 @@ div#preloader {
 02. slider area section title css goes here
 =======================================================*/
 
-#slider_area_1 .tparrows {
+#slider_area_1 .tparrows{/**/
   background: #ffffff !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
@@ -287,20 +285,20 @@ div#preloader {
   height: 60px !important;
   border-radius: 0px !important;
 }
-#slider_area_1 .tparrows:before {
+#slider_area_1 .tparrows:before {/*.tparrows*/
   line-height: 60px !important;
   font-size: 20px;
   color: #f15b5c !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
 }
-#slider_area_1 .tparrows:hover {
+#slider_area_1 .tparrows:hover {/*.tparrows*/
   background: #37b721 !important;
 }
-#slider_area_1 .tparrows:hover:before {
+#slider_area_1 .tparrows:hover:before {/*.tparrows*/
   color: #ffffff !important;
 }
-#slider_area_2 .tparrows {
+#slider_area_2 .tparrows {/*.tparrows*/
   background: #ffffff !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
@@ -308,20 +306,20 @@ div#preloader {
   height: 75px !important;
   border-radius: 50% !important;
 }
-#slider_area_2 .tparrows:before {
+#slider_area_2 .tparrows:before {/*.tparrows*/
   line-height: 75px !important;
   font-size: 20px;
   color: #f15b5c !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
 }
-#slider_area_2 .tparrows:hover {
+#slider_area_2 .tparrows:hover {/*.tparrows*/
   background: #37b721 !important;
 }
-#slider_area_2 .tparrows:hover:before {
+#slider_area_2 .tparrows:hover:before {/*.tparrows*/
   color: #ffffff !important;
 }
-#rev_slider_3 .tparrows {
+#rev_slider_3 .tparrows {/*.tparrows*/
   background: #ffffff !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
@@ -329,20 +327,20 @@ div#preloader {
   height: 60px !important;
   border-radius: 0px !important;
 }
-#rev_slider_3 .tparrows:before {
+#rev_slider_3 .tparrows:before {/*.tparrows*/
   line-height: 60px !important;
   font-size: 20px;
   color: #f15b5c !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
 }
-#rev_slider_3 .tparrows:hover {
+#rev_slider_3 .tparrows:hover {/*.tparrows*/
   background: #f15b5c !important;
 }
-#rev_slider_3 .tparrows:hover:before {
+#rev_slider_3 .tparrows:hover:before {/*.tparrows*/
   color: #ffffff !important;
 }
-#rev_slider_4 .tparrows {
+#rev_slider_4 .tparrows {/*.tparrows*/
   background: #ffffff !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
@@ -350,17 +348,17 @@ div#preloader {
   height: 60px !important;
   border-radius: 0px !important;
 }
-#rev_slider_4 .tparrows:before {
+#rev_slider_4 .tparrows:before {/*.tparrows*/
   line-height: 60px !important;
   font-size: 20px;
   color: #f15b5c !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
 }
-#rev_slider_4 .tparrows:hover {
+#rev_slider_4 .tparrows:hover {/*.tparrows*/
   background: #f15b5c !important;
 }
-#rev_slider_4 .tparrows:hover:before {
+#rev_slider_4 .tparrows:hover:before {/*.tparrows*/
   color: #ffffff !important;
 }
 /*=====================================================
@@ -475,6 +473,7 @@ div#preloader {
 header {
   position: relative;
 }
+
 header .header_top_area {
   background: #ffffff;
 }
@@ -525,14 +524,23 @@ header .main_nav {
   -webkit-transition: all ease-in-out 0.5s;
   transition: all ease-in-out 0.5s;
   position: absolute;
-  top: 75px;
-  left: 0;
-  width: 100%;
+  top: 10px;
+  left: 940px;
+  width: 400px;
+  /*width: 100%;*/
   z-index: 1;
 }
-header .main_nav .logo-area {
-  padding: 25px 0;
+.logo-area{
+  position: absolute;
+  left: 60px;
+  top: 40px;
+  width:70%;
+  height: 70%;
+  z-index: 20;
 }
+/*header .main_nav .logo-area{ 
+  padding: 25px 0;
+}*/
 header .main_nav .main-menu > li {
   display: inline-block;
   padding: 30px 0 30px 42px;
@@ -644,8 +652,8 @@ header .main_nav .main-menu > li.active a:before {
   left: 0;
   right: 0;
   text-align: center;
-  margin-top: -120px;
-  padding-bottom: 60px;
+  margin-top: -480px;
+  padding-bottom: 50px;
 }
 .search_area a:focus {
   outline: none;
@@ -1493,10 +1501,10 @@ header .main_nav .main-menu > li.active a:before {
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  justify-content: center;
 }
 .footer-area .footer_bottom_wrapper .copy_right_wrapper .copyright p {
   color: #ffffff;
@@ -1565,8 +1573,8 @@ header .main_nav .main-menu > li.active a:before {
   width: 100%;
   z-index: -1;
 }
-.slider-area-2 .tparrows,
-.slider-area-3 .tparrows {
+.slider-area-2 .tparrows,/*.tparrows*/
+.slider-area-3 .tparrows {/*.tparrows*/
   background: #37b721 !important;
   -webkit-transition: all ease-in-out 0.3s !important;
   transition: all ease-in-out 0.3s !important;
@@ -1574,13 +1582,13 @@ header .main_nav .main-menu > li.active a:before {
   height: 53px !important;
   border-radius: 4px !important;
 }
-.slider-area-2 .tparrows:before,
-.slider-area-3 .tparrows:before {
+.slider-area-2 .tparrows:before,/*.tparrows*/
+.slider-area-3 .tparrows:before {/*.tparrows*/
   line-height: 53px !important;
   font-size: 20px;
 }
-.slider-area-2 .tparrows:hover,
-.slider-area-3 .tparrows:hover {
+.slider-area-2 .tparrows:hover,/*.tparrows*/
+.slider-area-3 .tparrows:hover {/*.tparrows*/
   background: #f15b5c !important;
 }
 .slider-area-2 span,

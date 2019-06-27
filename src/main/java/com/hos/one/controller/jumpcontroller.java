@@ -18,4 +18,7 @@ public class Jumpcontroller {
 
     @RequestMapping("/login-admin")
     public String getLoginadmin(){return "login-admin.html";}
+
+    @RequestMapping("register-admin")
+    public String getRegisteradmin(){return "register-admin.html";}
 }

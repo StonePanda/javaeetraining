@@ -1,24 +1,21 @@
 var time = 3;
 $(function () {
 
-    $("#name, #email, #pass, #pass-ag").focus(restore);
+    $("#phone, #email, #pass, #pass-ag").focus(restore);
     $("#email").blur(checkEmail);
-    $("#name").blur(checkName);
+    $("#phone").blur(checkPhone);
     $("#pass").blur(checkPass);
     $("#pass-ag").blur(checkPassAg);
     $("#submit").click(checkAll);
 
 });
 
-function checkName() {
-    var name = $("#name").val();
+function checkPhone() {
+    var phone = $("#phone").val();
     var flag = true;
 
-    if(name === ""){
-        setError("请输入用户名！");
-        flag = false;
-    }else if(name.length < 4 && name.length > 10){
-        setError("4~10个字符长度了解一下！");
+    if(phone === ""){
+        setError("请输入电话！");
         flag = false;
     }
     return flag;
@@ -60,15 +57,15 @@ function checkPassAg() {
 }
 
 function checkAll() {
-    if(!(checkName() && checkPass() && checkEmail() && checkPassAg())){
+    if(!(checkPhone() && checkPass() && checkEmail() && checkPassAg())){
         return false;
     } else {
-        var nickname = $("#name").val();
+        var phone = $("#phone").val();
         var email = $("#email").val();
         var pass = $("#pass").val();
 
         var obj={
-                    "accountname": nickname,
+                    "phone": phone,
                     "accountpw": pass,
                     "email": email
                 }
@@ -79,9 +76,18 @@ function checkAll() {
             contentType: "application/json",//传过去的值的类型
             //async: true,
             data: JSON.stringify(obj),
-            success: function (data) {
+            success: function (data) {//这个表示post成功
+               var status=data
+               if(status=="success"){
                console.log(data)
-             },
+               window.sessionStorage.setItem("email",email);
+               window.location.href="/login";
+               }
+               else{
+               	console.log(data)
+               	setError("手机号或邮箱已被注册！")
+               }
+             }
             }
         );
 
@@ -111,6 +117,6 @@ function regOk() {
         setError(info);
         time--;
     } else {
-        window.location.href = "login.html";
+        window.location.href = "/login";
     }
 }

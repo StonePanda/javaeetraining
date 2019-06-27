@@ -18,6 +18,18 @@
     from client
     where clientid = #{clientid,jdbcType=INTEGER}
   </select>
+    <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from client
+        where phone = #{phone,jdbcType=INTEGER}
+    </select>
+  <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from client
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from client
     where clientid = #{clientid,jdbcType=INTEGER}
