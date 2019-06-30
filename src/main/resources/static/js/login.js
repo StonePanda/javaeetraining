@@ -64,7 +64,8 @@ function checkAll() {
                 var status=data
                 if(status=="success"){
                     console.log(data)
-                    //window.location.href = "/index";
+                    window.location.href = "/index";
+                    window.sessionStorage.setItem("email",email)
                 }
                 else{
                     console.log(data)

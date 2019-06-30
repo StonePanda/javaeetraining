@@ -5,10 +5,20 @@ header .header_top_area .contact_wrapper_top .header_top_contact li i {
     background: #f15b5c;
     top: 91.5%;
 }
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight, .ui-state-active, .ui-widget-content .ui-state-active{
-    border: 1px solid #37b721;
-    background: #37b721;
+.ui-state-active{
+    border: 1px solid #f15b5c;
+    background: #f15b5c;/**/
     color: #fff;
+}
+.ui-widget-content .ui-state-active{
+    border: 1px solid #f15b5c;
+    background: #f15b5c;/**/
+    color: #fff;
+}
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+    border: 1px solid #37b721;
+    background: rgb(246,246,246);/**/
+    color: rgb(69,69,69);
 }
 header.index-2 .main_nav .main-menu > li > a:before {
     top: 62px !important;

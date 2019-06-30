@@ -1,6 +1,9 @@
 package com.hos.one.dao;
 
 import com.hos.one.entity.Hotel;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface HotelMapper {
     int deleteByPrimaryKey(Integer hotelid);
@@ -14,6 +17,8 @@ public interface HotelMapper {
     Hotel selectByPhone(String phone);
 
     Hotel selectByName(String name);
+
+    List<Hotel> selectByKeyWord(@Param("keyword") String keyword);
 
     int updateByPrimaryKeySelective(Hotel record);
 

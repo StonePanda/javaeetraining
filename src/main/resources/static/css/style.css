@@ -463,13 +463,6 @@ div#preloader {
 01. header section css goes here
 ======================================*/
 
-/*
-.container{
-  border-right: 1px solid red;
-  border-left: 1px solid red;
-}
-*/
-
 header {
   position: relative;
 }
@@ -497,7 +490,7 @@ header .header_top_area .contact_wrapper_top .header_top_contact li {
 }
 header .header_top_area .contact_wrapper_top .header_top_contact li i {
   margin-right: 10px;
-  color: #37b721;
+  color: #f15b5c;/*#37b721*/
   font-size: 20px;
 }
 header .header_top_area .contact_wrapper_top .book-btn {
@@ -515,7 +508,7 @@ header .header_top_area .contact_wrapper_top .book-btn a {
   font-weight: 500;
 }
 header .header_top_area .contact_wrapper_top .book-btn:hover {
-  background: #37b721;
+  background: #f15b5c;/*#37b721*/
 }
 header .header_top_area .header-top-area-2 {
   background: #2c3035;
@@ -558,7 +551,7 @@ header .main_nav .main-menu > li > a:before {
   position: absolute;
   width: 0;
   height: 2px;
-  background: #37b721;
+  background: #f15b5c;/*#37b721*/
   content: '';
   left: 0;
   right: 0;
@@ -606,7 +599,7 @@ header .main_nav .main-menu > li ul.dropdown li a {
 }
 header .main_nav .main-menu > li ul.dropdown li a:hover {
   padding-left: 23px;
-  color: #37b721;
+  color: #f15b5c;/*#37b721*/
 }
 header .main_nav .main-menu > li:hover ul.dropdown {
   opacity: 1;
@@ -614,7 +607,7 @@ header .main_nav .main-menu > li:hover ul.dropdown {
   top: 100%;
 }
 header .main_nav .main-menu > li:hover > a {
-  color: #37b721;
+  color: #f15b5c;/*#37b721*/
 }
 header .main_nav .main-menu > li:hover a:before {
   opacity: 1;
@@ -625,7 +618,7 @@ header .main_nav .main-menu > li:hover a:before {
   bottom: -6px;
 }
 header .main_nav .main-menu > li.active a {
-  color: #37b721;
+  color: #f15b5c;/*#37b721*/
   font-weight: 600;
 }
 header .main_nav .main-menu > li.active a:before {

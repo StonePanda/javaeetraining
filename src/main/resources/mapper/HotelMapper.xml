@@ -38,6 +38,9 @@
     from hotel
     where hotelname = #{hotelname,jdbcType=VARCHAR}
   </select>
+  <select id="selectByKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
+         SELECT * FROM Hotel WHERE hotelname LIKE #{keyword,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hotel
     where hotelid = #{hotelid,jdbcType=INTEGER}

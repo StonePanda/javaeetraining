@@ -3,6 +3,7 @@ package com.hos.one.controller;
 import com.alibaba.fastjson.JSON;
 import com.hos.one.entity.Client;
 import com.hos.one.service.Clientservice;
+import com.hos.one.service.Hotelservice;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class Clientcontroller {
 
     @Autowired
     private Clientservice clientservice;
+
+    @Autowired
+    private Hotelservice hotelservice;
 
     @ResponseBody
     @PostMapping("/login")
@@ -49,4 +53,13 @@ public class Clientcontroller {
         clientservice.addclient(clientregister);
         return JSON.toJSONString("success");
     }
+
+    @ResponseBody
+    @PostMapping("/search")
+    public String postSearch(@RequestBody Map<String,Object> map) {//不要用void,不然前端会报4040错误
+        //System.out.println(JSON.toJSONString(hotelservice.findHotelByKeyWord("同福客栈")));
+        System.out.println(map.get("keyword").toString());
+        return JSON.toJSONString(hotelservice.findHotelByKeyWord(map.get("keyword").toString()));//map.get("keyword").toString())
+    }
 }
+

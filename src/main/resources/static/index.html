@@ -46,6 +46,11 @@
 </head>
 <body> 
 <!-- header area start here -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
 <header>
 	<div class="col-md-2 col-sm-2 col-xs-12 tap-v-responsive">
 					<div class="logo-area">
@@ -59,11 +64,11 @@
 								<div class="col-md-10">
 					<nav>
 						<ul class="main-menu text-right">
-							<li class="active"><a href="index.html">首页</a>
+							<li class="active"><a href="/index">首页</a>
 							</li>
-							<li><a href="">用户名</a><!--或者登录!-->
+							<li><a href="" id="clientemail"></a><!--用户名或者登录!-->
 							</li>
-							<li><a href="">退出</a></li><!--或者注册!-->
+							<li><a href="" id="exitOrRegister"></a></li><!--/about退出或者注册/register!-->
 						</ul>
 					</nav>
 				</div> <!-- main menu end here -->
@@ -73,11 +78,11 @@
 </header> <!-- header area end here -->
 
 <!-- slider area start here -->
-<section class="slider-area" id="slider_area_1">
+<section class="slider-area" id="slider_area_1"><!--!-->
 	<div class="rev_slider_wrapper">
 		<div id="rev_slider_1" class="rev_slider" style="display:none">
 			<ul>
-
+				<!--!-->
 				<li data-index="rs-3049" data-transition="zoomin" data-slotamount="7" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut" data-masterspeed="2000"  data-thumb="images/slider/slider_1_1.jpg"  data-rotate="0"  data-saveperformance="off"  data-title="Love it?" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
 					<!-- MAIN IMAGE -->
 					<img src="images/slider/slider_1_1.jpg"  alt=""  data-bgposition="center center" data-kenburns="on" data-duration="10000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120" data-rotatestart="0" data-rotateend="0" data-offsetstart="0 -500" data-offsetend="0 500" data-bgparallax="10" class="rev-slidebg" data-no-retina>
@@ -237,30 +242,34 @@
 			</ul>
 		</div> <!-- end slider container -->
 	</div> <!-- END end slider container wrapper -->
-</section> <!-- slider area end here -->
+</section>  <!--slider area end here -->
 
 <section class="search_area">
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-12">
 				<div class="search_form">
-					<form action="#" method="post">
+					<form action="/search" onsubmit="return jumpSearch();"><!-- method=""post-->
 						<div class="form-group keywork_type">
 							<label><i class="fa fa-map-marker"></i></label>
-							<input type="search" name="s" id="keyword2" class="hotel-input-first" placeholder="Type Keyword">
+							<input type="search" name="s" id="keyword2" class="hotel-input-first" placeholder="位置...">
 						</div>
 						<div class="form-group">
 							<label><i class="fa fa-calendar"></i></label>
-							<input type="button" name="s" value="Date" id="datepicker2" class="hotel-input-first">
+							<input type="button" name="s" value="入住时间" id="datepicker2" class="hotel-input-first">
+						</div>
+						<div class="form-group">
+							<label><i class="fa fa-calendar"></i></label>
+							<input type="button" name="s" value="离店时间" id="datepicker1" class="hotel-input-first">
 						</div>
 						<div class="form-group">
 							<label><i class="fa fa-user"></i></label>
-							<input type="number" name="s" id="number1" class="hotel-input-first" placeholder="Person">
+							<input type="number" name="s" id="number1" class="hotel-input-first" placeholder="人数">
 						</div>
 						<div class="form-group searc-btn-7">
-							<button type="submit">Search</button>
+							<button type="submit">Search</button><!--onclick="jumpSearch()"-->
 						</div>
-					</form>
+					</form><!---->
 				</div>
 			</div>
 		</div>
@@ -803,6 +812,10 @@
     ============================= -->
     <!-- jquery -->
     <script src="js/vendor/jquery-3.2.0.min.js"></script>
+    <script src="js/index.js"></script>
+        <!-- jquery-ui js -->
+    <script src="js/jquery-ui.min.js"></script>
+
     <!-- bootstrap js -->
     <script src="js/bootstrap.min.js"></script>    
     <script src="js/popper.min.js"></script>
@@ -812,8 +825,7 @@
     <script src="js/slick.min.js"></script>
     <!-- meanmenu js -->
     <script src="js/jquery.meanmenu.min.js"></script>
-    <!-- jquery-ui js -->
-    <script src="js/jquery-ui.min.js"></script>
+
     <!-- wow js -->
     <script src="js/wow.min.js"></script>
     <!-- counter js -->
@@ -852,5 +864,7 @@
     <script src="js/jquery-customselect.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
+
+
 </body>
 </html>

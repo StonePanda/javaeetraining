@@ -21,4 +21,13 @@ public class Jumpcontroller {
 
     @RequestMapping("register-admin")
     public String getRegisteradmin(){return "register-admin.html";}
+
+    @RequestMapping("index")
+    public String getIndex(){return "index.html";}
+
+    @RequestMapping("about")
+    public String getAbout(){return "about.html";}
+
+    @RequestMapping("search")
+    public String getSearch(){return "searchresult.html";}
 }
