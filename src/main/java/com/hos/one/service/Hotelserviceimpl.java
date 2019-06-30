@@ -13,18 +13,20 @@ public class Hotelserviceimpl implements Hotelservice{
     @Autowired
     private HotelMapper hotelmapper;
 
+    //酒店注册
     @Override
     public void addHotel(Hotel hotel){hotelmapper.insertSelective(hotel);}
 
+    //酒店注册时看看电话是否被注册过
     @Override
     public Hotel findHotelByPhone(String phone){return hotelmapper.selectByPhone(phone);}
 
+    //酒店注册时看看名字是否被注册过
     @Override
     public Hotel findHotelByName(String name){return hotelmapper.selectByName(name);}
 
     @Override
-    public List<Hotel> findHotelByKeyWord(String keyword){
-        String sqlkeyword='%'+keyword+'%';
-        System.out.println(hotelmapper.selectByKeyWord(keyword));
-        return hotelmapper.selectByKeyWord(sqlkeyword);}
+    public Hotel findHotelByPrimaryKey(int hotelid){
+        return hotelmapper.selectByPrimaryKey(hotelid);
+    }
 }

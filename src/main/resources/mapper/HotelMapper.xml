@@ -6,7 +6,6 @@
       <idArg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="hotelname" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="hotelphone" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="hotelpw" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="positiontext" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="positionwei" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="positionjing" javaType="java.lang.Double" jdbcType="DOUBLE" />
@@ -17,8 +16,8 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    hotelid, hotelname, hotelphone, hotelpw, positiontext, positionwei, positionjing, 
-    brandid, overview, photourl, getstars
+    hotelid, hotelname, hotelphone, positiontext, positionwei, positionjing, brandid, 
+    overview, photourl, getstars
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -38,24 +37,21 @@
     from hotel
     where hotelname = #{hotelname,jdbcType=VARCHAR}
   </select>
-  <select id="selectByKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
-         SELECT * FROM Hotel WHERE hotelname LIKE #{keyword,jdbcType=VARCHAR}
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hotel
     where hotelid = #{hotelid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hos.one.entity.Hotel">
     insert into hotel (hotelid, hotelname, hotelphone, 
-      hotelpw, positiontext, positionwei, 
-      positionjing, brandid, overview, 
-      photourl, getstars)
+      positiontext, positionwei, positionjing, 
+      brandid, overview, photourl, 
+      getstars)
     values (#{hotelid,jdbcType=INTEGER}, #{hotelname,jdbcType=VARCHAR}, #{hotelphone,jdbcType=VARCHAR}, 
-      #{hotelpw,jdbcType=VARCHAR}, #{positiontext,jdbcType=VARCHAR}, #{positionwei,jdbcType=DOUBLE}, 
-      #{positionjing,jdbcType=DOUBLE}, #{brandid,jdbcType=INTEGER}, #{overview,jdbcType=VARCHAR}, 
-      #{photourl,jdbcType=VARCHAR}, #{getstars,jdbcType=INTEGER})
+      #{positiontext,jdbcType=VARCHAR}, #{positionwei,jdbcType=DOUBLE}, #{positionjing,jdbcType=DOUBLE}, 
+      #{brandid,jdbcType=INTEGER}, #{overview,jdbcType=VARCHAR}, #{photourl,jdbcType=VARCHAR}, 
+      #{getstars,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotel" useGeneratedKeys="true" keyProperty="hotelid">
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotel">
     insert into hotel
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="hotelid != null">
@@ -66,9 +62,6 @@
       </if>
       <if test="hotelphone != null">
         hotelphone,
-      </if>
-      <if test="hotelpw != null">
-        hotelpw,
       </if>
       <if test="positiontext != null">
         positiontext,
@@ -102,9 +95,6 @@
       <if test="hotelphone != null">
         #{hotelphone,jdbcType=VARCHAR},
       </if>
-      <if test="hotelpw != null">
-        #{hotelpw,jdbcType=VARCHAR},
-      </if>
       <if test="positiontext != null">
         #{positiontext,jdbcType=VARCHAR},
       </if>
@@ -137,9 +127,6 @@
       <if test="hotelphone != null">
         hotelphone = #{hotelphone,jdbcType=VARCHAR},
       </if>
-      <if test="hotelpw != null">
-        hotelpw = #{hotelpw,jdbcType=VARCHAR},
-      </if>
       <if test="positiontext != null">
         positiontext = #{positiontext,jdbcType=VARCHAR},
       </if>
@@ -168,7 +155,6 @@
     update hotel
     set hotelname = #{hotelname,jdbcType=VARCHAR},
       hotelphone = #{hotelphone,jdbcType=VARCHAR},
-      hotelpw = #{hotelpw,jdbcType=VARCHAR},
       positiontext = #{positiontext,jdbcType=VARCHAR},
       positionwei = #{positionwei,jdbcType=DOUBLE},
       positionjing = #{positionjing,jdbcType=DOUBLE},

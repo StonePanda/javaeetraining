@@ -9,11 +9,14 @@ public class Roomtype {
 
     private Double price;
 
-    public Roomtype(Integer hotelid, String roomtype, Integer num, Double price) {
+    private Integer discount;
+
+    public Roomtype(Integer hotelid, String roomtype, Integer num, Double price, Integer discount) {
         this.hotelid = hotelid;
         this.roomtype = roomtype;
         this.num = num;
         this.price = price;
+        this.discount = discount;
     }
 
     public Roomtype() {
@@ -50,5 +53,13 @@ public class Roomtype {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Integer discount) {
+        this.discount = discount;
     }
 }

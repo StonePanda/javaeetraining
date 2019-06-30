@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hos.one.dao.CityhotelMapper">
+  <resultMap id="BaseResultMap" type="com.hos.one.entity.Cityhotel">
+    <constructor>
+      <idArg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="cityid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="cityname" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    hotelid, cityid, cityname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cityhotel
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCityName" parameterType="java.lang.String" resultMap="Integer">
+    select
+    hotelid
+    from cityhotel
+    where cityname = #{cityname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cityhotel
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hos.one.entity.Cityhotel">
+    insert into cityhotel (hotelid, cityid, cityname
+      )
+    values (#{hotelid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER}, #{cityname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Cityhotel">
+    insert into cityhotel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        hotelid,
+      </if>
+      <if test="cityid != null">
+        cityid,
+      </if>
+      <if test="cityname != null">
+        cityname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null">
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null">
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Cityhotel">
+    update cityhotel
+    <set>
+      <if test="cityid != null">
+        cityid = #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null">
+        cityname = #{cityname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Cityhotel">
+    update cityhotel
+    set cityid = #{cityid,jdbcType=INTEGER},
+      cityname = #{cityname,jdbcType=VARCHAR}
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+</mapper>

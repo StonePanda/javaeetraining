@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hos.one.dao.HotelbrandMapper">
+  <resultMap id="BaseResultMap" type="com.hos.one.entity.Hotelbrand">
+    <constructor>
+      <idArg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="brandid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="brandname" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    hotelid, brandid, brandname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hotelbrand
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByBrandId" parameterType="java.lang.Integer" resultMap="Integer">
+    select
+    hotelid
+    from hotelbrand
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hotelbrand
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hos.one.entity.Hotelbrand">
+    insert into hotelbrand (hotelid, brandid, brandname
+      )
+    values (#{hotelid,jdbcType=INTEGER}, #{brandid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotelbrand">
+    insert into hotelbrand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        hotelid,
+      </if>
+      <if test="brandid != null">
+        brandid,
+      </if>
+      <if test="brandname != null">
+        brandname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="brandid != null">
+        #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="brandname != null">
+        #{brandname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Hotelbrand">
+    update hotelbrand
+    <set>
+      <if test="brandid != null">
+        brandid = #{brandid,jdbcType=INTEGER},
+      </if>
+      <if test="brandname != null">
+        brandname = #{brandname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Hotelbrand">
+    update hotelbrand
+    set brandid = #{brandid,jdbcType=INTEGER},
+      brandname = #{brandname,jdbcType=VARCHAR}
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+</mapper>

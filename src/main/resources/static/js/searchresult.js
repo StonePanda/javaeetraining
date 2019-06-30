@@ -13,42 +13,45 @@ function getParams(key) {
 }
 
 function initialize(){
-	var keyword=getParams("kw")
-	obj={
-		"keyword":keyword
+	//品牌搜索
+	if(getParams("brand")!=null){
+		var brand=getParams("brand")
+		obj={
+		"brand":brand
 	}
 	$.ajax({
-		url: "/user/search",
+		url: "/user/searchbrand",
             dataType: "json",
             contentType: "application/json",//传过去的值的类型
             async: true,
             type: "POST",
             data: JSON.stringify(obj),
             success: function (data) {//这里仅仅是post成功
-                //sessionStorage.user = JSON.stringify(data);
-                //session存储账户名
-               console.log(data)
                show(data)
         }
-
 	})
+	}
+	//关键词搜索
+	if(getParams("city")!=null){
+		var city=getParams("city")
+		obj={
+		"city":keyword
+		}
+	$.ajax({
+		url: "/user/searchcity",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            show(data)
+        }
+	})
+	}
 }
 
 function show(data){
-	/*<div class="col-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="single-hotels-2">
-                        <div class="hotel-image">
-                            <img src="images/hotel/1.jpg" alt="" class="border-raduis-3">
-                        </div>
-                        <div class="hotel-description">
-                            <a href="#"><h4>Sheraton Hotel</h4></a>
-                            <p>低至<span>$500/</span>2人2天</p>
-                            <div class="hotel-book-btn">
-                                <a href="#" class="travel-booking-btn hvr-shutter-out-horizontal">详细信息</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>*/
   var hotellist = data;
   $('#showlist').html('')
   $.each(hotellist, function (index, item) {

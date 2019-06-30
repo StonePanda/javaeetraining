@@ -7,8 +7,6 @@ public class Hotel {
 
     private String hotelphone;
 
-    private String hotelpw;
-
     private String positiontext;
 
     private Double positionwei;
@@ -23,11 +21,10 @@ public class Hotel {
 
     private Integer getstars;
 
-    public Hotel(Integer hotelid, String hotelname, String hotelphone, String hotelpw, String positiontext, Double positionwei, Double positionjing, Integer brandid, String overview, String photourl, Integer getstars) {
+    public Hotel(Integer hotelid, String hotelname, String hotelphone, String positiontext, Double positionwei, Double positionjing, Integer brandid, String overview, String photourl, Integer getstars) {
         this.hotelid = hotelid;
         this.hotelname = hotelname;
         this.hotelphone = hotelphone;
-        this.hotelpw = hotelpw;
         this.positiontext = positiontext;
         this.positionwei = positionwei;
         this.positionjing = positionjing;
@@ -63,14 +60,6 @@ public class Hotel {
 
     public void setHotelphone(String hotelphone) {
         this.hotelphone = hotelphone == null ? null : hotelphone.trim();
-    }
-
-    public String getHotelpw() {
-        return hotelpw;
-    }
-
-    public void setHotelpw(String hotelpw) {
-        this.hotelpw = hotelpw == null ? null : hotelpw.trim();
     }
 
     public String getPositiontext() {

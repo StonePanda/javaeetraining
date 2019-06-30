@@ -18,12 +18,12 @@
     from client
     where clientid = #{clientid,jdbcType=INTEGER}
   </select>
-    <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from client
-        where phone = #{phone,jdbcType=INTEGER}
-    </select>
+  <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from client
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
   <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -40,7 +40,7 @@
     values (#{clientid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{accountpw,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.hos.one.entity.Client" useGeneratedKeys="true" keyProperty="clientid">
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Client">
     insert into client
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="clientid != null">

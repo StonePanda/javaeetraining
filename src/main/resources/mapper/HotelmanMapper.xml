@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hos.one.dao.HotelmanMapper">
+  <resultMap id="BaseResultMap" type="com.hos.one.entity.Hotelman">
+    <constructor>
+      <idArg column="hotelid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="hotelphone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hotelpw" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="hotelname" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    hotelid, hotelphone, hotelpw, hotelname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hotelman
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hotelman
+    where hotelphone = #{hotelphone,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hotelman
+    where hotelname = #{hotelname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hotelman
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hos.one.entity.Hotelman">
+    insert into hotelman (hotelid, hotelphone, hotelpw, 
+      hotelname)
+    values (#{hotelid,jdbcType=INTEGER}, #{hotelphone,jdbcType=VARCHAR}, #{hotelpw,jdbcType=VARCHAR}, 
+      #{hotelname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hos.one.entity.Hotelman">
+    insert into hotelman
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        hotelid,
+      </if>
+      <if test="hotelphone != null">
+        hotelphone,
+      </if>
+      <if test="hotelpw != null">
+        hotelpw,
+      </if>
+      <if test="hotelname != null">
+        hotelname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotelid != null">
+        #{hotelid,jdbcType=INTEGER},
+      </if>
+      <if test="hotelphone != null">
+        #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpw != null">
+        #{hotelpw,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelname != null">
+        #{hotelname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Hotelman">
+    update hotelman
+    <set>
+      <if test="hotelphone != null">
+        hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelpw != null">
+        hotelpw = #{hotelpw,jdbcType=VARCHAR},
+      </if>
+      <if test="hotelname != null">
+        hotelname = #{hotelname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Hotelman">
+    update hotelman
+    set hotelphone = #{hotelphone,jdbcType=VARCHAR},
+      hotelpw = #{hotelpw,jdbcType=VARCHAR},
+      hotelname = #{hotelname,jdbcType=VARCHAR}
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </update>
+</mapper>

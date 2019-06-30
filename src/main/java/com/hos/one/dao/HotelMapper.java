@@ -1,7 +1,6 @@
 package com.hos.one.dao;
 
 import com.hos.one.entity.Hotel;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,13 +11,12 @@ public interface HotelMapper {
 
     int insertSelective(Hotel record);
 
+    //根据Id得到hotel
     Hotel selectByPrimaryKey(Integer hotelid);
 
-    Hotel selectByPhone(String phone);
+    Hotel selectByPhone(String hotelphone);
 
-    Hotel selectByName(String name);
-
-    List<Hotel> selectByKeyWord(@Param("keyword") String keyword);
+    Hotel selectByName(String hotelname);
 
     int updateByPrimaryKeySelective(Hotel record);
 
