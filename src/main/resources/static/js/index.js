@@ -64,17 +64,25 @@ showPopular(data){
     $('#popularhotels').append(
     	$('<div>').attr('class','col-12 col-sm-6 col-md-6 col-lg-4').append(
     		$('<div>').attr('class','single-package').append(
-    			$('<div>').attr('class','hotel-image').append($('<img>').attr('src',item.photourl).attr('class','border-raduis-3')),
-    			$('<div>').attr('class','hotel-description').append(
-    				$('<a>').attr('href','#').append($('<h4>').append(item.hotelname)),
-    				$('<p>').append(item.positiontext),
-    				$('<div>').attr('class','hotel-book-btn').append(
-    					$('<a>').attr('href','#').attr('class','travel-booking-btn hvr-shutter-out-horizontal').append('详细信息'))
+    			$('<div>').attr('class','package-image').append($('<a>').attr('href','#').append('<img>').attr('src',item.photourl).attr('alt',item.hotelname)),
+    			$('<div>').attr('class','package-content').append(
+    				$('<h4>').append($('<a>').attr('href','').attr('title','').append(item.hotelname).append('<br>')),
+    				$('<p>').append(item.overview.substr(0,6))),
+    			$('<div>').attr('class','package-calto-action').append(
+    				$('<ul>').attr('class','ct-action').append(
+    					$('<li>').append($('<a>').attr('href','#').attr('class','travel-booking-btn hvr-shutter-out-horizontal')
+    					.append('现在预定')),
+    					$('<li>').append(
+    						$('<i>').attr('class','fa fa-star'),
+    						$('<i>').attr('class','fa fa-star'),
+    						$('<i>').attr('class','fa fa-star'),
+    						$('<i>').attr('class','fa fa-star'),
+    						$('<i>').attr('class','fa fa-star'))
+      				)
       			)
-      		)
- 		)
-    )
-  })
+ 			)
+    	)
+  )})
 }
 
 function
