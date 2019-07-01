@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 80013
+Source Server Version : 50622
 Source Host           : localhost:3306
 Source Database       : hos
 
 Target Server Type    : MYSQL
-Target Server Version : 80013
+Target Server Version : 50622
 File Encoding         : 65001
 
-Date: 2019-07-01 14:49:29
+Date: 2019-07-01 15:41:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `cityhotel`;
 CREATE TABLE `cityhotel` (
   `hotelid` int(11) NOT NULL,
   `cityid` int(11) NOT NULL,
-  `cityname` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `cityname` varchar(10) NOT NULL,
   PRIMARY KEY (`hotelid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
@@ -67,9 +67,9 @@ INSERT INTO `cityhotel` VALUES ('32', '1', '成都');
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE `client` (
   `clientid` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `phone` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `accountpw` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `accountpw` varchar(10) NOT NULL,
+  `email` varchar(50) NOT NULL,
   PRIMARY KEY (`clientid`) USING BTREE,
   UNIQUE KEY `phone` (`phone`) USING BTREE,
   UNIQUE KEY `email` (`email`) USING BTREE
@@ -97,14 +97,14 @@ INSERT INTO `client` VALUES ('13', '00', '00', '00@qq.com');
 DROP TABLE IF EXISTS `hotel`;
 CREATE TABLE `hotel` (
   `hotelid` int(11) NOT NULL AUTO_INCREMENT,
-  `hotelname` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `hotelphone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `positiontext` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `hotelname` varchar(30) NOT NULL,
+  `hotelphone` varchar(20) NOT NULL,
+  `positiontext` varchar(50) DEFAULT NULL,
   `positionwei` double DEFAULT NULL,
   `positionjing` double DEFAULT NULL,
   `brandid` int(11) DEFAULT NULL,
-  `overview` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `photourl` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `overview` varchar(500) DEFAULT NULL,
+  `photourl` varchar(100) DEFAULT NULL,
   `getstars` int(11) DEFAULT NULL,
   PRIMARY KEY (`hotelid`) USING BTREE,
   UNIQUE KEY `hotelname` (`hotelname`) USING BTREE,
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS `hotelbrand`;
 CREATE TABLE `hotelbrand` (
   `hotelid` int(50) NOT NULL,
   `brandid` int(11) NOT NULL,
-  `brandname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `brandname` varchar(20) NOT NULL,
   PRIMARY KEY (`hotelid`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
@@ -195,9 +195,9 @@ INSERT INTO `hotelbrand` VALUES ('32', '10', '锦江之星酒店');
 DROP TABLE IF EXISTS `hotelman`;
 CREATE TABLE `hotelman` (
   `hotelid` int(11) NOT NULL AUTO_INCREMENT,
-  `hotelphone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `hotelpw` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `hotelname` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `hotelphone` varchar(20) NOT NULL,
+  `hotelpw` varchar(10) NOT NULL,
+  `hotelname` varchar(30) NOT NULL,
   PRIMARY KEY (`hotelid`) USING BTREE,
   UNIQUE KEY `hotelphone` (`hotelphone`) USING BTREE,
   UNIQUE KEY `hotelname` (`hotelname`) USING BTREE
@@ -247,19 +247,34 @@ CREATE TABLE `order` (
   `orderid` int(11) NOT NULL AUTO_INCREMENT,
   `clientid` int(11) NOT NULL,
   `hotelid` int(11) NOT NULL,
-  `roomtype` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `roomtype` varchar(10) NOT NULL,
   `timestart` int(11) NOT NULL,
   `timeend` int(11) NOT NULL,
   `price` double NOT NULL,
   `status` int(11) NOT NULL,
   `commentstar` int(11) DEFAULT NULL,
-  `commentcontent` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `commentcontent` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`orderid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
+INSERT INTO `order` VALUES ('1', '1', '22', '单人间', '1562860800', '1563120000', '360', '0', null, '');
+INSERT INTO `order` VALUES ('2', '2', '4', '标准间', '1560182400', '1560355200', '500', '2', '5', '早餐很赞，房间干净，设施齐全。很舒服。');
+INSERT INTO `order` VALUES ('3', '3', '16', '标准间', '1560355200', '1560614400', '750', '2', '4', '地理位置不错 房间设施基本很齐全 也很干净');
+INSERT INTO `order` VALUES ('4', '4', '11', '单人间', '1563379200', '1563465600', '180', '0', null, '');
+INSERT INTO `order` VALUES ('5', '5', '5', '豪华间', '1560614400', '1560700800', '300', '2', '4', '设备齐全，冬天的话暖气空调都有。网络很给力。屋子清洁也非常好！细心周到的布置，还有卸妆面膜。还有spa！');
+INSERT INTO `order` VALUES ('6', '6', '6', '单人间', '1562601600', '1562688000', '150', '1', null, '');
+INSERT INTO `order` VALUES ('7', '6', '8', '单人间', '1563379200', '1563465600', '160', '0', null, '');
+INSERT INTO `order` VALUES ('8', '7', '10', '标准间', '1560614400', '1560787200', '700', '2', '4', '房间很大，很舒服，房东人也很好的。');
+INSERT INTO `order` VALUES ('9', '8', '30', '单人间', '1562860800', '1563120000', '360', '0', null, '');
+INSERT INTO `order` VALUES ('10', '9', '28', '豪华间', '1563465600', '1563552000', '600', '1', null, '');
+INSERT INTO `order` VALUES ('11', '10', '16', '单人间', '1562601600', '1562688000', '160', '1', null, '');
+INSERT INTO `order` VALUES ('12', '11', '12', '单人间', '1560355200', '1560441600', '220', '2', '5', '从服务、环境、到体验都很太棒啦，完美的体验，下次来一定会选择这里：）');
+INSERT INTO `order` VALUES ('13', '11', '2', '豪华间', '1563379200', '1563465600', '250', '1', null, '');
+INSERT INTO `order` VALUES ('14', '12', '23', '标准间', '1560441600', '1560614400', '400', '2', '5', '地理位置很好 房间干净卫生 员工很热情，还给我做好了游玩的路线');
+INSERT INTO `order` VALUES ('15', '13', '26', '单人间', '1563379200', '1563465600', '100', '0', null, '');
 
 -- ----------------------------
 -- Table structure for `roomtype`
@@ -267,7 +282,7 @@ CREATE TABLE `order` (
 DROP TABLE IF EXISTS `roomtype`;
 CREATE TABLE `roomtype` (
   `hotelid` int(11) NOT NULL,
-  `roomtype` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `roomtype` varchar(10) NOT NULL,
   `num` int(11) NOT NULL,
   `price` double NOT NULL,
   `discount` int(11) NOT NULL,
