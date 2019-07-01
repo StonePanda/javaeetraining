@@ -33,4 +33,7 @@ public class Jumpcontroller {
 
     @RequestMapping("search")
     public String getSearch(){return "searchresult.html";}
+
+    @RequestMapping("hoteldetails")
+    public String getHotelDetails(){return "hoteldetails.html";}
 }

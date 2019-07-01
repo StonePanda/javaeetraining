@@ -82,15 +82,15 @@ showPopular(data){
   $('#popularhotels').html('')
   $.each(hotellist, function (index, item) {
     $('#popularhotels').append(
-    	$('<div>').attr('class','col-12 col-sm-6 col-md-6 col-lg-4').append(//.attr('height','300px').attr('width','400px')
+    	$('<div>').attr('class','col-12 col-sm-6 col-md-6 col-lg-4').append(
     		$('<div>').attr('class','single-package').append(
-    			$('<div>').attr('class','package-image').append($('<a>').attr('href','#').append($('<img>').attr('src',item.photourl).attr('alt',item.hotelname))),
+    			$('<div>').attr('class','package-image').append($('<a>').attr('href','/hoteldetails?hotelid='+item.hotelid).append($('<img>').attr('src',item.photourl).attr('alt',item.hotelname))),
     			$('<div>').attr('class','package-content').append(
-    				$('<h4>').append($('<a>').attr('href','').attr('title','').append(item.hotelname).append('<br>')),
+    				$('<h4>').append($('<a>').attr('href','/hoteldetails?hotelid='+item.hotelid).attr('title','').append(item.hotelname).append('<br>')),
     				$('<p>').append(item.overview.substr(0,36)+'...')),
     			$('<div>').attr('class','package-calto-action').append(
     				$('<ul>').attr('class','ct-action').append(
-    					$('<li>').append($('<a>').attr('href','#').attr('class','travel-booking-btn hvr-shutter-out-horizontal')
+    					$('<li>').append($('<a>').attr('href','/hoteldetails?hotelid='+item.hotelid).attr('class','travel-booking-btn hvr-shutter-out-horizontal')
     					.append('现在预定')),
     					$('<li>').append(
     						$('<i>').attr('class','fa fa-star'),

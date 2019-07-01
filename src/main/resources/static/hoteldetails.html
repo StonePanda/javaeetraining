@@ -52,15 +52,14 @@
 <!-- header area start here -->
 <header>
     <div class="col-md-2 col-sm-2 col-xs-12 tap-v-responsive">
-                    <div class="logo-area">
-                        <a href="index.html"><img src="images/logo2.png" alt="">
-                        </a>
+        <div class="logo-area">
+            <a href="index.html"><img src="images/logo2.png" alt=""></a>
         </div>
     </div>
     <div class="main_nav">
         <div class="container">
             <div class="row">
-                                <div class="col-md-10">
+                        <div class="col-md-10">
                     <nav>
                         <ul class="main-menu text-right">
                             <li class="active"><a href="/index">首页</a>
@@ -70,11 +69,11 @@
                             <li><a href="" id="exitOrRegister"></a></li><!--/about退出或者注册/register!-->
                         </ul>
                     </nav>
-                </div> <!-- main menu end here -->
+                </div> 
             </div>
         </div>
-    </div> <!-- header-bottom area end here -->
-</header> <!-- header area end here -->
+    </div> 
+</header> 
 
 
 <section class="section-paddings single-package-area" id="hotel_details">
@@ -84,29 +83,29 @@
 
                 <div class="single-package-details" style="padding-top: 30px;">
                     <div class="single-package-title">
-                        <h2>Daydream Hotel</h2>
+                        <h2 id="hotelname"></h2><!--Daydream Hotel-->
                     </div>
                     <ul class="package-content d-flex">
-                        <li class="price_hotel"><span>500 /</span>天</li>
+                        <li class="price_hotel" id="priceroomtype"></li><!--在这里加上方形价钱-->
                         <li>
-                            <span>
+                            <span id="hotelgetstars">
+                               <!--<i class="fa fa-star"></i>
                                <i class="fa fa-star"></i>
                                <i class="fa fa-star"></i>
                                <i class="fa fa-star"></i>
-                               <i class="fa fa-star"></i>
-                               <i class="fa fa-star"></i>
+                               <i class="fa fa-star"></i>-->
                            </span>
                         </li>
                         <li></li>
                     </ul>
                 </div><!-- tab menu strat -->
                 <div class="package_banner">
-                    <img src="images/hotel/hotel01.jpg" alt="" class="img-fluid">
+                    <img src="" alt="" class="img-fluid" id="hotelpicurl"><!--images/hotel/hotel01.jpg-->
                 </div>
                 <div class="package-tab-menu">
                     <ul class="package-tab-menu nav nav-tabs" id="myTab2" role="tablist">
                         <li role="presentation"><a href="#description" class="active" aria-controls="description" role="tab" data-toggle="tab">详细介绍</a></li>
-                        <li role="presentation"><a href="#reviews" aria-controls="评论区" role="tab" data-toggle="tab">Reviews</a></li>
+                        <li role="presentation"><a href="#reviews" aria-controls="评论区" role="tab" data-toggle="tab">评论区</a></li>
                     </ul>
                 </div><!-- tab menu end -->
 
@@ -117,79 +116,11 @@
                                 <!-- left content -->
                                 <div class="col-md-12 col-sm-12">
                                     <div class="tour-description">
-                                        <p>Daydream Hotel是您梦想中的临时家园——舒适的房内环境，优美的房外环境，温泉、麻将、儿童房、桑拿房.......应有尽有，快来预订吧！</p>
+                                        <p id="hoteloverview"></p><!--Daydream Hotel是您梦想中的临时家园——舒适的房内环境，优美的房外环境，温泉、麻将、儿童房、桑拿房.......应有尽有，快来预订吧！-->
                                     </div>
                                 </div><!-- left-content -->
                             </div>
                         </div>
-
-                        <div role="tabpanel" class="tab-pane fade" id="itinerary">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="tour-description">
-                                    <!--    <h4>Tour Description</h4>-->
-                                        <div class="main-timeline">
-                                            <!-- single timeline -->
-                                            <div class="timeline">
-                                                <div class="timeline-content left">
-                                                    <span class="timeline-icon">1</span>
-                                                </div>
-                                            </div><!-- single timeline -->
-
-                                            <!-- single timeline -->
-                                            <div class="timeline">
-                                                <div class="timeline-content left">
-                                                    <span class="timeline-icon">2</span>
-                                                </div>
-                                            </div><!-- single timeline -->
-
-                                            <!-- single timeline -->
-                                            <div class="timeline">
-                                                <div class="timeline-content left">
-                                                    <span class="timeline-icon">3</span>
-                                                </div>
-                                            </div><!-- single timeline -->
-
-                                            <!-- single timeline -->
-                                            <div class="timeline">
-                                                <div class="timeline-content left">
-                                                    <span class="timeline-icon">4</span>
-                                                </div>
-                                            </div><!-- single timeline -->
-                                       </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane fade" id="map">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                    <div class="tour-description">
-                                    <!--    <h4>Map Tour</h4>-->
-                                        <!-- map -->
-                                       <div class="mapp" id="overlay">
-                                        </div><!-- map -->
-                                   </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- video tab content start -->
-                        <div role="tabpanel" class="tab-pane fade" id="video">
-                            <div class="row">
-                                <div class="col-12 col-md-12 col-sm-12">
-                                    <div class="tour-description">
-                                       <!-- <h4>Video</h4>-->
-                                        <!-- Video -->
-                                        <div class="tab-video-area video-bg">
-                                          <div class="video-play-btn">
-                                             <!--   <a href="https://www.youtube.com/watch?v=UQneDljrWm0" class="video_iframe"><span><i class="fa fa-play"></i></span></a>-->
-                                            </div>
-                                        </div><!-- Video -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!-- video tab content end -->
 
                          <!--video tab content start -->
                         <div role="tabpanel" class="tab-pane fade" id="reviews">
@@ -205,7 +136,28 @@
                                                     <div class="comment-text">
                                                         <div class="author_info"> 
                                                             <div class="author_name">
-                                                                <a>Jonathon Smith</a>
+                                                                <a id="comment1email"></a><!--Jonathon Smith20 June 2019 at 10.45 AM-->
+                                                                <span id="comment1timeend"></span>
+                                                             </div>
+                                                        </div>
+                                                        <ul class="review_rating d-flex" id="comment1star">
+                                                            <!--<li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>服务态度真的好的不行，酒店服务细致入微就像是私人订制！-->
+                                                        </ul>         
+                                                        <p id="comment1content"></p>
+                                                    </div>                               
+                                                </div>
+                                                <div class="comment-list" style="background-color: transparent;">
+                                                    <div class="commnet_img">
+                                                        <img src="images/blog/comments1.jpg" alt="member img" class="img-fluid">
+                                                    </div>
+                                                    <div class="comment-text">
+                                                        <div class="author_info"> 
+                                                            <div class="author_name">
+                                                                <a id="comment2email"></a><!--Jonathon Smith-->
                                                                 <span>20 June 2019 at 10.45 AM</span>
                                                              </div>
                                                         </div>

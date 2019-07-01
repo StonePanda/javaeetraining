@@ -17,8 +17,8 @@ function initialize(){
 	if(getParams("brand")!=null){
 		var brand=getParams("brand")
 		obj={
-		"brand":brand
-	}
+			"brand":brand
+		}
 	$.ajax({
 		url: "/user/searchbrand",
             dataType: "json",
