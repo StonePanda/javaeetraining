@@ -6,8 +6,9 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title></title><!--酒店详情可以用jsappend上来-->
     <!-- Google Fonts Includes -->
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <!-- Favi icon -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
@@ -39,14 +40,20 @@
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/master.css">
     <!-- modernizr css -->
+    <style type="text/css">
+        section{
+            background-color: rgb(245, 246, 250);
+        }
+    </style>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
 </head>
 <body>
 <!-- header area start here -->
 <header>
     <div class="col-md-2 col-sm-2 col-xs-12 tap-v-responsive">
                     <div class="logo-area">
-                        <a href="index.html"><img src="images/logo.png" alt="">
+                        <a href="index.html"><img src="images/logo2.png" alt="">
                         </a>
         </div>
     </div>
@@ -73,9 +80,9 @@
 <section class="section-paddings single-package-area" id="hotel_details">
     <div class="container">
         <div class="row">
-            <!-- single package tab with details -->
             <div class="col-md-8 col-sm-12">
-                <div class="single-package-details">
+
+                <div class="single-package-details" style="padding-top: 30px;">
                     <div class="single-package-title">
                         <h2>Daydream Hotel</h2>
                     </div>
@@ -99,16 +106,11 @@
                 <div class="package-tab-menu">
                     <ul class="package-tab-menu nav nav-tabs" id="myTab2" role="tablist">
                         <li role="presentation"><a href="#description" class="active" aria-controls="description" role="tab" data-toggle="tab">详细介绍</a></li>
-                        <!--<li role="presentation"><a href="#itinerary" aria-controls="itinerary" role="tab" data-toggle="tab">Tour Guide</a></li>
-                        <li role="presentation"><a href="#map" aria-controls="map" role="tab" data-toggle="tab">Tour Map</a>
-                        <li role="presentation"><a href="#video" aria-controls="video" role="tab" data-toggle="tab">Videos</a></li>-->
                         <li role="presentation"><a href="#reviews" aria-controls="评论区" role="tab" data-toggle="tab">Reviews</a></li>
                     </ul>
                 </div><!-- tab menu end -->
 
-                <!-- tab content start -->
                 <div class="row">
-                    <!-- tabs content -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane fade show active in" id="description">
                             <div class="row">
@@ -117,24 +119,7 @@
                                     <div class="tour-description">
                                         <p>Daydream Hotel是您梦想中的临时家园——舒适的房内环境，优美的房外环境，温泉、麻将、儿童房、桑拿房.......应有尽有，快来预订吧！</p>
                                     </div>
-                                    <div class="packaging_contents_wrapper">
-                                        <h4>为什么选择我们？</h4>
-                                        <div class="packaging-contents">
-                                            <ul class="list-unstyled">
-                                                 <li><i class="fa fa-angle-double-right"></i>全国连锁有保障</li>
-                                                <li><i class="fa fa-angle-double-right"></i>人性化服务</li>
-                                                <li><i class="fa fa-angle-double-right"></i>环境舒适，好评如潮</li>
-                                            </ul>
-                                            <ul class="list-unstyled packaging-contents-right pull-right">
-                                                <li><i class="fa fa-angle-double-right"></i>实惠</li>
-                                                <li><i class="fa fa-angle-double-right"></i>安全</li>
-                                                <li><i class="fa fa-angle-double-right"></i>方便</li>
-                                               
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </div><!-- left-content -->
-
                             </div>
                         </div>
 
@@ -213,69 +198,16 @@
                                     <div class="tour-description">
                                          <div class="comment-list-items">
                                             <div class="comment-list-wrapper">
-                                                <div class="comment-list">
+                                                <div class="comment-list" style="background-color: transparent;">
                                                     <div class="commnet_img">
                                                         <img src="images/blog/comments1.jpg" alt="member img" class="img-fluid">
                                                     </div>
                                                     <div class="comment-text">
                                                         <div class="author_info"> 
                                                             <div class="author_name">
-                                                               <a href="" class="">Adam Smith</a> 
+                                                                <a>Jonathon Smith</a>
                                                                 <span>20 June 2019 at 10.45 AM</span>
                                                              </div>
-                                                             <div class="reply-comment">
-                                                               <a href="#" title=""> <i class="flaticon-reply-arrow"></i>Reply</a>
-                                                            </div> 
-                                                        </div> 
-                                                        <ul class="review_rating d-flex">
-                                                           <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                        </ul>    
-                                                        <p>老人孩子都喜欢，环境舒适，早餐也很好吃，电梯上下，没有异味，真的很棒。</p>
-                                                    </div>
-                                                </div>
-
-                                                <div class="comment-list reply_comment_text">
-                                                    <div class="commnet_img">
-                                                       <img src="images/blog/comments2.jpg" alt="member img" class="img-fluid">
-                                                    </div>
-                                                    <div class="comment-text">
-                                                        <div class="author_info"> 
-                                                            <div class="author_name">
-                                                                <a href="" class="">Jonson Park</a> 
-                                                                <span>20 June 2019 at 10.45 AM</span>
-                                                             </div>
-                                                             <div class="reply-comment">
-                                                                <a href="#" title=""> <i class="flaticon-reply-arrow"></i> Reply</a>
-                                                            </div> 
-                                                        </div>
-                                                        <ul class="review_rating d-flex">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                        </ul>         
-                                                        <p>住了这么多酒店，最爱的一家，真的无可挑剔。</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="comment-list-wrapper">
-                                                <div class="comment-list">
-                                                    <div class="commnet_img">
-                                                        <img src="images/blog/comments1.jpg" alt="member img" class="img-fluid">
-                                                    </div>
-                                                    <div class="comment-text">
-                                                        <div class="author_info"> 
-                                                            <div class="author_name">
-                                                                <a href="" class="">Jonathon Smith</a> 
-                                                                <span>20 June 2019 at 10.45 AM</span>
-                                                             </div>
-                                                             <div class="reply-comment">
-                                                                <a href="#" title=""> <i class="flaticon-reply-arrow"></i> Reply</a>
-                                                            </div> 
                                                         </div>
                                                         <ul class="review_rating d-flex">
                                                             <li><i class="fa fa-star"></i></li>
@@ -293,10 +225,12 @@
                                 </div>
                             </div>
                         </div><!-- video tab content end -->
+
+
                     </div><!-- tabs content-->
                 </div><!-- tab content end -->
             </div><!-- single package tab with details -->
-            
+
 
             <!-- booking form start here -->
             <div class="col-md-4 col-sm-12">

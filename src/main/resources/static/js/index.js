@@ -16,7 +16,6 @@ $(function(){
     _key = "ow8uqXF6pIh8PgH06CGieoAzbc0kv7Bo";//百度地图可以申请到
     _script.src = "http://api.map.baidu.com/location/ip?ak="+_key+"&coor=bd09ll&ip=&callback=initpopular";//拼接URL
     document.head.appendChild(_script);
-	//initpopular()
 })
 
 /* function 

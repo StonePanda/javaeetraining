@@ -35,7 +35,7 @@ function initialize(){
 	if(getParams("city")!=null){
 		var city=getParams("city")
 		obj={
-		"city":keyword
+		"city":city
 		}
 	$.ajax({
 		url: "/user/searchcity",
