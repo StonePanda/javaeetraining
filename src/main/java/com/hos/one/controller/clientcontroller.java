@@ -80,5 +80,42 @@ public class Clientcontroller {
         }
         return JSON.toJSONString(hotellist);
     }
+    //查找最受好评的六个酒店
+    @ResponseBody
+    @PostMapping("popular")
+    public String postPopular(@RequestBody Map<String,Object> map){
+        //获取到的格式是四川省成都市这样的格式，需要得到省与市之间的东西
+        int shengpos=map.get("IPCity").toString().indexOf("省");
+        int shipos=map.get("IPCity").toString().indexOf("市");
+        String ipcity=map.get("IPCity").toString().substring(shengpos+1,shipos);
+        //因为是首页显示，所以得到用户IP所在的位置推荐即可
+        List<Integer> hotelidlist=cityhotelservice.selectByCityName(ipcity);//用户IP所在的城市
+
+        //先获取hotelidlist，然后获取其中getstars最大的六个
+        List<Hotel> hotellist=new ArrayList<>();
+        for (int i = 0; i < hotelidlist.size(); i++) {
+            hotellist.add(hotelservice.findHotelByPrimaryKey(hotelidlist.get(i)));
+        }
+        //将hotellist找到
+        List<Hotel> returnhotellist=new ArrayList<>();
+        //先从五星的找
+        for(int i=0;i<hotellist.size();i++) {
+            if (hotellist.get(i).getGetstars() == 5) {
+                if(returnhotellist.size()>=6)
+                    break;
+                returnhotellist.add(hotellist.get(i));
+            }
+        }
+        //再从四星的找
+        for(int i=0;i<hotellist.size();i++) {
+            if (hotellist.get(i).getGetstars() == 4) {
+                if(returnhotellist.size()>=6)
+                    break;
+                returnhotellist.add(hotellist.get(i));
+            }
+        }
+        //如果没有就不找了，不能获取三星
+        return JSON.toJSONString(returnhotellist);
+    }
 }
 

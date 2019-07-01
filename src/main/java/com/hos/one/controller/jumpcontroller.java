@@ -25,6 +25,9 @@ public class Jumpcontroller {
     @RequestMapping("index")
     public String getIndex(){return "index.html";}
 
+    @RequestMapping("")
+    public String getShouIndex(){return "index.html";}
+
     @RequestMapping("about")
     public String getAbout(){return "about.html";}
 

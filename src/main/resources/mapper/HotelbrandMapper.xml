@@ -17,7 +17,7 @@
     from hotelbrand
     where hotelid = #{hotelid,jdbcType=INTEGER}
   </select>
-  <select id="selectByBrandId" parameterType="java.lang.Integer" resultMap="Integer">
+  <select id="selectByBrandId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     select
     hotelid
     from hotelbrand
