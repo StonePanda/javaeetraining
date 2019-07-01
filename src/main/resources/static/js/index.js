@@ -88,7 +88,7 @@ showPopular(data){
     			$('<div>').attr('class','package-image').append($('<a>').attr('href','#').append($('<img>').attr('src',item.photourl).attr('alt',item.hotelname))),
     			$('<div>').attr('class','package-content').append(
     				$('<h4>').append($('<a>').attr('href','').attr('title','').append(item.hotelname).append('<br>')),
-    				$('<p>').append(item.overview.substr(0,16)+'...')),
+    				$('<p>').append(item.overview.substr(0,36)+'...')),
     			$('<div>').attr('class','package-calto-action').append(
     				$('<ul>').attr('class','ct-action').append(
     					$('<li>').append($('<a>').attr('href','#').attr('class','travel-booking-btn hvr-shutter-out-horizontal')
