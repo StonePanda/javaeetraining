@@ -160,8 +160,18 @@ public class Clientcontroller {
     }
     @ResponseBody
     @PostMapping("ctclientemail")
-    public String postCtClientEmail(@RequestBody Map<String,Object> map){
-
+    public String postCtClientEmail(@RequestBody Map<String,String> map){
+        List<Integer> twoctemial=orderservice.findTwoCommentByHotelid(Integer.parseInt(map.get("hotelid")));
+        List<String> returneamil=new ArrayList(2);
+        for(int i=0;i<2;i++){
+            returneamil.add(clientservice.findClientById(twoctemial.get(i)).getEmail());
+        }
+        return JSON.toJSONString(returneamil);
+    }
+    @ResponseBody
+    @PostMapping("commenttwo")
+    public String postCommenttwo(@RequestBody Map<String,String> map){
+        
     }
 }
 

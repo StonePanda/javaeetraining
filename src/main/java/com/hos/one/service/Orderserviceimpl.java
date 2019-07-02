@@ -5,6 +5,8 @@ import com.hos.one.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class Orderserviceimpl implements Orderservice{
     @Autowired
@@ -13,5 +15,10 @@ public class Orderserviceimpl implements Orderservice{
     @Override
     public void addOrder(Order neworder){
         ordermapper.insertSelective(neworder);
+    }
+
+    @Override
+    public List<Integer> findTwoCommentByHotelid(int hotelid){
+        return ordermapper.selectTwoCommentByHotelid(hotelid);
     }
 }

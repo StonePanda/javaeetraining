@@ -24,4 +24,7 @@ public class Clientserviceimpl implements Clientservice{
     //用户注册时查看邮箱是否被登陆过
     @Override
     public Client findClientByPhone(String phone){return clientmapper.selectByPhone(phone);}
+
+    @Override
+    public Client findClientById(Integer clientid){return clientmapper.selectByPrimaryKey(clientid);}
 }

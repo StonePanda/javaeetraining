@@ -8,4 +8,6 @@ public interface Clientservice {
     Client findClientByEmail(String email);//根据邮箱找客户
     //根据电话找客户
     Client findClientByPhone(String email);
+
+    Client findClientById(Integer clientid);
 }

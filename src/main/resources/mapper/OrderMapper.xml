@@ -28,9 +28,9 @@
   <select id="selectTwoCommentByHotelid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     select
     clientid
-    from order
+    from 'order'
     where hotelid = #{hotelid,jdbcType=INTEGER}
-    and status=2
+    and 'status'=2
     and commentstar!=null
     limit 0,2
   </select>
