@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost_3306
-Source Server Version : 50622
+Source Server Version : 80013
 Source Host           : localhost:3306
 Source Database       : hos
 
 Target Server Type    : MYSQL
-Target Server Version : 50622
+Target Server Version : 80013
 File Encoding         : 65001
 
-Date: 2019-07-01 15:41:31
+Date: 2019-07-02 16:26:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -292,7 +292,7 @@ CREATE TABLE `roomtype` (
 -- ----------------------------
 -- Records of roomtype
 -- ----------------------------
-INSERT INTO `roomtype` VALUES ('1', '单人间', '70', '200', '1');
+INSERT INTO `roomtype` VALUES ('1', '单人间', '60', '200', '1');
 INSERT INTO `roomtype` VALUES ('1', '标准间', '80', '250', '1');
 INSERT INTO `roomtype` VALUES ('1', '豪华间', '50', '350', '0');
 INSERT INTO `roomtype` VALUES ('2', '单人间', '80', '130', '0');

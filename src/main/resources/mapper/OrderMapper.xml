@@ -25,6 +25,15 @@
     from order
     where orderid = #{orderid,jdbcType=INTEGER}
   </select>
+  <select id="selectTwoCommentByHotelid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    clientid
+    from order
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+    and status=2
+    and commentstar!=null
+    limit 0,2
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from order
     where orderid = #{orderid,jdbcType=INTEGER}

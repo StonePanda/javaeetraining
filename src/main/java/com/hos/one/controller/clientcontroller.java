@@ -3,10 +3,9 @@ package com.hos.one.controller;
 import com.alibaba.fastjson.JSON;
 import com.hos.one.entity.Client;
 import com.hos.one.entity.Hotel;
-import com.hos.one.service.Cityhotelservice;
-import com.hos.one.service.Clientservice;
-import com.hos.one.service.Hotelbrandservice;
-import com.hos.one.service.Hotelservice;
+import com.hos.one.entity.Order;
+import com.hos.one.service.*;
+import io.netty.util.internal.InternalThreadLocalMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +25,10 @@ public class Clientcontroller {
     private Cityhotelservice cityhotelservice;
     @Autowired
     private Hotelbrandservice hotelbrandservice;
+    @Autowired
+    private Orderservice orderservice;
+    @Autowired
+    private Roomtypeservice roomtypeservice;
     //用户登录
     @ResponseBody
     @PostMapping("/login")
@@ -118,6 +121,47 @@ public class Clientcontroller {
     }
     //根据用户email，返回id和电话信息
     @ResponseBody
-    @PostMapping
+    @PostMapping("bookhotel")
+    public  String postBookHotel(@RequestBody Map<String,Object> map){
+        /*var obj={
+			"clientid":window.sessionStorage.getItem("id"),
+			"hotelid":getParams("hotelid"),
+			"roomtype":$('#roomtype').value,
+			"timestart":Math.round(new Date($('#datepicker2').value)).getTime()/1000).toString(),
+			"timeend":Math.round(new Date($('#datepicker2').value)).getTime()/1000).toString(),
+			"status":status
+		}*/
+        Order neworder=new Order();
+        neworder.setClientid(Integer.parseInt(map.get("clientid").toString()));
+        neworder.setHotelid(Integer.parseInt(map.get("hotelid").toString()));
+        neworder.setRoomtype(map.get("roomtype").toString());
+        neworder.setTimeend(Integer.parseInt(map.get("timeend").toString()));
+        neworder.setTimestart(Integer.parseInt(map.get("timestart").toString()));
+        neworder.setStatus(Integer.parseInt(map.get("status").toString()));
+        orderservice.addOrder(neworder);
+        roomtypeservice.setNewNum(Integer.parseInt(map.get("hotelid").toString()),map.get("roomtype").toString(),Integer.parseInt(map.get("num").toString()));
+        return JSON.toJSONString("success");
+    }
+    @ResponseBody
+    @PostMapping("hoteldetails")
+    public String postHotelDetails(@RequestBody Map<String,Object> map){
+        /*	var obj={
+		"hotelid":hotelid
+	        }*/
+        return JSON.toJSONString(hotelservice.findHotelByPrimaryKey(Integer.parseInt(map.get("hotelid").toString())));
+    }
+    @ResponseBody
+    @PostMapping("roomtype")
+    public String postRoomType(@RequestBody Map<String,Object> map){
+        /*	var obj={
+		"hotelid":hotelid
+	}*/
+        return JSON.toJSONString(roomtypeservice.findRoomtypeByHotelid(Integer.parseInt(map.get("hotelid").toString())));
+    }
+    @ResponseBody
+    @PostMapping("ctclientemail")
+    public String postCtClientEmail(@RequestBody Map<String,Object> map){
+
+    }
 }
 

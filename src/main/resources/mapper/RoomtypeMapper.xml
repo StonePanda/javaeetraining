@@ -20,6 +20,12 @@
     where hotelid = #{hotelid,jdbcType=INTEGER}
       and roomtype = #{roomtype,jdbcType=VARCHAR}
   </select>
+  <select id="selectByHotelId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from roomtype
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from roomtype
     where hotelid = #{hotelid,jdbcType=INTEGER}
@@ -83,6 +89,14 @@
     </set>
     where hotelid = #{hotelid,jdbcType=INTEGER}
       and roomtype = #{roomtype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByOrder" parameterType="map">
+    update roomtype
+    <set>
+        num = num - #{minusnum,jdbcType=INTEGER},
+    </set>
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+    and roomtype = #{roomtype,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Roomtype">
     update roomtype
