@@ -21,4 +21,9 @@ public class Orderserviceimpl implements Orderservice{
     public List<Integer> findTwoCommentByHotelid(int hotelid){
         return ordermapper.selectTwoCommentByHotelid(hotelid);
     }
+
+    @Override
+    public List<Order> findTwoOrderByHotelid(int hotelid){
+        return ordermapper.selectTwoOrderByHotelid(hotelid);
+    }
 }

@@ -8,4 +8,6 @@ public interface Orderservice {
     void addOrder(Order neworder);
 /**/
     List<Integer> findTwoCommentByHotelid(int hotelid);
+
+    List<Order> findTwoOrderByHotelid(int hotelid);
 }

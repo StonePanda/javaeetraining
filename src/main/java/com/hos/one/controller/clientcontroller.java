@@ -5,7 +5,6 @@ import com.hos.one.entity.Client;
 import com.hos.one.entity.Hotel;
 import com.hos.one.entity.Order;
 import com.hos.one.service.*;
-import io.netty.util.internal.InternalThreadLocalMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -171,7 +170,7 @@ public class Clientcontroller {
     @ResponseBody
     @PostMapping("commenttwo")
     public String postCommenttwo(@RequestBody Map<String,String> map){
-        
+        return JSON.toJSONString(orderservice.findTwoOrderByHotelid(Integer.parseInt(map.get("hotelid"))));
     }
 }
 

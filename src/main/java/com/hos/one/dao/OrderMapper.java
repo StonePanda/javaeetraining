@@ -15,6 +15,8 @@ public interface OrderMapper {
 
     List<Integer> selectTwoCommentByHotelid(Integer hotelid);
 
+    List<Order> selectTwoOrderByHotelid(Integer hotelid);
+
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
