@@ -128,11 +128,11 @@
                                 <div class="col-md-12 col-sm-12">
                                     <div class="tour-description">
                                          <div class="comment-list-items">
-                                            <div class="comment-list-wrapper">
+                                            <div class="comment-list-wrapper" id="commentlist">
                                                 <div class="comment-list" style="background-color: transparent;">
                                                     <div class="commnet_img">
-                                                        <img src="images/blog/comments1.jpg" alt="member img" class="img-fluid">
-                                                    </div>
+                                                        <img src=""class="img-fluid" id="comment1avatar">
+                                                    </div><!--images/blog/comments1.jpg alt="member img" -->
                                                     <div class="comment-text">
                                                         <div class="author_info"> 
                                                             <div class="author_name">
@@ -152,24 +152,20 @@
                                                 </div>
                                                 <div class="comment-list" style="background-color: transparent;">
                                                     <div class="commnet_img">
-                                                        <img src="images/blog/comments1.jpg" alt="member img" class="img-fluid">
+                                                        <img src="" class="img-fluid" id="comment1avatar"><!--images/blog/comments2.jpgalt="member img" -->
                                                     </div>
                                                     <div class="comment-text">
                                                         <div class="author_info"> 
                                                             <div class="author_name">
-                                                                <a id="comment2email"></a><!--Jonathon Smith-->
-                                                                <span>20 June 2019 at 10.45 AM</span>
+                                                                <a id="comment2email"></a>
+                                                                <span id="comment2timeend"></span>
                                                              </div>
                                                         </div>
-                                                        <ul class="review_rating d-flex">
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
-                                                            <li><i class="fa fa-star"></i></li>
+                                                        <ul class="review_rating d-flex" id="comment2star">
+                                                            <!--<li><i class="fa fa-star"></i></li>-->
                                                         </ul>         
-                                                        <p>服务态度真的好的不行，酒店服务细致入微就像是私人订制！</p>
-                                                    </div>                               
+                                                        <p id="comment2content"></p>
+                                                    </div><!--服务态度真的好的不行，酒店服务细致入微就像是私人订制！-->                               
                                                 </div>
                                             </div>
                                         </div> 
@@ -189,30 +185,39 @@
                 <aside>
                     <div class="booking-form">
                         <div class="booking-title">
-                            <h2>Book This Hotel</h2>
+                            <h2>预定酒店</h2>
                             <p>您将预订这一家宾馆，请如实填写接下来的信息：</p>
                         </div>
-                        <form action="#" method="post">
+                        <form onsubmit="return bookOrLogin();"><!--action="/search" 必须像index那样有一个函数且返回false-->
                             <div class="form-group">
-                                <input type="text" class="form-control" id="name" placeholder="Name">
+                                <input type="text" class="form-control" id="clientname" placeholder="邮箱"><!-- value=""00@qq.com-->
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="confirm_email" placeholder="E-mail">
+                                <input type="email" class="form-control" id="clientphone" placeholder="电话"><!---->
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control" id="number" placeholder="Phone Number">
+                                <input type="tel" class="form-control" id="roomtype" placeholder="房型"><!---->
                             </div>
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <input type="text" class="form-control" id="booking-date" placeholder="dd-mm-yy *">
+                            </div>-->
+                            <div class="form-group">
+                              <input type="text" name="s" value="入住时间" id="datepicker2" class="form-control">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="ticket" placeholder="Number Of Tickets *">
+                                <input type="text" name="s" value="离店时间" id="datepicker1" class="form-control">
                             </div>
                             <div class="form-group">
-                                <textarea name="messgae" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                                <input type="text" class="form-control" id="roomnum" placeholder="房间数">
+                            </div>
+                            <div id="tishixiaoxi">
+                            <!--<div class="alert alert-success" id="tishidetail">
+                                <a class="close" data-dismiss="alert">×</a>
+                                <strong id="tishistrong"></strong>
+                            </div>--><!--成功!您已成功预定-->
                             </div>
                             <div class="form-group form_btn">
-                                <button type="submit" class="booking-confirm hvr-shutter-out-horizontal">Book Now</button>
+                                <button type="submit" class="booking-confirm hvr-shutter-out-horizontal" id="bookOrLogin"></button><!--Book Now-->
                             </div>
                         </form>
                     </div>

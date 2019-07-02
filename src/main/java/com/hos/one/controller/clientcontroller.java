@@ -32,7 +32,8 @@ public class Clientcontroller {
     public String postLogin(@RequestBody Map<String,Object> map){//不要用void,不然前端会报4040错误
         Client clientlogin=clientservice.findClientByEmail(map.get("email").toString());
         if (clientlogin.getAccountpw().equals(map.get("password").toString())){
-            return JSON.toJSONString("success");
+            clientlogin.setAccountpw("null");//为了设置密码不可显示
+            return JSON.toJSONString(clientlogin);
         }
         else{
             //全都忘光的JAVA语法！！！！字符串用==比较是比较的内存地址
@@ -59,8 +60,7 @@ public class Clientcontroller {
     //根据城市名查找hotel
     @ResponseBody
     @PostMapping("/searchcity")
-    public String postCitySearch(@RequestBody Map<String,Object> map) {//不要用void,不然前端会报4040错误
-        //先根据城市名查找list的hotelid
+    public String postCitySearch(@RequestBody Map<String,Object> map) {//不要用void,不然前端会报4040错误//先根据城市名查找list的hotelid
         List<Integer> hotelidlist=cityhotelservice.selectByCityName(map.get("city").toString());
         List<Hotel> hotellist=new ArrayList<>();
         for (int i = 0; i < hotelidlist.size(); i++) {
@@ -71,8 +71,7 @@ public class Clientcontroller {
     //根据品牌名查找hotel
     @ResponseBody
     @PostMapping("/searchbrand")
-    public String postBrandSearch(@RequestBody Map<String,Object> map) {//不要用void,不然前端会报4040错误
-        //先根据品牌id查找list的hotelid
+    public String postBrandSearch(@RequestBody Map<String,Object> map) {//不要用void,不然前端会报4040错误//先根据品牌id查找list的hotelid
         List<Integer> hotelidlist=hotelbrandservice.findHotelByBrand(Integer.parseInt(map.get("brand").toString()));
         List<Hotel> hotellist=new ArrayList<>();
         for (int i = 0; i < hotelidlist.size(); i++) {
@@ -117,5 +116,8 @@ public class Clientcontroller {
         //如果没有就不找了，不能获取三星
         return JSON.toJSONString(returnhotellist);
     }
+    //根据用户email，返回id和电话信息
+    @ResponseBody
+    @PostMapping
 }
 

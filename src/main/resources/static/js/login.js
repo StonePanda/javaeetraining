@@ -62,15 +62,19 @@ function checkAll() {
                 //sessionStorage.user = JSON.stringify(data);
                 //session存储账户名
                 var status=data
-                if(status=="success"){
-                    console.log(data)
-                    window.location.href = "/index";
-                    window.sessionStorage.setItem("email",email)
-                }
-                else{
+                if(status=="fail"){
                     console.log(data)
                     setError("邮箱或密码错误！")
                 }
+                else{
+                    console.log(data)
+                    window.sessionStorage.setItem("email",email)
+                    window.sessionStorage.setItem("phone",data.phone)
+                    window.sessionStorage.setItem("id",data.clientid)
+                    window.location.href = "/index";
+                    
+                }
+                
         }});
     }
 }
