@@ -7,7 +7,7 @@
 .selemenu{ border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px;width:180px;width:180px; height:45px; background:#fff; color:#696969; text-indent:10px; border:none; background:url(../images/xiala.png) 140px  center no-repeat #fff; text-indent: 20px}
 .selemenu{ font-size:18px; line-height:45px;text-indent: 20px}
 /*line-height: 25px; */
-.box{width:117px;height:140px; text-align:center;font-size:18px;}
+.box{width:117px;height:140px; text-align:center;font-size:18px;line-height: 25px;}
 .box img{width:117px; height:80px;padding-top: 10%;}
 .citylist span{ border-top-left-radius:15px;border-top-right-radius:15px;border-bottom-left-radius:15px;border-bottom-right-radius:15px;width:180px;display:block; clear:both; cursor:pointer;font-size: 18px;color:#696969;text-indent: 20px}
 .citylist span:hover{ background:#eee;}
