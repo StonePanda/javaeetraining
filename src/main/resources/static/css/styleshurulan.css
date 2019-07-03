@@ -10,9 +10,9 @@ body {
 }
 
 .containersousuok {
-  max-width: 1300px;
+  max-width: 1150px;
   margin: 0 auto;
-  padding: 60px 15px;
+  padding: 100px 20px;
 }
 
 form {
@@ -42,7 +42,7 @@ input {
   font-size: 16px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.06);
   color: #786f6b;
-  font-weight: bold;
+  font-weight: normal;
   letter-spacing: 1px;
   border-radius: 1px;
   transition: all 0.2s ease;
