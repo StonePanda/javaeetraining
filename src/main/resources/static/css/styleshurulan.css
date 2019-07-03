@@ -10,7 +10,7 @@ body {
 }
 
 .containersousuok {
-  max-width: 1150px;
+  max-width: 1242px;
   margin: 0 auto;
   padding: 100px 20px;
 }
@@ -44,7 +44,7 @@ input {
   color: #786f6b;
   font-weight: normal;
   letter-spacing: 1px;
-  border-radius: 1px;
+  border-radius: 15px;
   transition: all 0.2s ease;
 }
 
