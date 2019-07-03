@@ -42,12 +42,18 @@
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
-
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
 <!-- header area start here -->
 <header>
-  
 </header> <!-- header area end here -->
-<section class="section-paddings single-package-area" id="hotel_details">
+
+
+
+<section class="section-paddings single-package-area" id="hotel_details" style="padding-left:180px;">
     <div class="container">
         <div class="row">
             <!-- single package tab with details -->
@@ -60,13 +66,12 @@
                     <br>
                         <h2>Daydream Hotel</h2>
                     </div>
-
                 </div><!-- tab menu strat -->
-  
+            
             </div><!-- single package tab with details -->
 
             <!-- booking form start here -->
-            <div class="col-md-4 col-sm-12">
+            <div class="col-md-4 col-sm-12" style="display: inline-block;left:-200px;">
                 <aside>
                     <div class="booking-form">
                         <div class="booking-title">
@@ -89,7 +94,7 @@
                                 </div>
                         </div>
                         <form action="#" method="post">
-    
+                            
                             <div class="form-group">
                                 <textarea name="messgae" id="message" cols="30" rows="7" class="form-control" placeholder="评论内容"></textarea>
                             </div>
@@ -99,8 +104,6 @@
                         </form>
                     </div>
                 </aside><!-- adverestment start here-->
-
-        
             </div><!-- booking form end here -->
         </div>
     </div>
