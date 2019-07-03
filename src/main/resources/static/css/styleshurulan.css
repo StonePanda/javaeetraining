@@ -9,7 +9,7 @@ body {
   background-color: #f9f9f9;
 }
 
-.container {
+.containersousuok {
   max-width: 1300px;
   margin: 0 auto;
   padding: 60px 15px;
@@ -21,7 +21,7 @@ form {
   position: relative;
 }
 
-.input-group {
+.input-groupsousuok {
   position: relative;
 }
 

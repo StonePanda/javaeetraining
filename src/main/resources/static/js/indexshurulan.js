@@ -1,5 +1,5 @@
 var all_apps = document.querySelectorAll('.app');
-var search = document.querySelector('#search');
+var search = document.querySelector('#searchsousuok');
 var listContainer = document.querySelector('.suggestion-list');
 
 var app_list = [];
