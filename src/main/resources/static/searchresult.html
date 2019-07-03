@@ -38,10 +38,15 @@
     <!-- responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/master.css">
+    <!--图标库-->
+<link rel='stylesheet' href='css/all.css'>
+
+<!--主要样式-->
+<link rel="stylesheet" href="css/styleshurulan.css">
     <!-- modernizr css -->
-        <style type="text/css">
+    <style type="text/css">
         section{
-            background-color: rgb(245, 246, 250);
+            background-color: rgb(249, 249, 249);
         }
     </style>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
@@ -73,6 +78,18 @@
     </div> <!-- header-bottom area end here -->
 </header> <!-- header area end here -->
     <!-- popular destination strat -->
+    <!--宠利加入-->
+<div class="containersousuok" style="top: 100px;">
+  <form>
+    <div class="input-groupsousuok">
+      <input type="text" id="searchsousuok" placeholder="输入目的地..." autocomplete="off">
+      <label for="searchsousuok"><i class="fas fa-search"></i></label>
+    </div>
+    <div class="suggestion-list hiddensousuok">
+    </div>
+  </form>
+</div>
+
     <section class="blog-contents-version-one pt-100 pb-70 hotels-area hotels-area-2">
         <div class="container">
             <div class="row" id="showlist">
@@ -280,6 +297,8 @@
     <script src="js/jquery-customselect.js"></script>
     <!-- main js -->
     <script src="js/custom.js"></script>
+    <script  src="js/indexshurulan.js"></script>
+
 </body>
 
 </html>
