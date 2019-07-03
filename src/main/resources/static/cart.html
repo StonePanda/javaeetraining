@@ -16,29 +16,97 @@
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,600,700,800,900%7CPoppins:300,400,500,600,700,800,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="padcss/vendor/bootstrap.min.css">
     <!-- Font-awesome CSS -->
-    <link rel="stylesheet" href="css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="padcss/vendor/font-awesome.min.css">
     <!-- Slick slider css -->
-    <link rel="stylesheet" href="css/plugins/slick.min.css">
+    <link rel="stylesheet" href="padcss/plugins/slick.min.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="css/plugins/animate.css">
+    <link rel="stylesheet" href="padcss/plugins/animate.css">
     <!-- Nice Select css -->
-    <link rel="stylesheet" href="css/plugins/nice-select.css">
+    <link rel="stylesheet" href="padcss/plugins/nice-select.css">
     <!-- jquery UI css -->
-    <link rel="stylesheet" href="css/plugins/jqueryui.min.css">
+    <link rel="stylesheet" href="padcss/plugins/jqueryui.min.css">
     <!-- main style css -->
+    <link rel="stylesheet" href="padcss/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- Favi icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+    <!-- bootstrap v3.3.6 css -->
+    <link rel="stylesheet" href="css/assets/bootstrap.min.css">
+    <!-- animate css -->
+    <link rel="stylesheet" href="css/assets/animate.css">
+    <!-- Button Hover animate css -->
+    <link rel="stylesheet" href="css/assets/hover-min.css">
+    <!-- jquery-ui.min css -->
+    <link rel="stylesheet" href="css/assets/jquery-ui.min.css">
+    <!-- meanmenu css -->
+    <link rel="stylesheet" href="css/assets/meanmenu.min.css">
+    <!-- owl.carousel css -->
+    <link rel="stylesheet" href="css/assets/owl.carousel.min.css">
+    <!-- slick css -->
+    <link rel="stylesheet" href="css/assets/slick.css">
+    <!-- chosen.min-->
+    <link rel="stylesheet" href="css/assets/jquery-customselect.css">
+    <!-- font-awesome css -->
+    <link rel="stylesheet" href="css/assets/font-awesome.min.css">
+    <!-- magnific Css -->
+    <link rel="stylesheet" href="css/assets/magnific-popup.css">
+    <!-- Preloader css -->
+    <link rel="stylesheet" href="css/assets/preloader.css"> 
+    <!-- custome css -->
     <link rel="stylesheet" href="css/style.css">
-
+    <!-- responsive css -->
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/master.css">
+    <!--图标库-->
+    <link rel='stylesheet' href='css/all.css'>
+    <!--主要样式-->
+    <link rel="stylesheet" href="css/styleshurulan.css">
+    <!--dropdown+css/+js-->
+    <link href="cssdrop/style.css" rel="stylesheet" type="text/css">
+    <script src="jsdrop/jquery.min.js"></script>
+    <!-- modernizr css -->
+    <style type="text/css">
+        section{
+            background-color: rgb(249, 249, 249);
+        }
+    </style>
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
 <body>
     <main>
+    <header>
+        <div class="col-md-2 col-sm-2 col-xs-12 tap-v-responsive">
+            <div class="logo-area">
+                <a href="index.html"><img src="images/logo2.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="main_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10">
+                        <nav>
+                            <ul class="main-menu text-right">
+                                <li class="active"><a href="/index">首页</a>
+                                </li>
+                                <li><a href="" id="clientemail"></a><!--用户名或者登录!-->
+                                </li>
+                                <li><a href="" id="exitOrRegister"></a></li><!--/about退出或者注册/register!-->
+                            </ul>
+                        </nav>
+                    </div> <!-- main menu end here -->
+                </div>
+            </div>
+        </div> <!-- header-bottom area end here -->
+    </header> <!-- header area end here -->
 
         <div class="cart-main-wrapper section-padding">
-            <div class="container">
+            <div class="container" style = "position:absolute;left:107px;top:130px;">
                 <div class="section-bg-color">
-                    <div class="row">
+                    <div class="row" >
                         <div class="col-lg-12">
                             <div class="cart-table table-responsive">
                                 <table class="table table-bordered">
@@ -63,7 +131,7 @@
                                             <td class="pro-title"><span>2019/7/1 14:00</span></td>
                                             <td class="pro-title"><span>2019/7/2 12:00</span></td>
                                             <td class="pro-title"><span>001</span></td>
-                                            <td class="pro-title"><span>新都区寿龙大道11980号</span></td>
+                                            <td class="pro-title"><span>寿龙大道119号</span></td>
                                         </tr>
 
                                         <tr>
@@ -123,7 +191,7 @@
                                             </tr>
                                             <tr class="total">
                                                 <td>共计</td>
-                                                <td class="total-amount">1290</td>
+                                                <td>1290元</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -144,33 +212,58 @@
 
 
     <!-- Modernizer JS -->
-    <script src="js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="padjs/vendor/modernizr-3.6.0.min.js"></script>
     <!-- jQuery JS -->
-    <script src="js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="padjs/vendor/jquery-3.3.1.min.js"></script>
     <!-- Popper JS -->
-    <script src="js/vendor/popper.min.js"></script>
+    <script src="padjs/vendor/popper.min.js"></script>
     <!-- Bootstrap JS -->
-    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="padjs/vendor/bootstrap.min.js"></script>
     <!-- slick Slider JS -->
-    <script src="js/plugins/slick.min.js"></script>
+    <script src="padjs/plugins/slick.min.js"></script>
     <!-- Countdown JS -->
-    <script src="js/plugins/countdown.min.js"></script>
+    <script src="padjs/plugins/countdown.min.js"></script>
     <!-- Nice Select JS -->
-    <script src="js/plugins/nice-select.min.js"></script>
+    <script src="padjs/plugins/nice-select.min.js"></script>
     <!-- jquery UI JS -->
-    <script src="js/plugins/jqueryui.min.js"></script>
+    <script src="padjs/plugins/jqueryui.min.js"></script>
     <!-- Image zoom JS -->
-    <script src="js/plugins/image-zoom.min.js"></script>
+    <script src="padjs/plugins/image-zoom.min.js"></script>
     <!-- image loaded js -->
-    <script src="js/plugins/imagesloaded.pkgd.min.js"></script>
+    <script src="padjs/plugins/imagesloaded.pkgd.min.js"></script>
     <!-- masonry  -->
-    <script src="js/plugins/masonry.pkgd.min.js"></script>
+    <script src="padjs/plugins/masonry.pkgd.min.js"></script>
     <!-- mailchimp active js -->
-    <script src="js/plugins/ajaxchimp.js"></script>
+    <script src="padjs/plugins/ajaxchimp.js"></script>
     <!-- contact form dynamic js -->
-    <script src="js/plugins/ajax-mail.js"></script>
+    <script src="padjs/plugins/ajax-mail.js"></script>
     <!-- Main JS -->
-    <script src="js/main.js"></script>
-</body>
+    <script src="padjs/main.js"></script>
+        <script src="js/vendor/jquery-3.2.0.min.js"></script>
+    <script src="js/searchresult.js"></script>
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>  
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- owl.carousel js -->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- slick js -->
+    <script src="js/slick.min.js"></script>
+    <!-- meanmenu js -->
+    <script src="js/jquery.meanmenu.min.js"></script>
+    <!-- jquery-ui js -->
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- wow js -->
+    <script src="js/wow.min.js"></script>
+    <!-- counter js -->
+    <script src="js/jquery.counterup.min.js"></script>
+    <!-- Countdown js -->
+    <script src="js/jquery.countdown.min.js"></script>
+    <!-- waypoints js -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <!-- Isotope js -->
+    <script src="js/isotope.pkgd.min.js"></script>
+    <!-- magnific js -->
+    <script src="js/jquery.magnific-popup.min.js"></script>
+
 
 </html>
