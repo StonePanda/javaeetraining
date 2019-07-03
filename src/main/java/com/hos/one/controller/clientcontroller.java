@@ -64,10 +64,25 @@ public class Clientcontroller {
     @PostMapping("/searchcity")
     public String postCitySearch(@RequestBody Map<String,Object> map) {//不要用void,不然前端会报4040错误//先根据城市名查找list的hotelid
         List<Integer> hotelidlist=cityhotelservice.selectByCityName(map.get("city").toString());
+        if(map.get("brand")!=null){
+            List<Integer> hotelidlist2=hotelbrandservice.findHotelByBrand(Integer.parseInt(map.get("brand").toString()));
+            List<Integer> returnlist=new ArrayList();
+            for(int i=0;i<hotelidlist2.size();i++){
+                if(hotelidlist.contains(hotelidlist.get(i))){
+                    returnlist.add(hotelidlist2.get(i));
+                }
+            }
+            List<Hotel> hotellist=new ArrayList<>();
+            for (int i = 0; i < returnlist.size(); i++) {
+                hotellist.add(hotelservice.findHotelByPrimaryKey(returnlist.get(i)));
+            }
+            return JSON.toJSONString(hotellist);
+        }
         List<Hotel> hotellist=new ArrayList<>();
         for (int i = 0; i < hotelidlist.size(); i++) {
             hotellist.add(hotelservice.findHotelByPrimaryKey(hotelidlist.get(i)));
         }
+
         return JSON.toJSONString(hotellist);
     }
     //根据品牌名查找hotel

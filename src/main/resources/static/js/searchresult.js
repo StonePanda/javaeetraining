@@ -51,7 +51,8 @@ function initialize(){
 	}
 }
 
-function show(data){
+function show(data){//这时候是这个城市里的全部酒店
+    window.sessionStorage.setItem("hotellist",data)
   var hotellist = data;
   $('#showlist').html('')
   $.each(hotellist, function (index, item) {
@@ -69,4 +70,38 @@ function show(data){
  		)
     )
   })
+}
+
+function
+distanceselectlist(){
+    if($('#searchsousuok').value==null){
+        //console.log("没有输入")如果没有输入就没办法使用地点筛选
+            alert("需要输入目的地才能使用距离筛选！")
+    }
+    else{
+        //需要计算两点之间的距离了
+    }
+}
+
+function
+brandselectlist(){
+    var city=getParams("city")
+    var brand=$('#brandselect').value
+    obj={
+        "city":city
+        "brand":brand
+    }
+    $.ajax({
+        url: "/user/searchcity",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            show(data)
+            window.sessionStorage.setItem("hotellist",data);
+        }
+    })
+    
 }
