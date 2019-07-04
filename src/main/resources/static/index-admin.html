@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Preferences</title>
+    <title>index-admin</title>
     <meta name="description" content="">
     <link href='http://fonts.googleapis.com/cssend?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/cssend'>
     <link href="cssend/font-awesome.min.css" rel="stylesheet">
@@ -53,6 +53,27 @@
             <!--<p>Here goes another form and form controls.</p>-->
             <form action="index.html" class="templatemo-login-form" method="post" enctype="multipart/form-data">
               <div class="row form-group">
+                <div class="col-lg-4 col-md-4 form-group">                  
+                    <label for="inputUsername">房间类型</label>
+                    <input type="text" class="form-control" id="inputUsername" placeholder="">                  
+                </div>
+                <div class="col-lg-4 col-md-4 form-group">                  
+                    <label for="inputEmail">今日定价</label>
+                    <input type="price" class="form-control" id="inputPrice" placeholder="">                  
+                </div>
+                <div class="col-lg-4 col-md- form-group"> 
+                  <label class="control-label templatemo-block">优惠设置</label>                 
+                  <select class="form-control">
+                    <option value="sale">有折扣</option>
+                    <option value="nosale">无折扣</option>                      
+                  </select>
+                </div>
+              </div>
+              <div class="form-group text-right">
+                <button type="submit" class="templatemo-blue-button">添加</button>
+                <button type="reset" class="templatemo-white-button">更新</button>
+              </div>              
+              <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
                     <label for="inputFirstName">名称</label>
                     <input type="text" class="form-control" id="inputFirstName" placeholder="">
@@ -70,13 +91,27 @@
                 <div class="col-lg-6 col-md-6 form-group">                  
                     <label for="inputEmail">联系电话</label>
                     <input type="email" class="form-control" id="inputEmail" placeholder="">                  
-                </div> 
+                </div>    
+              </div>
+                 
+              <div class="row form-group">
+                <div class="col-lg-12 form-group">                   
+                    <label class="control-label" for="inputNote">简介</label>
+                    <textarea class="form-control" id="inputNote" rows="3"></textarea>
+                </div>
+              </div>              
+              <div class="row form-group">
+                <div class="col-lg-12">
+                  <label class="control-label templatemo-block">酒店照片</label> 
+                  <input type="file" name="fileToUpload" id="fileToUpload" class="filestyle" data-buttonName="btn-primary" data-buttonBefore="true" data-icon="false">
+                  <p>最大上传大小为 5 MB</p>                  
+                </div>
               </div>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
                     <label for="inputCurrentPassword">当前密码</label>
                     <input type="password" class="form-control" id="inputCurrentPassword" placeholder="">
-                </div>                
+                </div>             
               </div>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
@@ -87,18 +122,6 @@
                     <label for="inputConfirmNewPassword">确认新密码</label>
                     <input type="password" class="form-control" id="inputConfirmNewPassword">
                 </div> 
-              </div>
-              <div class="row form-group">
-                <div class="col-lg-12 form-group">                   
-                    <label class="control-label" for="inputNote">简介</label>
-                    <textarea class="form-control" id="inputNote" rows="3"></textarea>
-                </div>
-              </div>              <div class="row form-group">
-                <div class="col-lg-12">
-                  <label class="control-label templatemo-block">酒店照片</label> 
-                  <input type="file" name="fileToUpload" id="fileToUpload" class="filestyle" data-buttonName="btn-primary" data-buttonBefore="true" data-icon="false">
-                  <p>最大上传大小为 5 MB</p>                  
-                </div>
               </div>
               <div class="form-group text-right">
                 <button type="submit" class="templatemo-blue-button">更新</button>
