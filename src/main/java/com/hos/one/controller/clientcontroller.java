@@ -258,6 +258,6 @@ public class Clientcontroller {
         }
         return JSON.toJSONString(hotellist);
     }
-    
+
 }
 

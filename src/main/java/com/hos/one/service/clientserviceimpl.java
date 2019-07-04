@@ -26,5 +26,7 @@ public class Clientserviceimpl implements Clientservice{
     public Client findClientByPhone(String phone){return clientmapper.selectByPhone(phone);}
 
     @Override
-    public Client findClientById(Integer clientid){return clientmapper.selectByPrimaryKey(clientid);}
+    public Client findClientById(Integer clientid){
+        return clientmapper.selectByPrimaryKey(clientid);
+    }
 }

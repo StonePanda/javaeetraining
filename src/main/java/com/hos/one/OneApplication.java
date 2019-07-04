@@ -7,7 +7,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan("com.hos.one.dao")
 @SpringBootApplication
 public class OneApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(OneApplication.class, args);
     }

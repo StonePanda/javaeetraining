@@ -103,7 +103,7 @@
     from roomtype
     where hotelid = #{hotelid,jdbcType=INTEGER}
   </select>
-  <select id="getAvgPriceByHotelid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  <select id="getDiscountByHotelid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
     select sum(discount)
     from roomtype
     where hotelid = #{hotelid,jdbcType=INTEGER}

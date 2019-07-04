@@ -55,12 +55,13 @@ function checkAll() {
             data: JSON.stringify(obj),
             success: function (data) {
                 var status=data
-                if(status=="success"){
-                    console.log(status)
-                    //window.location.href = "/index";
-                } else {
+                if(status=="fail"){
                     console.log(status)
                     setError("酒店电话或密码错误！")
+                } else {//这个时候返回的酒店的所有信息
+                    console.log(status)
+                    window.sessionStorage.setItem("hotelinfo",data)
+                    window.location.href = "/index-admin";
                 }
             }
         });
