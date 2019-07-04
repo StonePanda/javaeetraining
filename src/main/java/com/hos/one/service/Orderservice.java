@@ -7,7 +7,9 @@ import java.util.List;
 public interface Orderservice {
     void addOrder(Order neworder);
 /**/
-    List<Integer> findTwoCommentByHotelid(int hotelid);
+List<Integer> findTwoCommentClientByHotelid(int hotelid);
 
-    List<Order> findTwoOrderByHotelid(int hotelid);
+   List<Order> findTwoHasCtOrderByHotelid(int hotelid);
+
+    List<Order> findHasCtOrderByHotelid(int hotelid);
 }

@@ -18,12 +18,17 @@ public class Orderserviceimpl implements Orderservice{
     }
 
     @Override
-    public List<Integer> findTwoCommentByHotelid(int hotelid){
-        return ordermapper.selectTwoCommentByHotelid(hotelid);
+    public List<Integer> findTwoCommentClientByHotelid(int hotelid){
+        return ordermapper.selectTwoCommentClientByHotelid(hotelid);
     }
 
     @Override
-    public List<Order> findTwoOrderByHotelid(int hotelid){
-        return ordermapper.selectTwoOrderByHotelid(hotelid);
+    public List<Order> findTwoHasCtOrderByHotelid(int hotelid){
+        return ordermapper.selectTwoHasCtOrderByHotelid(hotelid);
+    }
+
+    @Override
+    public List<Order> findHasCtOrderByHotelid(int hotelid){
+        return ordermapper.selectHasCtOrderByHotelid(hotelid);
     }
 }

@@ -54,7 +54,7 @@
 <header>
 	<div class="col-md-2 col-sm-2 col-xs-12 tap-v-responsive">
 					<div class="logo-area">
-						<a href="index.html"><img src="images/logo.png" alt="">
+						<a><img src="images/logo.png" alt=""><!-- href="index.html"-->
 						</a>
 		</div>
 	</div>
@@ -156,7 +156,7 @@
 
 						data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":750,"ease":"Power4.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]' 
 						style="z-index: 7; color:#fff; font-family:'Poppins', sans-serif; white-space: nowrap; font-weight:400;">
-						We are not the beginning of the pursuit of others<br>but every unknown tomorrow.
+						住得更好，走得更远
 					</div>
 
 				</li>
@@ -235,7 +235,7 @@
 
 						data-frames='[{"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","speed":2000,"to":"o:1;","delay":750,"ease":"Power4.easeInOut"},{"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}]' 
 						style="z-index: 7; color:#fff; font-family:'Poppins', sans-serif; white-space: nowrap; font-weight:400;">
-						We are not the beginning of the pursuit of others<br>but every unknown tomorrow.
+						住得更好，走得更远
 					</div>
 				</li>
 				<!-- first slider end -->
@@ -298,18 +298,18 @@
 		<div class="row">
 			<div class="col-md-12 col-sm-12-col-xs-12">
 				<div class="count-down-titile">
-					<h2>超<span class="color-one">AJing Hotel</span> for 100 <br> customers with <span class="color-two">Discount 30%</span> </h2>
+					<h2>超级优惠的价格就在<span class="color-one" id="discounthotel"></span><br>平均每日价格 <span class="color-two" id="discountavgprice"></span> 元</h2><!--AJing HotelDiscount 30%-->
 				</div>
 				<div class="count-timer text-center">
 					<div class="time-wrapper">
-						<p>It’s limited seating! Hurry up</p>
+						<p>用更实惠价格获得更愉快假期！</p><!--It’s limited seating! Hurry up2019/7/5#-->
 						<div class="timer">
-							<div data-countdown="2019/6/30"></div>
+							<div data-countdown="" id="discountendtime"></div><!--这个就是明天的日期-->
 						</div>
 					</div>
 				</div>
 				<div class="buy-now text-center">
-					<a href="#" class="travel-primary-btn hvr-fade">Book Now</a>
+					<a class="travel-primary-btn hvr-fade" id="discounthotelurl">现在预定</a>
 				</div>
 			</div>
 		</div>
@@ -428,66 +428,66 @@
                     <div class="block-text">
                         <div class="carousel-text slider-for-two">
                             <div class="single-box">
-                                <p>External environment: geographical location, convenient transportation ~
-                                <br>Hotel service: warmth and comfort ~ management level ~
-                                <br>Hotel prices: reasonable cost - effective ~ excellent quality and reasonable price.
-                                <br>Hotel consumption: free breakfast, moderate taste, rich choice of many ~
-                                </p>
+                                <p id="indexct1ct">
+                                </p><!--评论内容-->
                                 <div class="client-bio">
-                                    <h3>Jhonthan Smith</h3>
-                                    <span>Ajing Hotel</span>
+                                    <h3 id="indexct1cl"></h3><!--用户名-->
+                                    <span id="indexct1hn"></span><!--酒店名，可以加href-->
                                 </div>
-                                <ul class="rating d-flex justify-content-center">
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
+                                <ul class="rating d-flex justify-content-center" id="indexct1star">
+                                    <!--<li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>
+                                    <li><i class="fa fa-star"></i></li>-->
                                 </ul>
                             </div>
                             <div class="single-box">
-                                <p>The best hotel ever!!
-                                </p>
+                                <p id="indexct2ct">
+                                <br>
+                                </p><!--评论内容-->
                                 <div class="client-bio">
-                                    <h3>ChengDu Hotel</h3>
-                                    <span>Martin, Parent</span>
+                                    <h3 id="indexct2cl"></h3>
+                                    <span id="indexct2hn"></span>
                                 </div>
-                                <ul class="rating d-flex justify-content-center">
+                                <ul class="rating d-flex justify-content-center" id="indexct2star">
+                                    <!--<li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
+                                    <li><i class="fa fa-star"></i></li>-->
+                                </ul>
+                            </div>
+                           <div class="single-box">
+                                <p id="indexct3ct">
+                                <br>
+                                </p><!--评论内容-->
+                                <div class="client-bio">
+                                    <h3 id="indexct3cl"></h3>
+                                    <span id="indexct3hn"></span>
+                                </div>
+                                <ul class="rating d-flex justify-content-center" id="indexct3star">
+                                    <!--<li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
+                                    <li><i class="fa fa-star"></i></li>                                    
+                                    <li><i class="fa fa-star"></i></li>-->
                                 </ul>
                             </div>
                             <div class="single-box">
-                                <p>LWhen I checked in, the staff saw that I had brought my baby who was still nursing. They even sent me a free stroller.
-                                </p>
+                                <p id="indexct4ct">
+                                <br>
+                                </p><!--评论内容-->
                                 <div class="client-bio">
-                                    <h3>ShangHai Hotel</h3>
-                                    <span>Martin, Parent</span>
+                                    <h3 id="indexct4cl"></h3>
+                                    <span id="indexct4hn"></span>
                                 </div>
-                                <ul class="rating d-flex justify-content-center">
+                                <ul class="rating d-flex justify-content-center" id="indexct4star">
+                                    <!--<li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
                                     <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                </ul>
-                            </div>
-                            <div class="single-box">
-                                <p>The service was superb, the room smelled faintly and the bed was clean. My family and I were satisfied.
-                                </p>
-                                <div class="client-bio">
-                                    <h3>ShenZhen Hotel</h3>
-                                    <span>Martin, Parent</span>
-                                </div>
-                                <ul class="rating d-flex justify-content-center">
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
-                                    <li><i class="fa fa-star"></i></li>                                    
+                                    <li><i class="fa fa-star"></i></li>-->
                                 </ul>
                             </div>
                         </div>
@@ -507,14 +507,14 @@
 			<div class="col-12 col-sm-6 col-md-6 col-lg-3">
 				<div class="single-footer">
 					<div class="footer-title">
-						<h3><a href="#"><img src="images/logo.png" alt=""></a></h3>
+						<h3><a><img src="images/logo.png" alt=""></a></h3>
 					</div>
 					<div class="footer-left">
 						<div class="footer-logo">
-							<p>Yep.I'm wondering if you will give all yourself to me when I need you.</p>
+							<p>如果有任何问题，请联系我们</p>
 						</div>
 						<ul class="footer-contact">
-							<li><img class="map" src="images/icon/map.png" alt="">Seventh ChengDu , China</li>
+							<li><img class="map" src="images/icon/map.png" alt="">中国四川省成都市</li>
 							<li><img class="map" src="images/icon/phone.png" alt="">+183-8019-8292</li>
 							<li><img class="map" src="images/icon/gmail.png" alt="">1104595810@qq.com</li>
 						</ul>
@@ -526,16 +526,15 @@
 			<div class="col-12 col-sm-6 col-md-6 col-lg-2">
 				<div class="single-footer">
 					<div class="footer-title">
-						<h3>Quick Link</h3>
+						<h3>快速连接</h3>
 					</div>
 					<ul class="list-unstyled">
-						<li><a href="" title="">Home</a></li>
-						<li><a href="" title="">Package List</a></li>
-						<li><a href="" title="">Hotels</a></li>
-						<li><a href="" title="">Flights</a></li>
-						<li><a href="" title="">Blog</a></li>
-						<li><a href="" title="">Pages</a></li>
-						<li><a href="" title="">Contact</a></li>
+						<li><a href="" title="">首页</a></li>
+						<li><a href="" title="">用户登录</a></li>
+						<li><a href="" title="">用户注册</a></li>
+						<li><a href="" title="">酒店登录</a></li>
+						<li><a href="" title="">酒店注册</a></li>
+						<li><a href="" title="">关于我们</a></li>
 					</ul>
 				</div>
 			</div>	<!-- footer destination -->
@@ -544,45 +543,39 @@
 				<div class="single-footer">
 					<div class="single-recent-post">
 						<div class="footer-title">
-							<h3>Recent News</h3>
+							<h3>最近优惠</h3>
 						</div>
 						<ul class="recent-post">
 							<li>
-								<a href="#">
+								<a id="fthotel1url"><!-- href="#" 酒店详情连接-->
 									<div class="post-thum">
-										<img src="images/blog/f4.jpg" alt="" class="img-rounded">
+										<img class="img-rounded" id="fthotel1img" style="width: 20px;height: 20px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字-->
 									</div>
 									<div class="post-content">
-										<p>A Clean Website Gives More Experience To 5-stars
-										Hotels.
-										</p>
-										<span>27 July, 2019</span>
+										<p id="fthotel1name"></p><!--酒店名字-->
+										<span id="fthotel1avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
 									</div>
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a id="fthotel2url"><!-- href="#" 酒店详情连接-->
 									<div class="post-thum">
-										<img src="images/blog/f5.jpg" alt="" class="img-rounded">
+										<img class="img-rounded" id="fthotel2img" style="width: 20px;height: 20px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字和酒店的地址 -->
 									</div>
 									<div class="post-content">
-										<p>A Clean Website Gives More Experience To 4-stars
-										Hotels.
-										</p>
-										<span>27 July, 2019</span>
+										<p id="fthotel2name"></p><!--酒店名字-->
+										<span id="fthotel2avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
 									</div>
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a id="fthotel3url"><!-- href="#" 酒店详情连接-->
 									<div class="post-thum">
-										<img src="images/blog/f6.jpg" alt="" class="img-rounded">
+										<img class="img-rounded" id="fthotel3img" style="width: 20px;height: 20px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字和酒店的地址 -->
 									</div>
 									<div class="post-content">
-										<p>A Clean Website Gives More Experience To 3-stars
-										Hotels.
-										</p>
-										<span>27 July, 2019</span>
+										<p id="fthotel3name"></p><!--酒店名字-->
+										<span id="fthote31avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
 									</div>
 								</a>
 							</li>
@@ -595,16 +588,16 @@
 			<div class="col-12 col-sm-6 col-md-6 col-lg-3 f-phone-responsive">
 				<div class="single-footer">
 					<div class="footer-title">
-						<h3>Quick Contact</h3>
+						<h3>快速联系我们</h3>
 					</div>
 					<div class="footer-contact-form">
 						<form action="#">
 							<ul class="footer-form-element">
 								<li>
-									<input type="text" name="email" id="email" placeholder="" value="Email Address" onblur="if(this.value==''){this.value='Email Address'}" onfocus="if(this.value=='Email Address'){this.value=''}">
+									<input type="text" name="email" id="footeremail" placeholder="" value="" onblur="if(this.value==''){this.value='Email Address'}" onfocus="if(this.value=='Email Address'){this.value=''}">
 								</li>
 								<li class="text_area">
-									<textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+									<textarea name="message" id="message" cols="30" rows="10" placeholder="我们将尽快给您回信"></textarea>
 									<button type="submit">Send</button>
 								</li>
 								<li>
@@ -613,18 +606,6 @@
 							</ul>
 						</form>
 					</div>
-					<!--<div class="footer-social-media">
-						<div class="social-footer-title">
-							<h3>Follow Us</h3>
-						</div>
-						<ul class="footer-social-link">
-							<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-							<li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-						</ul>
-					</div>!-->
 				</div>
 			</div>	<!-- footer contact -->
 		</div>

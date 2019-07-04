@@ -22,33 +22,41 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where orderid = #{orderid,jdbcType=INTEGER}
   </select>
-  <select id="selectTwoCommentByHotelid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  <select id="selectTwoCommentClientByHotelid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     clientid
-    from 'order'
+    from `order`
     where hotelid = #{hotelid,jdbcType=INTEGER}
-    and 'status'=2
-    and commentstar!=null
+    and status=2
+    and commentstar is not null
     limit 0,2
   </select>
-  <select id="selectTwoOrderByHotelid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectTwoHasCtOrderByHotelid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     *
-    from 'order'
+    from `order`
     where hotelid = #{hotelid,jdbcType=INTEGER}
-    and 'status'=2
-    and commentstar!=null
+    and status=2
+    and commentstar is not null
     limit 0,2
   </select>
+  <select id="selectHasCtOrderByHotelid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    *
+    from `order`
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+    and status=2
+    and commentstar is not null
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
+    delete from `order`
     where orderid = #{orderid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hos.one.entity.Order">
-    insert into order (orderid, clientid, hotelid, 
+    insert into `order` (orderid, clientid, hotelid,
       roomtype, timestart, timeend, 
       price, status, commentstar, 
       commentcontent)
@@ -58,7 +66,7 @@
       #{commentcontent,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hos.one.entity.Order">
-    insert into order
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="orderid != null">
         orderid,
@@ -125,7 +133,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.hos.one.entity.Order">
-    update order
+    update `order`
     <set>
       <if test="clientid != null">
         clientid = #{clientid,jdbcType=INTEGER},
@@ -158,7 +166,7 @@
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Order">
-    update order
+    update `order`
     set clientid = #{clientid,jdbcType=INTEGER},
       hotelid = #{hotelid,jdbcType=INTEGER},
       roomtype = #{roomtype,jdbcType=VARCHAR},

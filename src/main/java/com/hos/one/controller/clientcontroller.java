@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user")
@@ -161,7 +159,7 @@ public class Clientcontroller {
     @ResponseBody
     @PostMapping("ctclientemail")
     public String postCtClientEmail(@RequestBody Map<String,String> map){
-        List<Integer> twoctemial=orderservice.findTwoCommentByHotelid(Integer.parseInt(map.get("hotelid")));
+        List<Integer> twoctemial=orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid")));
         List<String> returneamil=new ArrayList(2);
         for(int i=0;i<2;i++){
             returneamil.add(clientservice.findClientById(twoctemial.get(i)).getEmail());
@@ -171,7 +169,7 @@ public class Clientcontroller {
     @ResponseBody
     @PostMapping("commenttwo")
     public String postCommenttwo(@RequestBody Map<String,String> map){
-        return JSON.toJSONString(orderservice.findTwoOrderByHotelid(Integer.parseInt(map.get("hotelid"))));
+        return JSON.toJSONString(orderservice.findTwoHasCtOrderByHotelid(Integer.parseInt(map.get("hotelid"))));
     }
     @ResponseBody
     @PostMapping("searchselect")
@@ -258,6 +256,92 @@ public class Clientcontroller {
         }
         return JSON.toJSONString(hotellist);
     }
+    @ResponseBody
+    @PostMapping("indexdiscount")
+    public String postIndexDiscount(@RequestBody Map<String,String> map){
+        //获取到的格式是四川省成都市这样的格式，需要得到省与市之间的东西
+        int shengpos=map.get("IPCity").toString().indexOf("省");
+        int shipos=map.get("IPCity").toString().indexOf("市");
+        String ipcity=map.get("IPCity").toString().substring(shengpos+1,shipos);
+        //因为是首页显示，所以得到用户IP所在的位置推荐即可
+        List<Integer> hotelidlist=cityhotelservice.selectByCityName(ipcity);//用户IP所在的城市
 
+        int minavgprice=roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(0));
+        int minavgid=1;
+        //找到平均价格最小的那个
+        for(int i=0;i<hotelidlist.size();i++){
+            if(roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))<minavgprice){
+                minavgprice=roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i));
+                minavgid=i;
+            }
+        }
+        Hotel returnHotel=new Hotel();
+        returnHotel.setHotelid(minavgid);
+        returnHotel.setBrandid(minavgprice);
+        returnHotel.setHotelname(hotelservice.findHotelByPrimaryKey(minavgid).getHotelname());
+        return JSON.toJSONString(returnHotel);
+    }
+    @ResponseBody
+    @PostMapping("indexcomment")
+    public String postIndexComment(@RequestBody Map<String,String> map){
+        //获取到的格式是四川省成都市这样的格式，需要得到省与市之间的东西
+        int shengpos=map.get("IPCity").toString().indexOf("省");
+        int shipos=map.get("IPCity").toString().indexOf("市");
+        String ipcity=map.get("IPCity").toString().substring(shengpos+1,shipos);
+        //因为是首页显示，所以得到用户IP所在的位置推荐即可
+        List<Integer> hotelidlist=cityhotelservice.selectByCityName(ipcity);//用户IP所在的城市
+        /*包括评论内容，用户名，酒店名，酒店id，评论星*/
+        //已经得到id，找到四个评论，order的id越大说明这个评论越新
+        List<Order> returnOrder=new ArrayList<>();
+        int maxcommentid=1;
+        for(int i=0;i<hotelidlist.size();i++) {//找到这个hotel的有评论的id
+            int hotelCommentsNum = orderservice.findHasCtOrderByHotelid(hotelidlist.get(i)).size();
+            //如果这个酒店是0条评论
+            if (hotelCommentsNum == 0){
+                //什么都不做
+            }
+            else{
+                if(orderservice.findHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1).getOrderid()>maxcommentid){
+                    maxcommentid=orderservice.findTwoHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1).getOrderid();
+                    if(returnOrder.size()<4){//返回四个
+                        returnOrder.add(orderservice.findTwoHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1));
+                    }else{
+                        returnOrder.remove(0);
+                        returnOrder.add(orderservice.findTwoHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1));
+                    }
+                }
+            }
+
+        }
+        /*包括评论内容，用户邮箱，酒店名，酒店id，评论星*/
+        List<Hotel> returnTidai=new ArrayList<>();
+        Hotel temTidaiHotel=new Hotel();
+        for(int i=0;i<returnOrder.size();i++){
+            temTidaiHotel.setHotelid(returnOrder.get(i).getHotelid());
+            temTidaiHotel.setHotelname(hotelservice.findHotelByPrimaryKey(returnOrder.get(i).getHotelid()).getHotelname());
+            temTidaiHotel.setHotelphone(clientservice.findClientById(returnOrder.get(i).getClientid()).getEmail());
+            temTidaiHotel.setOverview(returnOrder.get(i).getCommentcontent());
+            temTidaiHotel.setGetstars(returnOrder.get(i).getCommentstar());
+            returnTidai.add(temTidaiHotel);
+        }
+        return JSON.toJSONString(returnTidai);
+    }
+    @ResponseBody
+    @GetMapping("footerhotel")
+    public String getFooterHotel(){
+        //什么都没有，只要返回有优惠的三个hotel就行了
+        List<Integer> hasDtHotelid=roomtypeservice.findHasDiscountHotel();
+        List<Hotel> returnHotel=new ArrayList<>();
+        Hotel temHotel=new Hotel();
+        /*酒店id，酒店名字，酒店图片的url,酒店优惠后的平均价格，还是要用一下替代的方法*/
+        for(int i=hasDtHotelid.size()-1;i>hasDtHotelid.size()-4;i--){
+            temHotel.setHotelid(hasDtHotelid.get(i));
+            temHotel.setHotelname(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getHotelname());
+            temHotel.setPhotourl(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getPhotourl());
+            temHotel.setBrandid(roomtypeservice.getAvgPriceByHotelid(hasDtHotelid.get(i)));
+            returnHotel.add(temHotel);
+        }
+        return JSON.toJSONString(returnHotel);
+    }
 }
 

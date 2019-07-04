@@ -12,4 +12,6 @@ public interface Roomtypeservice {
     int getAvgPriceByHotelid(Integer hotelid);
 
     int getDiscountByHotelid(Integer hotelid);
+
+    List<Integer> findHasDiscountHotel();
 }

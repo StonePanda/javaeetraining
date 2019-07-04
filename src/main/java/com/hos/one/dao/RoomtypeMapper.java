@@ -18,6 +18,8 @@ public interface RoomtypeMapper {
 
     List<Roomtype> selectByHotelId(Integer hotelid);
 
+    List<Integer> selectHasDiscountHotel();
+
     int getAvgPriceByHotelid(Integer hotelid);
 
     int getDiscountByHotelid(Integer hotelid);

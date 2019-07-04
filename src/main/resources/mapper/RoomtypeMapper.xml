@@ -26,6 +26,12 @@
     from roomtype
     where hotelid = #{hotelid,jdbcType=INTEGER}
   </select>
+  <select id="selectHasDiscountHotel" resultType="java.lang.Integer">
+    select
+    distinct  hotelid
+    from roomtype
+    where discount>0
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     delete from roomtype
     where hotelid = #{hotelid,jdbcType=INTEGER}

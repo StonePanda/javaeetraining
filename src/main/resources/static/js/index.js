@@ -4,12 +4,14 @@ $(function(){
 		$('#clientemail').attr('href','/clientdetail');
 		$('#exitOrRegister').text('退出')
 		$('#exitOrRegister').attr('href','/about')
+		$('#footeremail').attr('value',window.sessionStorage.getItem("email"))
 	}
 	else{
 		$('#clientemail').text("登录");
 		$('#clientemail').attr('href','/login');
 		$('#exitOrRegister').text('注册')
 		$('#exitOrRegister').attr('href','/register')
+		$('#footeremail').attr('value','请先登录！')
 	}
 	var _script = document.createElement('script');
     _script.type = "text/javascript";
@@ -18,20 +20,12 @@ $(function(){
     document.head.appendChild(_script);
 })
 
-/* function 
- f(data){
-                pointX = data.content.point.x;
-                pointY = data.content.point.y;
-                    document.getElementById("comefrom").innerHTML  = "你所在城市:"+data.content.address;
-                    // document.getElementById("pointX").innerHTML  = "你城市经度:"+pointX;
-                    // document.getElementById("pointY").innerHTML  = "你的城市纬度:"+pointY;
-              }*/  //获取IP所在经纬度和城市
-
 function
 initpopular(data){
 	var obj={
 		"IPCity":data.content.address
 	}
+	IPCity=data.content.address
 	console.log(data.content.address)
 	$.ajax({
 		url: "/user/popular",
@@ -43,6 +37,199 @@ initpopular(data){
         success: function (data) {//这里仅仅是post成功
             showPopular(data)
             console.log(data)
+        },
+        error: function(data) {
+      		console.log(data)
+    	}
+	})
+	//然后还要获得最有优惠的
+	console.log("最优惠的没有返回？")
+	$.ajax({
+		url: "/user/indexdiscount",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            console.log("最优惠的返回"+data)
+            //返回名字，返回平均价格，时间就是明天的，模式是2019/7/5,返回一个新对象，用一个平均价格代替某一个int值
+            $('#discounthotel').append(data.hotelname)
+            $('#discountavgprice').append(data.brandid)//这个是代替
+            var tomorrow = new Date()
+            $('#discountendtime').attr('data-countdown',tomorrow.getFullYear()+'/'+tomorrow.getMonth()+1+'/'+tomorrow.getDate()+1)
+            $('#discounthotelurl').attr('href','/hoteldetails?hotelid='+data.hotelid)
+        },
+        error: function(data) {
+      		console.log(data)
+    	}
+	})
+	console.log("评论没有返回？")
+	//和这个城市相关的宾馆的评论随机选四个
+	$.ajax({
+		url: "/user/indexcomment",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功,返回的应该是替代了的。包括评论内容，用户名，酒店名，酒店id，评论星
+            console.log("三个评论返回"+data)
+            //返回名字，返回平均价格，时间就是明天的，模式是2019/7/5,返回一个新对象，用一个平均价格代替某一个int值
+            /* temTidaiHotel.setHotelid(returnOrder.get(i).getHotelid());
+            temTidaiHotel.setHotelname(hotelservice.findHotelByPrimaryKey(returnOrder.get(i).getHotelid()).getHotelname());
+            temTidaiHotel.setHotelphone(clientservice.findClientById(returnOrder.get(i).getClientid()).getEmail());
+            temTidaiHotel.setOverview(returnOrder.get(i).getCommentcontent());
+            temTidaiHotel.setGetstars(returnOrder.get(i).getCommentstar());*/
+            $('#indexct1ct').append(data[0].overview)
+            $('#indexct1cl').append(data[0].Hotelphone)
+            $('#indexct1hn').append(data[0].hotelname)
+            $('#indexct1hn').attr('href','/hoteldetails?hotelid='+data[0].hotelid)
+            if(data[0].commentstar=="5"){
+            	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            else if(data[0].commentstar=="4"){
+            	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[0].commentstar=="3"){
+            	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[0].commentstar=="2"){
+            	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[0].commentstar=="1"){
+            	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>')
+            }
+            $('#indexct2ct').append(data[1].overview)
+            $('#indexct2cl').append(data[1].Hotelphone)
+            $('#indexct2hn').append(data[1].hotelname)
+            $('#indexct2hn').attr('href','/hoteldetails?hotelid='+data[1].hotelid)
+            if(data[1].commentstar=="5"){
+            	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            else if(data[1].commentstar=="4"){
+            	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[1].commentstar=="3"){
+            	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[1].commentstar=="2"){
+            	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[1].commentstar=="1"){
+            	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>')
+            }
+            $('#indexct3ct').append(data[2].overview)
+            $('#indexct3cl').append(data[2].Hotelphone)
+            $('#indexct3hn').append(data[2].hotelname)
+            $('#indexct3hn').attr('href','/hoteldetails?hotelid='+data[2].hotelid)
+            if(data[2].commentstar=="5"){
+            	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            else if(data[2].commentstar=="4"){
+            	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[2].commentstar=="3"){
+            	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[2].commentstar=="2"){
+            	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[2].commentstar=="1"){
+            	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>')
+            }
+            $('#indexct4ct').append(data[3].overview)
+            $('#indexct4cl').append(data[3].Hotelphone)
+            $('#indexct4hn').append(data[3].hotelname)
+            $('#indexct4hn').attr('href','/hoteldetails?hotelid='+data[3].hotelid)
+            if(data[3].commentstar=="5"){
+            	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            else if(data[3].commentstar=="4"){
+            	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[3].commentstar=="3"){
+            	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[3].commentstar=="2"){
+            	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
+            							'<li><i class="fa fa-star"></i></li>')
+            }
+            if(data[3].commentstar=="1"){
+            	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>')
+            }
+            
+        },
+        error: function(data) {
+      		console.log(data)
+    	}
+	})
+	$.ajax({
+		url: "/user/footerhotel",
+        dataType: "json",//期待返回的类型
+        async: true,
+        type: "GET",
+        success: function (data) {//这里仅仅是post成功,返回的应该是替代了的。包括评论内容，用户名，酒店名，酒店id，评论星
+            console.log(data)
+            /*酒店id，酒店名字，酒店图片的url,酒店优惠后的平均价格，还是要用一下替代的方法*/
+            /*temHotel.setHotelid(hasDtHotelid.get(i));
+            temHotel.setHotelname(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getHotelname());
+            temHotel.setPhotourl(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getPhotourl());
+            temHotel.setBrandid(roomtypeservice.getAvgPriceByHotelid(hasDtHotelid.get(i)));*/
+            $('#fthotel1url').attr('href','/hoteldetails?hotelid='+data[0].hotelid)
+            $('#fthotel1img').attr('src',data[0].photourl)
+            $('#fthotel1img').attr('alt',data[0].hotelname)
+            $('#fthotel1name').append(data[0].hotelname)
+            $('#fthotel1avgprice').append(data[0].brandid)
+                        $('#fthotel2url').attr('href','/hoteldetails?hotelid='+data[1].hotelid)
+            $('#fthotel2img').attr('src',data[1].photourl)
+            $('#fthotel2img').attr('alt',data[1].hotelname)
+            $('#fthotel2name').append(data[1].hotelname)
+            $('#fthotel2avgprice').append(data[1].brandid)
+                        $('#fthotel3url').attr('href','/hoteldetails?hotelid='+data[2].hotelid)
+            $('#fthotel3img').attr('src',data[2].photourl)
+            $('#fthotel3img').attr('alt',data[2].hotelname)
+            $('#fthotel3name').append(data[2].hotelname)
+            $('#fthotel3avgprice').append(data[2].brandid)
         },
         error: function(data) {
       		console.log(data)
@@ -111,4 +298,3 @@ jumpSearch(){
 	window.location.href='/search?city='+keyword;//
 	return false//防止form自己的跳转
 }
-
