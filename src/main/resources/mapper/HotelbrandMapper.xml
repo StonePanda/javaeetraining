@@ -23,6 +23,12 @@
     from hotelbrand
     where brandid = #{brandid,jdbcType=INTEGER}
   </select>
+  <select id="selectByBrandName" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    hotelid
+    from hotelbrand
+    where brandname = #{brandname,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hotelbrand
     where hotelid = #{hotelid,jdbcType=INTEGER}

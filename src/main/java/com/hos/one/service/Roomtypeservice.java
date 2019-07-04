@@ -8,4 +8,8 @@ public interface Roomtypeservice {
     List<Roomtype> findRoomtypeByHotelid(Integer hotelid);
 
     void setNewNum(Integer hotelid,String roomtype,Integer minusnum);
+
+    int getAvgPriceByHotelid(Integer hotelid);
+
+    int getDiscountByHotelid(Integer hotelid);
 }

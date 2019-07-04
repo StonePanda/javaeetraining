@@ -98,6 +98,16 @@
     where hotelid = #{hotelid,jdbcType=INTEGER}
     and roomtype = #{roomtype,jdbcType=VARCHAR}
   </update>
+  <select id="getAvgPriceByHotelid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select avg(price)
+    from roomtype
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </select>
+  <select id="getAvgPriceByHotelid" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select sum(discount)
+    from roomtype
+    where hotelid = #{hotelid,jdbcType=INTEGER}
+  </select>
   <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Roomtype">
     update roomtype
     set num = #{num,jdbcType=INTEGER},

@@ -64,20 +64,6 @@ public class Clientcontroller {
     @PostMapping("/searchcity")
     public String postCitySearch(@RequestBody Map<String,Object> map) {//不要用void,不然前端会报4040错误//先根据城市名查找list的hotelid
         List<Integer> hotelidlist=cityhotelservice.selectByCityName(map.get("city").toString());
-        if(map.get("brand")!=null){
-            List<Integer> hotelidlist2=hotelbrandservice.findHotelByBrand(Integer.parseInt(map.get("brand").toString()));
-            List<Integer> returnlist=new ArrayList();
-            for(int i=0;i<hotelidlist2.size();i++){
-                if(hotelidlist.contains(hotelidlist.get(i))){
-                    returnlist.add(hotelidlist2.get(i));
-                }
-            }
-            List<Hotel> hotellist=new ArrayList<>();
-            for (int i = 0; i < returnlist.size(); i++) {
-                hotellist.add(hotelservice.findHotelByPrimaryKey(returnlist.get(i)));
-            }
-            return JSON.toJSONString(hotellist);
-        }
         List<Hotel> hotellist=new ArrayList<>();
         for (int i = 0; i < hotelidlist.size(); i++) {
             hotellist.add(hotelservice.findHotelByPrimaryKey(hotelidlist.get(i)));
@@ -187,5 +173,91 @@ public class Clientcontroller {
     public String postCommenttwo(@RequestBody Map<String,String> map){
         return JSON.toJSONString(orderservice.findTwoOrderByHotelid(Integer.parseInt(map.get("hotelid"))));
     }
+    @ResponseBody
+    @PostMapping("searchselect")
+    public String postSelect(@RequestBody Map<String,String> map){
+        /*    obj={
+        "city":city
+        "brand":brand
+        "price":price
+        "discount":discount
+    }*/
+        //City
+        List<Integer> hotelidlist=cityhotelservice.selectByCityName(map.get("city").toString());
+        List<Hotel> hotellist=new ArrayList<>();
+        List<Integer> hotelidbybrand=new ArrayList<>();
+        //city里面选择品牌
+        if(map.get("brand")=="ALL"||map.get("brand")=="品牌筛选"){
+            //品牌没有筛选
+        }
+        else{
+            hotelidbybrand=hotelbrandservice.findHotelByBrandName(map.get("brand"));
+            //倒序删除不会出现大小变化问题
+            for(int i=hotelidlist.size()-1;i>=0;i++){
+                if(!hotelidbybrand.contains(hotelidlist.get(i))){
+                    hotelidlist.remove(i);
+                }
+            }
+            //品牌筛选完毕
+        }
+        //查看price,这个price是平均价格
+        if(map.get("price")=="ALL"||map.get("price")=="价格筛选"){
+            //价格不做筛选
+        }
+        else{
+            switch (map.get("price")){
+                case "0-200元/日":
+                    for(int i=hotelidlist.size()-1;i>=0;i++){
+                        if(roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))>200){
+                            hotelidlist.remove(i);
+                        }
+                    }
+                    break;
+                case "200-500元/日":
+                    for(int i=hotelidlist.size()-1;i>=0;i++){
+                        if(roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))>500||
+                                roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))<200){
+                            hotelidlist.remove(i);
+                        }
+                    }
+                    break;
+                case ">500元/日":
+                    for(int i=hotelidlist.size()-1;i>=0;i++){
+                        if(roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))<=500){
+                            hotelidlist.remove(i);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+            //价格筛选完毕
+        }
+        //有无优惠筛选
+        if(map.get("discount")=="优惠筛选"||map.get("discount")=="ALL"){
+            //什么都不做
+        }
+        else{
+            if(map.get("discount")=="有优惠"){
+                for(int i=hotelidlist.size()-1;i>=0;i++){
+                    if(roomtypeservice.getDiscountByHotelid(hotelidlist.get(i))==0){//==0是无优惠
+                        hotelidlist.remove(i);
+                    }
+                }
+            }
+            else{//只要没有优惠的
+                for(int i=hotelidlist.size()-1;i>=0;i++){
+                    if(roomtypeservice.getDiscountByHotelid(hotelidlist.get(i))>0){//==0是无优惠
+                        hotelidlist.remove(i);
+                    }
+                }
+            }
+        }
+        for (int i=0;i<hotelidlist.size();i++){
+            hotellist.add(hotelservice.findHotelByPrimaryKey(hotelidlist.get(i)));
+        }
+        return JSON.toJSONString(hotellist);
+    }
+    
 }
 

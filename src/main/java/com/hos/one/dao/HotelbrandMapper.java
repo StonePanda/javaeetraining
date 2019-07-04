@@ -15,6 +15,8 @@ public interface HotelbrandMapper {
 
     List<Integer> selectByBrandId(Integer brandid);
 
+    List<Integer> selectByBrandName(String brandname);
+
     int updateByPrimaryKeySelective(Hotelbrand record);
 
     int updateByPrimaryKey(Hotelbrand record);

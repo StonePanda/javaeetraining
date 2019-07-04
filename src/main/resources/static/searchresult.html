@@ -142,8 +142,8 @@
 		function myFun(){
 			var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
 			//pp就是最终选中的结果
-			window.sessionStorage.setItem("clientjing",pp.lng)//用户选择的位置经度
-			window.sessionStorage.setItem("clientwei",pp.lat)//用户选择的位置纬度
+			window.sessionStorage.setItem("clientpoint",pp)//用户选择的位置经度.lng
+			//window.sessionStorage.setItem("clientwei",pp.lat)//用户选择的位置纬度
 			map.centerAndZoom(pp, 18);
 			map.addOverlay(new BMap.Marker(pp));    //添加标注
 		}
@@ -164,14 +164,14 @@
                                 <div class="leibie" id="brandselect">所有品牌</div>
                                 <div id="ullist" style="width: 100px;margin-top: 4px;padding-top: 4px;display: inline-block;">
                                  <ul class="shangquan" >
-                                 <li><div class = "box"><img src="images/all2.png">ALL</div></li>
-                                 <li><div class = "box"><img src="images/格林豪泰酒店（Green Tree Inn.png" >格林豪泰酒店</div></li>
-                                 <li><div class = "box"><img src="images/皇冠假日(Crowne Plaza.png">皇冠假日酒店</div></li>
-                                 <li><div class = "box"><img src="images/假日酒店（holiday inn.png">假日酒店</div></li>
-                                 <li><div class = "box"><img src="images/锦江之星（Jinjiang Inn.png">锦江之星酒店</div></li>
-                                 <li><div class = "box"><img src="images/凯宾斯基（Kempinski.png">凯宾斯基酒店</div></li>
-                                 <li><div class = "box"><img src="images/速8（Super 8.png">速8酒店</div></li>
-                                 <li><div class = "box"><img src="images/索菲特（Sofitel Hotels.png">索菲特酒店</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/all2.png">ALL</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/格林豪泰酒店（Green Tree Inn.png" >格林豪泰酒店</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/皇冠假日(Crowne Plaza.png">皇冠假日酒店</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/假日酒店（holiday inn.png">假日酒店</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/锦江之星（Jinjiang Inn.png">锦江之星酒店</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/凯宾斯基（Kempinski.png">凯宾斯基酒店</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/速8（Super 8.png">速8酒店</div></li>
+                                 <li><div class = "box" onclick="brandselectlist()"><img src="images/索菲特（Sofitel Hotels.png">索菲特酒店</div></li>
                                  <li><div class = "box" onclick="brandselectlist()"><img src="images/维也纳酒店（Vienna Hotel Group.png">维也纳酒店</div></li>
                                  <li><div class = "box" onclick="brandselectlist()"><img src="images/温德姆酒店(Wyndham Hotels and Resorts.png">温德姆酒店</div></li>
                                  <li><div class = "box" onclick="brandselectlist()"><img src="images/喜来登(Sheraton.png">喜来登酒店</div></li>
@@ -191,35 +191,33 @@
                             </div>
     </div>
 
-    <div class="selemediv"> <div class="selemenu">价格筛选</div>
+    <div class="selemediv"> <div class="selemenu" id="priceselect">价格筛选</div>
                             <DIV class="citylist">
-                             <span>ALL</span>
-                             <span>0-100元/日</span>
-                             <span>100-200元/日</span>
-                             <span>200-500元/日</span>
-                             <span>500-1000元/日</span>
-                             <span>>1000元/日</span>
+                             <span onclick="priceselectlist()">ALL</span>
+                             <span onclick="priceselectlist()">0-200元/日</span>
+                             <span onclick="priceselectlist()">200-500元/日</span>
+                             <span onclick="priceselectlist()">>500元/日</span>
                             </div>
     </div>
     <div class="selemediv"> <div class="selemenu">星级信息</div>
                             <DIV class="citylist">
-                             <span>ALL</span>
-                             <span>五星酒店</span>
-                             <span>四星酒店</span>
-                             <span>三星酒店</span>
-                             <span>二星酒店</span>
-                             <span>一星酒店</span>
+                             <span onclick="starsselectlist()">ALL</span>
+                             <span onclick="starsselectlist()">五星酒店</span>
+                             <span onclick="starsselectlist()">四星酒店</span>
+                             <span onclick="starsselectlist()">三星酒店</span>
+                             <span onclick="starsselectlist()">二星酒店</span>
+                             <span onclick="starsselectlist()">一星酒店</span>
                             </div>
     </div>
-    <div class="selemediv"> <div class="selemenu">优惠筛选</div>
+    <div class="selemediv"> <div class="selemenu" id="discountlist">优惠筛选</div>
                             <DIV class="citylist">
-                             <span>ALL</span>
-                             <span>有优惠</span>
-                             <span>无优惠</span>
+                             <span onclick="discountselectlist()">ALL</span>
+                             <span onclick="discountselectlist()">有优惠</span>
+                             <span onclick="discountselectlist()">无优惠</span>
                             </div>
     </div>
 
-    <div class="selemediv"> <div class="selemenu">模式筛选</div>
+    <div class="selemediv"> <div class="selemenu" id="showselected">模式筛选</div>
                             <DIV class="citylist">
                              <span onclick="showselectedlist()">列表模式</span>
                              <span onclick="showselectedlist()">地图模式</span>

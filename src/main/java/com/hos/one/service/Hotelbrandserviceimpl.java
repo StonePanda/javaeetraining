@@ -15,4 +15,9 @@ public class Hotelbrandserviceimpl implements Hotelbrandservice{
     public List<Integer> findHotelByBrand(int brandid){
         return hotelbrandmapper.selectByBrandId(brandid);
     }
+
+    @Override
+    public List<Integer> findHotelByBrandName(String brandname){
+        return hotelbrandmapper.selectByBrandName(brandname);
+    }
 }

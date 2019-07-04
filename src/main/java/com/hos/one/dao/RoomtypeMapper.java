@@ -18,6 +18,10 @@ public interface RoomtypeMapper {
 
     List<Roomtype> selectByHotelId(Integer hotelid);
 
+    int getAvgPriceByHotelid(Integer hotelid);
+
+    int getDiscountByHotelid(Integer hotelid);
+
     int updateByPrimaryKeySelective(Roomtype record);
 
     int updateByPrimaryKey(Roomtype record);

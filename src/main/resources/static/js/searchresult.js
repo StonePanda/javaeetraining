@@ -78,21 +78,74 @@ distanceselectlist(){
         //console.log("没有输入")如果没有输入就没办法使用地点筛选
             alert("需要输入目的地才能使用距离筛选！")
     }
-    else{
-        //需要计算两点之间的距离了
+    else if($('#distanceselect').value=="ALL"){
+    	//do nothing
     }
+    else{
+    	var map = new BMap.Map("l-map");
+    	map.centerAndZoom(getParams("city"),12);  //初始化地图,设置城市和地图级别。
+        //需要计算两点之间的距离了
+        //在现在的data里筛选出来符合距离
+        hotellist=window.sessionStorage.getItem("hotellist")
+    	$.each(hotellist, function (index, item) {
+    		var hotelpoint=new BMap.Point(item.positionjing,item.positionwei)
+    		if($('#distanceselect').value=="<1000m"){
+    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)<1000){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+    		else if(('#distanceselect').value=="1000-2000m"){
+    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)<2000&&
+    				map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)>1000){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+    		else if(('#distanceselect').value=="2000-5000m"){
+    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)>=2000&&
+    				map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)<=5000){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+    		else{
+    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)>5000){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+  })
+    	show(hotellist)
+    	window.sessionStorage.setItem("hotellist",hotellist)
 }
 
 function
 brandselectlist(){
-    var city=getParams("city")
+	$(".shangquan li").removeClass("active")
+    $(this).addClass("active")
+    var text1=$(this).text();
+    $(".sqinput").html(text1)
+	var city=getParams("city")
     var brand=$('#brandselect').value
+    var price=$('#priceselect').value
+    var discount=$('#discountlist').value
     obj={
         "city":city
         "brand":brand
+        "price":price
+        "discount":discount
     }
     $.ajax({
-        url: "/user/searchcity",
+        url: "/user/searchselect",
         dataType: "json",
         contentType: "application/json",//传过去的值的类型
         async: true,
@@ -103,5 +156,123 @@ brandselectlist(){
             window.sessionStorage.setItem("hotellist",data);
         }
     })
-    
+    }
+}
+
+function
+priceselectlist(){
+	var city=getParams("city")
+    var brand=$('#brandselect').value
+    var price=$('#priceselect').value
+    var discount=$('#discountlist').value
+    obj={
+        "city":city
+        "brand":brand
+        "price":price
+        "discount":discount
+    }
+    $.ajax({
+        url: "/user/searchselect",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            show(data)
+            window.sessionStorage.setItem("hotellist",data);
+        }
+    })
+    }
+
+}
+
+function
+starsselectlist(){
+	if($('#starsselect').value=="ALL"){
+    	//do nothing
+    }
+    else{
+        hotellist=window.sessionStorage.getItem("hotellist")
+    	$.each(hotellist, function (index, item) {
+    		if($('#starsselect').value=="五星酒店"){
+    			if(item.getstars==5){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+    		else if($('#starsselect').value=="四星酒店"){
+    			if(item.getstars==4){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+    		else if($('#starsselect').value=="三星酒店"){
+    			if(item.getstars==3){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+    		else if($('#starsselect').value=="二星酒店"){
+    			if(item.getstars==2){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+    		else{
+    			if(item.getstars==1){
+    				//donothing
+    			}
+    			else{
+    				hotellist.remove(item)
+    			}
+    		}
+  })
+    	show(hotellist)
+    	window.sessionStorage.setItem("hotellist",hotellist)
+}
+
+function
+discountselectlist(){
+	var city=getParams("city")
+    var brand=$('#brandselect').value
+    var price=$('#priceselect').value
+    var discount=$('#discountlist').value
+    obj={
+        "city":city
+        "brand":brand
+        "price":price
+        "discount":discount
+    }
+    $.ajax({
+        url: "/user/searchselect",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            show(data)
+            window.sessionStorage.setItem("hotellist",data);
+        }
+    })
+    }
+}
+
+function
+showselectedlist(){
+	if($('#showselected').value=="列表模式"){
+		//donothing
+	}
+	else{
+		window.location.href="/map"
+	}
 }

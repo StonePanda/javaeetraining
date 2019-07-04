@@ -21,4 +21,14 @@ public class Roomtypeserviceimpl implements Roomtypeservice{
     public void setNewNum(Integer hotelid,String roomtype,Integer minusnum){
         roomtypemapper.updateByOrder(hotelid,roomtype,minusnum);
     }
+
+    @Override
+    public  int getAvgPriceByHotelid(Integer hotelid){
+        return roomtypemapper.getAvgPriceByHotelid(hotelid);
+    }
+
+    @Override
+    public int getDiscountByHotelid(Integer hotelid){
+        return roomtypemapper.getDiscountByHotelid(hotelid);
+    }
 }
