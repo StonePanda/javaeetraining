@@ -1,4 +1,17 @@
 window.onload=function(){
+    if(window.sessionStorage.hasOwnProperty("email")==true){//已经登录
+        $('#clientemail').text(window.sessionStorage.getItem("email"));
+        $('#clientemail').attr('href','/clientdetail');
+        $('#exitOrRegister').text('退出')
+        $('#exitOrRegister').attr('href','/about')
+
+    }
+    else{
+        $('#clientemail').text("登录");
+        $('#clientemail').attr('href','/login');
+        $('#exitOrRegister').text('注册')
+        $('#exitOrRegister').attr('href','/register')
+    }
 	initialize()
 }
 
@@ -46,25 +59,65 @@ function initialize(){
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
             show(data)
+            console.log(data)
         }
 	})
 	}
+    $.ajax({
+        url: "/user/footerhotel",
+        dataType: "json",//期待返回的类型
+        async: true,
+        type: "GET",
+        success: function (data) {//这里仅仅是post成功,返回的应该是替代了的。包括评论内容，用户名，酒店名，酒店id，评论星
+            console.log(data)
+            console.log(data[0])
+            console.log(data[1])
+            console.log(data[2])
+            /*酒店id，酒店名字，酒店图片的url,酒店优惠后的平均价格，还是要用一下替代的方法*/
+            /*temHotel.setHotelid(hasDtHotelid.get(i));
+            temHotel.setHotelname(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getHotelname());
+            temHotel.setPhotourl(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getPhotourl());
+            temHotel.setBrandid(roomtypeservice.getAvgPriceByHotelid(hasDtHotelid.get(i)));*/
+            $('#fthotel1url').attr('href','/hoteldetails?hotelid='+data[0].hotelid)
+            $('#fthotel1img').attr('src',data[0].photourl)
+            $('#fthotel1img').attr('alt',data[0].hotelname)
+            $('#fthotel1name').append(data[0].hotelname)
+            $('#fthotel1avgprice').append('平均每日'+data[0].brandid+'元')
+                        $('#fthotel2url').attr('href','/hoteldetails?hotelid='+data[1].hotelid)
+            $('#fthotel2img').attr('src',data[1].photourl)
+            $('#fthotel2img').attr('alt',data[1].hotelname)
+            $('#fthotel2name').append(data[1].hotelname)
+            $('#fthotel2avgprice').append('平均每日'+data[1].brandid+'元')
+                        $('#fthotel3url').attr('href','/hoteldetails?hotelid='+data[2].hotelid)
+            $('#fthotel3img').attr('src',data[2].photourl)
+            $('#fthotel3img').attr('alt',data[2].hotelname)
+            $('#fthotel3name').append(data[2].hotelname)
+            $('#fthotel3avgprice').append('平均每日'+data[2].brandid+'元')
+            console.log("第三个为什不现实？"+data[2].brandid)
+        },
+        error: function(data) {
+            console.log(data)
+        }
+    })
 }
 
 function show(data){//这时候是这个城市里的全部酒店
-    window.sessionStorage.setItem("hotellist",data)
-  var hotellist = data;
+
+  window.sessionStorage.setItem("hotellist",data)
+  var hotellist =data
   $('#showlist').html('')
-  $.each(hotellist, function (index, item) {
+  console.log("append失败？")
+  $.each(hotellist, function (index,item) {
+    console.log(item.hotelname)
     $('#showlist').append(
     	$('<div>').attr('class','col-12 col-sm-6 col-md-6 col-lg-4').append(
     		$('<div>').attr('class','single-hotels-2').append(
-    			$('<div>').attr('class','hotel-image').append($('<img>').attr('src',item.photourl).attr('class','border-raduis-3')),
+    			$('<div>').attr('class','hotel-image').append($('<img>').attr('src',item.photourl).attr('class','border-raduis-3').attr('style','height:260px;width:100%;')),
     			$('<div>').attr('class','hotel-description').append(
-    				$('<a>').attr('href','#').append($('<h4>').append(item.hotelname)),
+    				$('<a>').attr('href','/hoteldetails?hotelid='+item.hotelid).append($('<h4>').append(item.hotelname)),
     				$('<p>').append(item.positiontext),
     				$('<div>').attr('class','hotel-book-btn').append(
-    					$('<a>').attr('href','#').attr('class','travel-booking-btn hvr-shutter-out-horizontal').append('详细信息'))
+    					$('<a>').attr('href','/hoteldetails?hotelid='+item.hotelid).attr('class','travel-booking-btn hvr-shutter-out-horizontal').append('详细信息'))
       			)
       		)
  		)
@@ -139,9 +192,9 @@ brandselectlist(){
     var price=$('#priceselect').value
     var discount=$('#discountlist').value
     obj={
-        "city":city
-        "brand":brand
-        "price":price
+        "city":city,
+        "brand":brand,
+        "price":price,
         "discount":discount
     }
     $.ajax({
@@ -166,9 +219,9 @@ priceselectlist(){
     var price=$('#priceselect').value
     var discount=$('#discountlist').value
     obj={
-        "city":city
-        "brand":brand
-        "price":price
+        "city":city,
+        "brand":brand,
+        "price":price,
         "discount":discount
     }
     $.ajax({
@@ -183,8 +236,6 @@ priceselectlist(){
             window.sessionStorage.setItem("hotellist",data);
         }
     })
-    }
-
 }
 
 function
@@ -247,9 +298,9 @@ discountselectlist(){
     var price=$('#priceselect').value
     var discount=$('#discountlist').value
     obj={
-        "city":city
-        "brand":brand
-        "price":price
+        "city":city,
+        "brand":brand,
+        "price":price,
         "discount":discount
     }
     $.ajax({

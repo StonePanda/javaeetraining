@@ -51,6 +51,12 @@
     and status=2
     and commentstar is not null
   </select>
+  <select id="selectHasCommentOrder" resultMap="BaseResultMap">
+    select
+    *
+    from `order`
+    where commentstar is not null
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from `order`
     where orderid = #{orderid,jdbcType=INTEGER}

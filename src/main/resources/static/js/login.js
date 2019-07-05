@@ -1,7 +1,5 @@
 $(function () {
-    //if(window.sessionStorage.hasOwnProperty("email")==true){}
     document.getElementById('email').value=window.sessionStorage.getItem("email");
-    //document.getElementById('pass').value="";
     console.log(window.sessionStorage.getItem("email"))
     console.log($("#email").val())
     $("#pass").value="";

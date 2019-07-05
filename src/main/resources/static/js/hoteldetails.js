@@ -4,7 +4,7 @@ $(function(){
 		$('#clientemail').attr('href','/clientdetail');
 		$('#exitOrRegister').text('退出')
 		$('#exitOrRegister').attr('href','/about')
-		$('#bookOrLogin').append("现在预定")
+		$('#bookOrLoginBt').append("现在预定")
 		$('#clientname').attr('value',window.sessionStorage.getItem("email"))
 		$('#clientphone').attr('value',window.sessionStorage.getItem("phone"))
 
@@ -14,7 +14,7 @@ $(function(){
 		$('#clientemail').attr('href','/login');
 		$('#exitOrRegister').text('注册')
 		$('#exitOrRegister').attr('href','/register')
-		$('#bookOrLogin').append("请先登录！")
+		$('#bookOrLoginBt').append("请先登录！")
 	}
 	initHotel();
 })
@@ -23,20 +23,118 @@ function getParams(key) {
             var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) {
-                //console.log(r[2]);
                 return decodeURI(r[2]);//unescape()
             }
             return null;
 }
 
-//全局变量
-var checktypenum=new Array()
+function
+initHotel(){
+	var hotelid=getParams("hotelid")
+	var obj={
+		"hotelid":hotelid
+	}
+	$.ajax({//请求的是酒店信息
+		url: "/user/hoteldetails",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            showHotel(data)
+        },
+        error: function(data) {
+    	}
+	})
+	$.ajax({//请求的是房型信息
+		url: "/user/roomtype",
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            showRoomtype(data)
+            //这里必须用json字符串存储，sessionstorage!!!!!
+            window.sessionStorage.setItem('roomtype',JSON.stringify(data))
+            console.log(data)//必须要用jquery循环
+            console.log(window.sessionStorage.getItem('roomtype'))
+        },
+        error: function(data) {
+    	}
+	})
+	$.ajax({//请求的评论人的用户信息
+		url: "/user/ctclientemail",//得到两个评论的用户名
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            showCommentEmail(data)
+        },
+        error: function(data) {
+    	}
+	})
+	$.ajax({//请求的是评论信息
+		url: "/user/commenttwo",//得到两个评论内容
+        dataType: "json",
+        contentType: "application/json",//传过去的值的类型
+        async: true,
+        type: "POST",
+        data: JSON.stringify(obj),
+        success: function (data) {//这里仅仅是post成功
+            showCommentTwo(data)
+        },
+        error: function(data) {
+    	}
+	})
+	$.ajax({
+        url: "/user/footerhotel",
+        dataType: "json",//期待返回的类型
+        async: true,
+        type: "GET",
+        success: function (data) {//这里仅仅是post成功,返回的应该是替代了的。包括评论内容，用户名，酒店名，酒店id，评论星
+            /*酒店id，酒店名字，酒店图片的url,酒店优惠后的平均价格，还是要用一下替代的方法*/
+            /*temHotel.setHotelid(hasDtHotelid.get(i));
+            temHotel.setHotelname(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getHotelname());
+            temHotel.setPhotourl(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getPhotourl());
+            temHotel.setBrandid(roomtypeservice.getAvgPriceByHotelid(hasDtHotelid.get(i)));*/
+            $('#fthotel1url').attr('href','/hoteldetails?hotelid='+data[0].hotelid)
+            $('#fthotel1img').attr('src',data[0].photourl)
+            $('#fthotel1img').attr('alt',data[0].hotelname)
+            $('#fthotel1name').append(data[0].hotelname)
+            $('#fthotel1avgprice').append('平均每日'+data[0].brandid+'元')
+                        $('#fthotel2url').attr('href','/hoteldetails?hotelid='+data[1].hotelid)
+            $('#fthotel2img').attr('src',data[1].photourl)
+            $('#fthotel2img').attr('alt',data[1].hotelname)
+            $('#fthotel2name').append(data[1].hotelname)
+            $('#fthotel2avgprice').append('平均每日'+data[1].brandid+'元')
+                        $('#fthotel3url').attr('href','/hoteldetails?hotelid='+data[2].hotelid)
+            $('#fthotel3img').attr('src',data[2].photourl)
+            $('#fthotel3img').attr('alt',data[2].hotelname)
+            $('#fthotel3name').append(data[2].hotelname)
+            $('#fthotel3avgprice').append('平均每日'+data[2].brandid+'元')
+        },
+        error: function(data) {
+        }
+    })
+}
+
 
 function
 bookOrLogin(){
+	data=JSON.parse(window.sessionStorage.getItem('roomtype'))
+	console.log(data)
+	console.log(data[0])
 	if(window.sessionStorage.hasOwnProperty("email")==true){//已经登录
 		//根据email得到电话信息，如果被修改就提示请用户重新确认
-		if($('#clientphone').value!=window.sessionStorage.getItem("phone")||$('#clientname').value!=window.sessionStorage.getItem("email")){
+		if($('#clientphone').attr('value')!=window.sessionStorage.getItem("phone")||$('#clientname').attr('value')!=window.sessionStorage.getItem("email")){
+			console.log($('#clientphone').attr('value'))//原生js是getElementByid.value，jquery写法是val()
+			//不知道不能用val(),只能用value
+			console.log(window.sessionStorage.getItem("phone"))
+			console.log($('#clientphone').attr('value')!=window.sessionStorage.getItem("phone"))
 			//两个之中有任何一个不相等，就要提示信息不对
 			/*<div class="alert alert-success">
                                 <a class="close" data-dismiss="alert">×</a>
@@ -45,8 +143,7 @@ bookOrLogin(){
 			$('#tishixiaoxi').append(
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
-					$('<strong>').append('错误！'),
-					append('输入电话或邮箱与注册时电话邮箱不符！')))
+					$('<strong>').append('错误！').append('输入电话或邮箱与注册时电话邮箱不符！')))
 		}
 		//检查日期必须是今天之后的，如果不是就修改
 		var nowdate=new Date()
@@ -69,41 +166,60 @@ bookOrLogin(){
 		}
 		//为true时时间才是对的
 		var status=0//0表示未进行，1进行中，2已完成
-		if($('#datepicker2').value<$('#datepicker1').value&&$('#datepicker2').value>nowdatestr){//=
+		if($('#datepicker2').attr('value')<$('#datepicker1').attr('value')&&$('#datepicker2').attr('value')>nowdatestr){//=
 			//do nothing
-			var status=0
+			status=0
 		}
-		else if($('#datepicker2').value<$('#datepicker1').value&&$('#datepicker2').value=nowdatestr){
-			var status=1
+		else if($('#datepicker2').attr('value')<$('#datepicker1').attr('value')&&$('#datepicker2').attr('value')==nowdatestr){
+			status=1
 		}
 		else{
 			$('#tishixiaoxi').append(
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
-					$('<strong>').append('错误！'),
-					append('输入时间不正确！')))
+					$('<strong>').append('错误！').append('输入时间不正确！')))
 		}
 		//检查房间数量够不够，如果不够就提示重新选择
-		for(int i=0;i<checktypenum.length;i++){
-			if (checktypenum[i].num-$('#roomnum').value<0&&checktypenum[i].roomtype==$('#roomtype').value) {
+		/*jquery ajax遍历集合的for循环两种形式：
+
+1：for(var i = 0; i<=list.length;i++)
+
+2:for(var item in list){
+
+list[item].属性
+
+}*/
+		for(var i=0;i<data.length;i++){
+			if (data[i].num-$('#roomnum').attr('value')<0&&data[i].roomtype==$('#roomtype').attr('value')) {
 				//刚好选的房型不够
 				$('#tishixiaoxi').append(
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
-					$('<strong>').append('错误！'),
-					append('该房型剩余数量不足！')))
+					$('<strong>').append('错误！').append('该房型剩余数量不足！')))
 			}
 		}
+		var whichtype=0
+		for(var i=0;i<data.length;i++){
+			if(data[i].roomtype==$('#roomtype').attr('value')){
+				whichtype=i
+			}
+		}
+		console.log(data.length)
+		console.log(whichtype)
 		//如果全都ok
 		var obj={
 			"clientid":window.sessionStorage.getItem("id"),
 			"hotelid":getParams("hotelid"),
-			"roomtype":$('#roomtype').value,
-			"timestart":Math.round(new Date($('#datepicker2').value)).getTime()/1000).toString(),
-			"timeend":Math.round(new Date($('#datepicker2').value)).getTime()/1000).toString(),
+			"roomtype":$('#roomtype').val(),//这里只能用val()
+			"timestart":(Math.round(new Date($('#datepicker2').val()).getTime())/1000).toString(),
+			"timeend":(Math.round(new Date($('#datepicker2').val()).getTime())/1000).toString(),
 			"status":status,
-			"num":$('#roomnum').value
+			"num":$('#roomnum').val(),
+			"price":parseInt($('#roomnum').val())*parseInt(data[whichtype].price)
 		}
+		console.log(data[whichtype].price)
+		console.log(parseInt(data[whichtype].price))
+		console.log(parseInt($('#roomnum').val())*parseInt(data[whichtype].price))
 		$.ajax({//请求的是酒店信息
 		url: "/user/bookhotel",
         dataType: "json",
@@ -112,17 +228,15 @@ bookOrLogin(){
         type: "POST",
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
-            console.log(data)
             $('#tishixiaoxi').append(
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
-					$('<strong>').append('成功！'),
-					append('预定成功，请留意日期安排行程！')))
+					$('<strong>').append('成功！').append('预定成功，请留意日期安排行程！')))
+            setTimeOut("window.location.href='/clientaccount?clientid='"+window.sessionStorage.getItem('id'),2000)
         },
         error: function(data) {
-      		console.log(data)
     	}
-	})
+		})
 	}
 	else{
 		window.location.href='/login'
@@ -130,75 +244,6 @@ bookOrLogin(){
 	return false
 }
 
-function
-initHotel(){
-	var hotelid=getParams("hotelid")
-	var obj={
-		"hotelid":hotelid
-	}
-	$.ajax({//请求的是酒店信息
-		url: "/user/hoteldetails",
-        dataType: "json",
-        contentType: "application/json",//传过去的值的类型
-        async: true,
-        type: "POST",
-        data: JSON.stringify(obj),
-        success: function (data) {//这里仅仅是post成功
-            showHotel(data)
-            console.log(data)
-        },
-        error: function(data) {
-      		console.log(data)
-    	}
-	})
-	$.ajax({//请求的是房型信息
-		url: "/user/roomtype",
-        dataType: "json",
-        contentType: "application/json",//传过去的值的类型
-        async: true,
-        type: "POST",
-        data: JSON.stringify(obj),
-        success: function (data) {//这里仅仅是post成功
-            showRoomtype(data)
-            checktypenum=data
-            console.log(data)
-        },
-        error: function(data) {
-      		console.log(data)
-    	}
-	})
-
-	$.ajax({//请求的评论人的用户信息
-		url: "/user/ctclientemail",//得到两个评论的用户名
-        dataType: "json",
-        contentType: "application/json",//传过去的值的类型
-        async: true,
-        type: "POST",
-        data: JSON.stringify(obj),
-        success: function (data) {//这里仅仅是post成功
-            showCommentEmail(data)
-            console.log(data)
-        },
-        error: function(data) {
-      		console.log(data)
-    	}
-	})
-	$.ajax({//请求的是评论信息
-		url: "/user/commenttwo",//得到两个评论内容
-        dataType: "json",
-        contentType: "application/json",//传过去的值的类型
-        async: true,
-        type: "POST",
-        data: JSON.stringify(obj),
-        success: function (data) {//这里仅仅是post成功
-            showCommentTwo(data)
-            console.log(data)
-        },
-        error: function(data) {
-      		console.log(data)
-    	}
-	})
-}
 
 function
 showHotel(data){//酒店是肯定有的
@@ -216,10 +261,10 @@ showRoomtype(data){//得到的是一个list
 var roomtypelist = data
   $.each(roomtypelist, function (index, item) {
   	if(item.discount==1){//有优惠
-  		$('#priceroomtype').append($('<span>').append(item.price+'/')).append(item.roomtype+'/间(余'+item.num+')  ')
+  		$('#priceroomtype').append($('<span>').append(item.price+'/')).append(item.roomtype+'/间(余'+item.num+')<br>')
   	}
   	if(item.discount==0){//无优惠
-  		$('#priceroomtype').append(item.price+'/'+item.roomtype+'/间(余'+item.num+')  ')
+  		$('#priceroomtype').append(item.price+'/'+item.roomtype+'/间(余'+item.num+')<br>')
   	}
     })
 }

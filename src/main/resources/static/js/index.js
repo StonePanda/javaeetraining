@@ -1,4 +1,6 @@
 $(function(){
+	 var tomorrow = new Date();
+     $('#discountendtime').attr('data-countdown',tomorrow.getFullYear()+'/'+(parseInt(tomorrow.getMonth())+1)+'/'+(parseInt(tomorrow.getDate())+1))
 	if(window.sessionStorage.hasOwnProperty("email")==true){
 		$('#clientemail').text(window.sessionStorage.getItem("email"));
 		$('#clientemail').attr('href','/clientdetail');
@@ -56,8 +58,6 @@ initpopular(data){
             //返回名字，返回平均价格，时间就是明天的，模式是2019/7/5,返回一个新对象，用一个平均价格代替某一个int值
             $('#discounthotel').append(data.hotelname)
             $('#discountavgprice').append(data.brandid)//这个是代替
-            var tomorrow = new Date()
-            $('#discountendtime').attr('data-countdown',tomorrow.getFullYear()+'/'+tomorrow.getMonth()+1+'/'+tomorrow.getDate()+1)
             $('#discounthotelurl').attr('href','/hoteldetails?hotelid='+data.hotelid)
         },
         error: function(data) {
@@ -74,7 +74,11 @@ initpopular(data){
         type: "POST",
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功,返回的应该是替代了的。包括评论内容，用户名，酒店名，酒店id，评论星
-            console.log("三个评论返回"+data)
+            console.log("四个评论返回"+JSON.stringify(data))
+            console.log(data[0].getstars)
+            console.log(data[2])
+            console.log(data[1])
+            console.log(data[3])
             //返回名字，返回平均价格，时间就是明天的，模式是2019/7/5,返回一个新对象，用一个平均价格代替某一个int值
             /* temTidaiHotel.setHotelid(returnOrder.get(i).getHotelid());
             temTidaiHotel.setHotelname(hotelservice.findHotelByPrimaryKey(returnOrder.get(i).getHotelid()).getHotelname());
@@ -85,116 +89,117 @@ initpopular(data){
             $('#indexct1cl').append(data[0].Hotelphone)
             $('#indexct1hn').append(data[0].hotelname)
             $('#indexct1hn').attr('href','/hoteldetails?hotelid='+data[0].hotelid)
-            if(data[0].commentstar=="5"){
+            if(data[0].getstars=="5"){
             	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            else if(data[0].commentstar=="4"){
+            else if(data[0].getstars=="4"){
             	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[0].commentstar=="3"){
+            if(data[0].getstars=="3"){
             	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[0].commentstar=="2"){
+            if(data[0].getstars=="2"){
             	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[0].commentstar=="1"){
+            if(data[0].getstars=="1"){
             	$('#indexct1star').append('<li><i class="fa fa-star"></i></li>')
             }
             $('#indexct2ct').append(data[1].overview)
             $('#indexct2cl').append(data[1].Hotelphone)
             $('#indexct2hn').append(data[1].hotelname)
             $('#indexct2hn').attr('href','/hoteldetails?hotelid='+data[1].hotelid)
-            if(data[1].commentstar=="5"){
+            if(data[1].getstars=="5"){
             	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            else if(data[1].commentstar=="4"){
+            else if(data[1].getstars=="4"){
             	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[1].commentstar=="3"){
+            if(data[1].getstars=="3"){
             	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[1].commentstar=="2"){
+            if(data[1].getstars=="2"){
             	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[1].commentstar=="1"){
+            if(data[1].getstars=="1"){
             	$('#indexct2star').append('<li><i class="fa fa-star"></i></li>')
             }
             $('#indexct3ct').append(data[2].overview)
             $('#indexct3cl').append(data[2].Hotelphone)
             $('#indexct3hn').append(data[2].hotelname)
             $('#indexct3hn').attr('href','/hoteldetails?hotelid='+data[2].hotelid)
-            if(data[2].commentstar=="5"){
+            if(data[2].getstars=="5"){
             	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            else if(data[2].commentstar=="4"){
+            else if(data[2].getstars=="4"){
             	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[2].commentstar=="3"){
+            if(data[2].getstars=="3"){
             	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[2].commentstar=="2"){
+            if(data[2].getstars=="2"){
             	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[2].commentstar=="1"){
+            if(data[2].getstars=="1"){
             	$('#indexct3star').append('<li><i class="fa fa-star"></i></li>')
             }
+            console.log("第三个评论有没有"+data[3].overview)
             $('#indexct4ct').append(data[3].overview)
             $('#indexct4cl').append(data[3].Hotelphone)
             $('#indexct4hn').append(data[3].hotelname)
             $('#indexct4hn').attr('href','/hoteldetails?hotelid='+data[3].hotelid)
-            if(data[3].commentstar=="5"){
+            if(data[3].getstars=="5"){
             	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            else if(data[3].commentstar=="4"){
+            else if(data[3].getstars=="4"){
             	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[3].commentstar=="3"){
+            if(data[3].getstars=="3"){
             	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[3].commentstar=="2"){
+            if(data[3].getstars=="2"){
             	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>'+
             							'<li><i class="fa fa-star"></i></li>')
             }
-            if(data[3].commentstar=="1"){
+            if(data[3].getstars=="1"){
             	$('#indexct4star').append('<li><i class="fa fa-star"></i></li>')
             }
             
@@ -210,6 +215,9 @@ initpopular(data){
         type: "GET",
         success: function (data) {//这里仅仅是post成功,返回的应该是替代了的。包括评论内容，用户名，酒店名，酒店id，评论星
             console.log(data)
+            console.log(data[0])
+            console.log(data[1])
+            console.log(data[2])
             /*酒店id，酒店名字，酒店图片的url,酒店优惠后的平均价格，还是要用一下替代的方法*/
             /*temHotel.setHotelid(hasDtHotelid.get(i));
             temHotel.setHotelname(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getHotelname());
@@ -219,17 +227,18 @@ initpopular(data){
             $('#fthotel1img').attr('src',data[0].photourl)
             $('#fthotel1img').attr('alt',data[0].hotelname)
             $('#fthotel1name').append(data[0].hotelname)
-            $('#fthotel1avgprice').append(data[0].brandid)
+            $('#fthotel1avgprice').append('平均每日'+data[0].brandid+'元')
                         $('#fthotel2url').attr('href','/hoteldetails?hotelid='+data[1].hotelid)
             $('#fthotel2img').attr('src',data[1].photourl)
             $('#fthotel2img').attr('alt',data[1].hotelname)
             $('#fthotel2name').append(data[1].hotelname)
-            $('#fthotel2avgprice').append(data[1].brandid)
+            $('#fthotel2avgprice').append('平均每日'+data[1].brandid+'元')
                         $('#fthotel3url').attr('href','/hoteldetails?hotelid='+data[2].hotelid)
             $('#fthotel3img').attr('src',data[2].photourl)
             $('#fthotel3img').attr('alt',data[2].hotelname)
             $('#fthotel3name').append(data[2].hotelname)
-            $('#fthotel3avgprice').append(data[2].brandid)
+            $('#fthotel3avgprice').append('平均每日'+data[2].brandid+'元')
+            console.log("第三个为什不现实？"+data[2].brandid)
         },
         error: function(data) {
       		console.log(data)

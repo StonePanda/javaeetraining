@@ -47,6 +47,7 @@
     </style>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 
+
 </head>
 <body>
 <!-- header area start here -->
@@ -193,19 +194,16 @@
                                 <input type="text" class="form-control" id="clientname" placeholder="邮箱"><!-- value=""00@qq.com-->
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control" id="clientphone" placeholder="电话"><!---->
+                                <input type="text" class="form-control" id="clientphone" placeholder="电话"><!---->
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control" id="roomtype" placeholder="房型"><!---->
-                            </div>
-                            <!--<div class="form-group">
-                                <input type="text" class="form-control" id="booking-date" placeholder="dd-mm-yy *">
-                            </div>-->
-                            <div class="form-group">
-                              <input type="text" name="s" value="入住时间" id="datepicker2" class="form-control">
+                                <input type="text" class="form-control" id="roomtype" placeholder="房型"><!---->
                             </div>
                             <div class="form-group">
-                                <input type="text" name="s" value="离店时间" id="datepicker1" class="form-control">
+                              <input type="text" value="入住时间" id="datepicker2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" value="离店时间" id="datepicker1" class="form-control">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="roomnum" placeholder="房间数">
@@ -217,7 +215,7 @@
                             </div>--><!--成功!您已成功预定-->
                             </div>
                             <div class="form-group form_btn">
-                                <button type="submit" class="booking-confirm hvr-shutter-out-horizontal" id="bookOrLogin"></button><!--Book Now-->
+                                <button type="submit" class="booking-confirm hvr-shutter-out-horizontal" id="bookOrLoginBt" ></button><!--Book Now-->
                             </div>
                         </form>
                     </div>
@@ -247,14 +245,14 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                 <div class="single-footer">
                     <div class="footer-title">
-                        <h3><a href="#"><img src="images/logo.png" alt=""></a></h3>
+                        <h3><a><img src="images/logo.png" alt=""></a></h3>
                     </div>
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <p>Yep.I'm wondering if you will give all yourself to me when I need you.</p>
+                            <p>如果有任何问题，请联系我们</p>
                         </div>
                         <ul class="footer-contact">
-                            <li><img class="map" src="images/icon/map.png" alt="">ChengDu , China</li>
+                            <li><img class="map" src="images/icon/map.png" alt="">中国四川省成都市</li>
                             <li><img class="map" src="images/icon/phone.png" alt="">+183-8019-8292</li>
                             <li><img class="map" src="images/icon/gmail.png" alt="">1104595810@qq.com</li>
                         </ul>
@@ -266,14 +264,15 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-2">
                 <div class="single-footer">
                     <div class="footer-title">
-                        <h3>Quick Link</h3>
+                        <h3>快速连接</h3>
                     </div>
                     <ul class="list-unstyled">
-                        <li><a href="" title="">Home</a></li>
-                        <li><a href="" title="">Information</a></li>
-                        <li><a href="" title="">order</a></li>
-                        <li><a href="" title="">Login</a></li>
-                        <li><a href="" title="">Registered</a></li>
+                        <li><a href="" title="">首页</a></li>
+                        <li><a href="" title="">用户登录</a></li>
+                        <li><a href="" title="">用户注册</a></li>
+                        <li><a href="" title="">酒店登录</a></li>
+                        <li><a href="" title="">酒店注册</a></li>
+                        <li><a href="" title="">关于我们</a></li>
                     </ul>
                 </div>
             </div>  <!-- footer destination -->
@@ -282,42 +281,39 @@
                 <div class="single-footer">
                     <div class="single-recent-post">
                         <div class="footer-title">
-                            <h3>近日新闻</h3>
+                            <h3>最近优惠</h3>
                         </div>
                         <ul class="recent-post">
                             <li>
-                                <a href="#">
+                                <a id="fthotel1url"><!-- href="#" 酒店详情连接-->
                                     <div class="post-thum">
-                                        <img src="images/blog/f4.jpg" alt="" class="img-rounded">
+                                        <img class="img-rounded" id="fthotel1img" style="width: 60px;height: 60px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字-->
                                     </div>
                                     <div class="post-content">
-                                        <p>为您推荐的5星级酒店：点我查看
-                                        </p>
-                                        <span>27 July, 2019</span>
+                                        <p id="fthotel1name"></p><!--酒店名字-->
+                                        <span id="fthotel1avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a id="fthotel2url"><!-- href="#" 酒店详情连接-->
                                     <div class="post-thum">
-                                        <img src="images/blog/f5.jpg" alt="" class="img-rounded">
+                                        <img class="img-rounded" id="fthotel2img" style="width: 60px;height: 60px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字和酒店的地址 -->
                                     </div>
                                     <div class="post-content">
-                                        <p>为您推荐的4星级酒店：点我查看
-                                        </p>
-                                        <span>27 July, 2019</span>
+                                        <p id="fthotel2name"></p><!--酒店名字-->
+                                        <span id="fthotel2avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a id="fthotel3url"><!-- href="#" 酒店详情连接-->
                                     <div class="post-thum">
-                                        <img src="images/blog/f6.jpg" alt="" class="img-rounded">
+                                        <img class="img-rounded" id="fthotel3img" style="width: 60px;height: 60px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字和酒店的地址 -->
                                     </div>
                                     <div class="post-content">
-                                        <p>为您推荐的3星级酒店：点我查看
-                                        </p>
-                                        <span>27 July, 2019</span>
+                                        <p id="fthotel3name"></p><!--酒店名字-->
+                                        <span id="fthotel3avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
                                     </div>
                                 </a>
                             </li>
@@ -330,16 +326,16 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 f-phone-responsive">
                 <div class="single-footer">
                     <div class="footer-title">
-                        <h3>Quick Contact</h3>
+                        <h3>快速联系我们</h3>
                     </div>
                     <div class="footer-contact-form">
                         <form action="#">
                             <ul class="footer-form-element">
                                 <li>
-                                    <input type="text" name="email" id="email" placeholder="" value="Email Address" onblur="if(this.value==''){this.value='Email Address'}" onfocus="if(this.value=='Email Address'){this.value=''}">
+                                    <input type="text" name="email" id="footeremail" placeholder="" value="" onblur="if(this.value==''){this.value='Email Address'}" onfocus="if(this.value=='Email Address'){this.value=''}">
                                 </li>
                                 <li class="text_area">
-                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="我们将尽快给您回信"></textarea>
                                     <button type="submit">Send</button>
                                 </li>
                                 <li>
@@ -347,18 +343,6 @@
                                 </li>
                             </ul>
                         </form>
-                    </div>
-                    <div class="footer-social-media">
-                        <div class="social-footer-title">
-                            <h3>Follow Us</h3>
-                        </div>
-                        <ul class="footer-social-link">
-                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>  <!-- footer contact -->
@@ -370,7 +354,7 @@
                 <div class="col-12 col-sm-12 col-md-12">
                     <div class="copy_right_wrapper">
                         <div class="copyright">
-                            <p>Copyright &copy; 2019.HOS All rights reserved.<a target="_blank"></a></p>
+                            <p>Copyright &copy; 2019.Team10-HOS All rights reserved.<a target="_blank"></a></p>
                         </div>
                     </div>
                 </div>
@@ -382,12 +366,13 @@
 <div class="to-top pos-rtive">
     <a href="#"><i class = "fa fa-angle-up"></i></a>
 </div><!-- Scroll to top-->
-    <!-- ============================
+    <!-- ============================回到顶部，就是#
             JavaScript Files
     ============================= -->
     
     <!-- jquery latest version -->
     <script src="js/vendor/jquery-3.2.0.min.js"></script>
+    <script src="js/hoteldetails.js"></script>
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>  
     <!-- bootstrap js -->
     <script src="js/bootstrap.min.js"></script>
@@ -422,10 +407,6 @@
     <script src="js/colors.js"></script>
     <!-- Jquery plugin -->
     <script src="js/jquery-customselect.js"></script>
-    <!-- google map api -->
-    <script src="http://ditu.google.cn/maps/api/js?key=AIzaSyCIW0B_E3g-Yg533xy3yF0WHThi-mFvSNQ "></script>
-    <!-- map js -->
-    <script src="js/google-map.js"></script>
     <!-- main js -->    
     <script src="js/custom.js"></script>
 </body>

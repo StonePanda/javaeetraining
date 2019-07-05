@@ -12,4 +12,6 @@ List<Integer> findTwoCommentClientByHotelid(int hotelid);
    List<Order> findTwoHasCtOrderByHotelid(int hotelid);
 
     List<Order> findHasCtOrderByHotelid(int hotelid);
+
+    List<Order> findHasCommentOrder();
 }

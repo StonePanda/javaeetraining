@@ -128,6 +128,7 @@ public class Clientcontroller {
 			"timestart":Math.round(new Date($('#datepicker2').value)).getTime()/1000).toString(),
 			"timeend":Math.round(new Date($('#datepicker2').value)).getTime()/1000).toString(),
 			"status":status
+
 		}*/
         Order neworder=new Order();
         neworder.setClientid(Integer.parseInt(map.get("clientid").toString()));
@@ -136,6 +137,7 @@ public class Clientcontroller {
         neworder.setTimeend(Integer.parseInt(map.get("timeend").toString()));
         neworder.setTimestart(Integer.parseInt(map.get("timestart").toString()));
         neworder.setStatus(Integer.parseInt(map.get("status").toString()));
+        neworder.setPrice(Double.parseDouble((map.get("price").toString())));
         orderservice.addOrder(neworder);
         roomtypeservice.setNewNum(Integer.parseInt(map.get("hotelid").toString()),map.get("roomtype").toString(),Integer.parseInt(map.get("num").toString()));
         return JSON.toJSONString("success");
@@ -159,12 +161,18 @@ public class Clientcontroller {
     @ResponseBody
     @PostMapping("ctclientemail")
     public String postCtClientEmail(@RequestBody Map<String,String> map){
-        List<Integer> twoctemial=orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid")));
-        List<String> returneamil=new ArrayList(2);
-        for(int i=0;i<2;i++){
-            returneamil.add(clientservice.findClientById(twoctemial.get(i)).getEmail());
+        if(orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid")))==null){
+            return JSON.toJSONString("null");
         }
-        return JSON.toJSONString(returneamil);
+        else{
+            List<Integer> twoctemial=orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid")));
+            //可能一个评论也没有
+            List<String> returneamil=new ArrayList(2);
+            for(int i=0;i< twoctemial.size();i++){
+                returneamil.add(clientservice.findClientById(twoctemial.get(i)).getEmail());
+            }
+            return JSON.toJSONString(returneamil);
+        }
     }
     @ResponseBody
     @PostMapping("commenttwo")
@@ -291,32 +299,29 @@ public class Clientcontroller {
         //因为是首页显示，所以得到用户IP所在的位置推荐即可
         List<Integer> hotelidlist=cityhotelservice.selectByCityName(ipcity);//用户IP所在的城市
         /*包括评论内容，用户名，酒店名，酒店id，评论星*/
-        //已经得到id，找到四个评论，order的id越大说明这个评论越新
+        //已经得到id，找到四个评论，order的id越大说明这个评论越新,只要order id靠后就可以了
+        //选出这些酒店的有评论的最后四个order
+        List<Order> AllCtOrder=orderservice.findHasCommentOrder();
         List<Order> returnOrder=new ArrayList<>();
-        int maxcommentid=1;
-        for(int i=0;i<hotelidlist.size();i++) {//找到这个hotel的有评论的id
-            int hotelCommentsNum = orderservice.findHasCtOrderByHotelid(hotelidlist.get(i)).size();
-            //如果这个酒店是0条评论
-            if (hotelCommentsNum == 0){
-                //什么都不做
+        //倒叙检查
+        for(int i=AllCtOrder.size()-1;i>=0;i--){
+            if(returnOrder.size()>=4){
+                break;
             }
-            else{
-                if(orderservice.findHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1).getOrderid()>maxcommentid){
-                    maxcommentid=orderservice.findTwoHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1).getOrderid();
-                    if(returnOrder.size()<4){//返回四个
-                        returnOrder.add(orderservice.findTwoHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1));
-                    }else{
-                        returnOrder.remove(0);
-                        returnOrder.add(orderservice.findTwoHasCtOrderByHotelid(hotelidlist.get(i)).get(hotelCommentsNum-1));
-                    }
+            else if(hotelidlist.contains(AllCtOrder.get(i).getHotelid())){
+                if(returnOrder.size()>=4){
+                    break;
+                }
+                else{
+                    returnOrder.add(AllCtOrder.get(i));
                 }
             }
-
         }
         /*包括评论内容，用户邮箱，酒店名，酒店id，评论星*/
         List<Hotel> returnTidai=new ArrayList<>();
         Hotel temTidaiHotel=new Hotel();
         for(int i=0;i<returnOrder.size();i++){
+            temTidaiHotel=new Hotel();
             temTidaiHotel.setHotelid(returnOrder.get(i).getHotelid());
             temTidaiHotel.setHotelname(hotelservice.findHotelByPrimaryKey(returnOrder.get(i).getHotelid()).getHotelname());
             temTidaiHotel.setHotelphone(clientservice.findClientById(returnOrder.get(i).getClientid()).getEmail());
@@ -335,6 +340,7 @@ public class Clientcontroller {
         Hotel temHotel=new Hotel();
         /*酒店id，酒店名字，酒店图片的url,酒店优惠后的平均价格，还是要用一下替代的方法*/
         for(int i=hasDtHotelid.size()-1;i>hasDtHotelid.size()-4;i--){
+            temHotel=new Hotel();
             temHotel.setHotelid(hasDtHotelid.get(i));
             temHotel.setHotelname(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getHotelname());
             temHotel.setPhotourl(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getPhotourl());

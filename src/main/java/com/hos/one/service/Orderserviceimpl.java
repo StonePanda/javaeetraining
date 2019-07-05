@@ -31,4 +31,7 @@ public class Orderserviceimpl implements Orderservice{
     public List<Order> findHasCtOrderByHotelid(int hotelid){
         return ordermapper.selectHasCtOrderByHotelid(hotelid);
     }
+
+    @Override
+    public List<Order> findHasCommentOrder(){return ordermapper.selectHasCommentOrder();}
 }
