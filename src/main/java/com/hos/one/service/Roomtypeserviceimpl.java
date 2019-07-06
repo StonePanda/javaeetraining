@@ -36,4 +36,9 @@ public class Roomtypeserviceimpl implements Roomtypeservice{
     public List<Integer> findHasDiscountHotel(){
         return roomtypemapper.selectHasDiscountHotel();
     }
+
+    @Override
+    public List<Roomtype> selectAllRoomTypeByHotelid(int hotelid){
+        return roomtypemapper.selectAllRoomtypeByHotelid(hotelid);
+    }
 }

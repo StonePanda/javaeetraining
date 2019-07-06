@@ -14,4 +14,6 @@ public interface Roomtypeservice {
     int getDiscountByHotelid(Integer hotelid);
 
     List<Integer> findHasDiscountHotel();
+
+    List<Roomtype> selectAllRoomTypeByHotelid(int hotelid);
 }

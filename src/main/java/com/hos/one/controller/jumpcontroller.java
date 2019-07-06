@@ -42,4 +42,19 @@ public class Jumpcontroller {
 
     @RequestMapping("map")
     public String getMap(){return "map.html";}
+
+    @RequestMapping("orderdoing")
+    public String getOrderDoing(){return "orderdoing.html";}
+
+    @RequestMapping("ordertodo")
+    public String getOrderTodo(){return "ordertodo.html";}
+
+    @RequestMapping("orderdone")
+    public String getOrderDone(){return "orderdone.html";}
+
+    @RequestMapping("comment")
+    public String getComment(){return "comment.html";}
+
+    @RequestMapping("index-admin")
+    public String getIndexAdmin(){return "index-admin.html";}
 }

@@ -24,6 +24,12 @@ public interface OrderMapper {
 
     List<Order> selectAllOrderByClientid(Integer clientid);
 
+    List<Order> selectAllDoneOrderByHotelid(Integer hotelid);
+
+    List<Order> selectAllTodoOrderByHotelid(Integer hotelid);
+
+    List<Order> selectAllDoingOrderByHotelid(Integer hotelid);
+
     void updateOrderStatus(@Param("timenow") int timenow);
 
     int updateByPrimaryKeySelective(Order record);

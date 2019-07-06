@@ -48,4 +48,31 @@ public class Orderserviceimpl implements Orderservice{
         ordermapper.updateOrderStatus(timenow);
         return ordermapper.selectAllOrderByClientid(clientid);
     }
+    @Override
+    public List<Order> selectAllDoneOrderByHotelid(int hotelid){
+        //用10位时间戳
+        Date nowdate=new Date();//获取当前时间
+        String timestamp = String.valueOf(nowdate.getTime()/1000);
+        int timenow=Integer.valueOf(timestamp);
+        ordermapper.updateOrderStatus(timenow);
+        return ordermapper.selectAllDoneOrderByHotelid(hotelid);
+    }
+    @Override
+    public List<Order> selectAllTodoOrderByHotelid(int hotelid){
+        //用10位时间戳
+        Date nowdate=new Date();//获取当前时间
+        String timestamp = String.valueOf(nowdate.getTime()/1000);
+        int timenow=Integer.valueOf(timestamp);
+        ordermapper.updateOrderStatus(timenow);
+        return ordermapper.selectAllTodoOrderByHotelid(hotelid);
+    }
+    @Override
+    public List<Order> selectAllDoingOrderByHotelid(int hotelid){
+        //用10位时间戳
+        Date nowdate=new Date();//获取当前时间
+        String timestamp = String.valueOf(nowdate.getTime()/1000);
+        int timenow=Integer.valueOf(timestamp);
+        ordermapper.updateOrderStatus(timenow);
+        return ordermapper.selectAllDoingOrderByHotelid(hotelid);
+    }
 }

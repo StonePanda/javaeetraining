@@ -21,7 +21,9 @@ public class Order {
 
     private String commentcontent;
 
-    public Order(Integer orderid, Integer clientid, Integer hotelid, String roomtype, Integer timestart, Integer timeend, Double price, Integer status, Integer commentstar, String commentcontent) {
+    private Integer roomnum;
+
+    public Order(Integer orderid, Integer clientid, Integer hotelid, String roomtype, Integer timestart, Integer timeend, Double price, Integer status, Integer commentstar, String commentcontent,Integer roomnum) {
         this.orderid = orderid;
         this.clientid = clientid;
         this.hotelid = hotelid;
@@ -32,6 +34,7 @@ public class Order {
         this.status = status;
         this.commentstar = commentstar;
         this.commentcontent = commentcontent;
+        this.roomnum=roomnum;
     }
 
     public Order() {
@@ -117,4 +120,8 @@ public class Order {
     public void setCommentcontent(String commentcontent) {
         this.commentcontent = commentcontent == null ? null : commentcontent.trim();
     }
+
+    public Integer getRoomnum(){return roomnum;}
+
+    public void setRoomnum(Integer roomnum){this.roomnum=roomnum;}
 }

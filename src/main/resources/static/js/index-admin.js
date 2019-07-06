@@ -1,6 +1,7 @@
 $(function(){
-	if(window.sessionStorage.hasOwnProperty("hotelinfo")==true){
-		$('#PhoneOrLogin').append(window.sessionStorage.getItem("hotelinfo"))
+	if(window.sessionStorage.hasOwnProperty("hotelphone")==true){
+		$('#PhoneOrLogin').append(window.sessionStorage.getItem("hotelphone"))
+		$('#PhoneOrLogin').attr('href','/index-admin')
 		$('#LogoutOrRegister').append("退出")
 		$('#LogoutOrRegister').attr('href','/about')
 		init()
@@ -17,17 +18,19 @@ function
 init(){
 	//先根据hotelphone查看各种房型以及基本信息
 	var obj={
-		"phone":window.sessionStorage.getItem("hotelinfo")
+		"hotelid":window.sessionStorage.getItem("hotelid")
 	}
 	$.ajax({
-		url: "/hotel/allroomtype"
-		type:"POST"
-		dataType:"application/json"
-		contentType:"application/json"
-		data:JSON.stringify(obj)
+		url: "/hotel/allroomtype",
+		type:"POST",
+		dataType:"json",
+		async: true,
+		contentType:"application/json",
+		data:JSON.stringify(obj),
 		success: function(data){
+			console.log(data)
 			//如果是刚注册的，那么一个房型信息都没有
-			if(data="null"){
+			if(data=="null"){
 				//do nothing
 			}
 			//数据库里面已经有的信息
@@ -54,48 +57,62 @@ init(){
               			$('<div>').attr('class','row form-group').append(
               				$('<div>').attr('class','col-lg-4 col-md-4 form-group').append(
               					$('<label>').attr('for','roomtype'+index).append("房间类型"),
-              					$('<input>').attr('type','text').attr('class','form-control').attr('id','roomtype'+index).append(item.roomtype)),
+              					$('<input>').attr('type','text').attr('class','form-control').attr('id','roomtype'+index).attr('value',item.roomtype)
+              					),
               				$('<div>').attr('class','col-lg-4 col-md-4 form-group').append(
               					$('<label>').attr('for','price'+index).append('今日定价(若有优惠，为优惠后价格)'),
-              					$('<input>').attr('type','price').attr('class','form-control').attr('id','price'+index).append(item.price)),
+              					$('<input>').attr('type','price').attr('class','form-control').attr('id','price'+index).attr('value',item.price)
+              					),
               				$('<div>').attr('class','col-lg-4 col-md- form-group').append(
               					$('<label>').attr('class','control-label templatemo-block').append('优惠设置'),
               					$('<select>').attr('class','form-control').attr('id','discount'+index).append(
               						$('<option>').attr('value','有优惠').append('有优惠'),
               						$('<option>').attr('value','无优惠').append('无优惠')
-              						)
+              						)//如何用js设置select的默认值
               					)
               				)
               			)
 				})
 			}
+		},
+		error:function(data){
+			console.log("roomtypeerror"+data)
 		}
 	})
 	//这个使为了得到基本信息
 	//这只是数据库里面已经有的宾馆的显示方式
 	$.ajax({
-		url:"/hotel/baseinfo"
-		type:"POST"
-		contentType:"application/json"
-		dataType:"application/json"
-		data:JSON.stringify(obj)
+		url:"/hotel/baseinfo",
+		type:"POST",
+		dataType:"json",
+		async: true,
+		contentType:"application/json",
+		data:JSON.stringify(obj),
+
 		success:function(data){
 			//返回的应该是hotel里表的信息,酒店品牌应该单独返回
 			$('#basename').attr('value',data.hotelname)
 			$('#basepositiontext').attr('value',data.positiontext)
 			$('#basephone').attr('value',data.hotelphone)
-			$('#baseoverview').attr('value',data.overview)
+			$('#baseoverview').append(data.overview)
 			$('#basepicurl').attr('src',data.photourl)
 		}
 	})
 	$.ajax({
-		url:"hotel/brandname"
-		type:"POST"
-		contentType:"application/json"
-		dataType:"application/json"
-		data:JSON.stringify(obj)
+		url:"hotel/brandname",
+		type:"POST",
+		dataType:"json",
+		async: true,//不加这个竟然会post不成功？？
+		contentType:"application/json",
+		data:JSON.stringify(obj),
 		success:function(data){
-			$('#basebrand').attr('value',data)
+			if(data=="null"){
+				//do nothing
+			}
+			else{
+				$('#basebrand').attr('value',data)
+			}
+			
 		}
 	})
 }

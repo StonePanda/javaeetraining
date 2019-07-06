@@ -29,9 +29,9 @@
         <nav class="templatemo-left-nav">
           <ul>
             <li><a href="#" class="active"><i class="fa fa-sliders fa-fw"></i>酒店信息录入</a></li>
-            <li><a href="ordertodo.html"><i class="fa fa-users fa-fw"></i>未完成订单</a></li>
-            <li><a href="manage-usersing.html"><i class="fa fa-users fa-fw"></i>进行中订单</a></li>
-            <li><a href="manage-usersdone.html"><i class="fa fa-users fa-fw"></i>已完成订单</a></li>
+            <li><a href="/ordertodo"><i class="fa fa-users fa-fw"></i>未完成订单</a></li>
+            <li><a href="/orderdoing"><i class="fa fa-users fa-fw"></i>进行中订单</a></li>
+            <li><a href="/orderdone"><i class="fa fa-users fa-fw"></i>已完成订单</a></li>
           </ul>
         </nav>
       </div>
@@ -51,16 +51,15 @@
           <div class="templatemo-content-widget white-bg">
             <h2 class="margin-bottom-10">房型信息录入与更新</h2>
             <!--<p>Here goes another form and form controls.</p>-->
-            <form action="index.html" class="templatemo-login-form" method="post" enctype="multipart/form-data">
               <div id="roomtype">
               <!--<div class="row form-group">
                 <div class="col-lg-4 col-md-4 form-group">
                     <label for="inputUsername">房间类型</label>
-                    <input type="text" class="form-control" id="inputUsername" placeholder="" id="roomtype1">
+                    <input type="text" class="form-control" id="inputUsername"  id="roomtype1">
                 </div>
                 <div class="col-lg-4 col-md-4 form-group">                  
                     <label for="inputEmail">今日定价(若有优惠，为优惠后价格)</label>
-                    <input type="price" class="form-control" id="inputPrice" placeholder="" id="price1">
+                    <input type="price" class="form-control" id="inputPrice"  id="price1">
                 </div>
                 <div class="col-lg-4 col-md- form-group"> 
                   <label class="control-label templatemo-block">优惠设置</label>
@@ -84,21 +83,21 @@
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">                  
                     <label for="inputFirstName">名称</label>
-                    <input type="text" class="form-control" placeholder="" id="basename">
+                    <input type="text" class="form-control"  id="basename">
                 </div>
                 <div class="col-lg-6 col-md-6 form-group">
                     <label for="inputLastName">地址</label>
-                    <input type="text" class="form-control" placeholder="" id="basepositiontext">
+                    <input type="text" class="form-control"  id="basepositiontext">
                 </div> 
               </div>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">
                     <label for="inputUsername">连锁品牌名(选填)</label>
-                    <input type="text" class="form-control" placeholder="" id="basebrand">
+                    <input type="text" class="form-control"  id="basebrand">
                 </div>
                 <div class="col-lg-6 col-md-6 form-group">
                     <label for="inputEmail">联系电话</label>
-                    <input type="email" class="form-control" placeholder="" id="basephone">
+                    <input type="email" class="form-control"  id="basephone">
                 </div>    
               </div>
                  
@@ -113,13 +112,13 @@
                   <label class="control-label templatemo-block">酒店照片</label> 
                   <input type="file" name="fileToUpload" class="filestyle" data-buttonName="btn-primary" data-buttonBefore="true" data-icon="false" >
                   <p>最大上传大小为 5 MB</p>
-                  <img src="" id="basepicurl"/><!--如果上传的有图片，可以展示出来-->
+                  <img src="" style="max-height:100px;" id="basepicurl"/><!--如果上传的有图片，可以展示出来-->
                 </div>
               </div>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">
                     <label for="inputCurrentPassword">当前密码</label>
-                    <input type="password" class="form-control" id="inputCurrentPassword" placeholder="" id="basepassword">
+                    <input type="password" class="form-control" id="inputCurrentPassword"  id="basepassword">
                 </div>
               </div>
               <div class="row form-group">
@@ -141,7 +140,7 @@
     </div>
 
     <!-- JS -->
-    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>        <!-- jQuery -->
+    <script src="js/vendor/jquery-3.2.0.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>  <!-- http://markusslima.github.io/bootstrap-filestyle/ -->
     <script type="text/javascript" src="js/templatemo-script.js"></script>        <!-- Templatemo Script -->
     <script type="text/javascript" src="js/index-admin.js"></script>

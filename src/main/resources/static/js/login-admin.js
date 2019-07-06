@@ -1,8 +1,9 @@
 $(function () {
-    document.getElementById('phone').value=window.sessionStorage.getItem("phone");
+    if(window.sessionStorage.hasOwnProperty("phone")==true){
+        document.getElementById('phone').value=window.sessionStorage.getItem("phone");
+    }
+    
     //document.getElementById('pass').value="";
-    console.log(window.sessionStorage.getItem("phone"))
-    console.log($("#phone").val())
     $("#phone, #pass").focus(restore);
     $("#phone").blur(checkPhone);
     $("#pass").blur(checkPass);
@@ -39,7 +40,6 @@ function checkAll() {
     if(!(checkPhone() && checkPass())){
         return false;
     } else {
-        //ajax submit
         let phone = $("#phone").val();//js中的let
         let pass = $("#pass").val();
         var obj= {

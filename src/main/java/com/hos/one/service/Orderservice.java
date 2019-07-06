@@ -18,4 +18,11 @@ List<Integer> findTwoCommentClientByHotelid(int hotelid);
     List<Order> selectAllOrderByClientid(int clientid);
 
     void updateOrderStatus(int timenow);
+
+    List<Order> selectAllDoneOrderByHotelid(int hotelid);
+
+    List<Order> selectAllTodoOrderByHotelid(int hotelid);
+
+    List<Order> selectAllDoingOrderByHotelid(int hotelid);
+
 }

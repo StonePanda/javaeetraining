@@ -130,11 +130,11 @@ modifyInfo=function(){
 		"password":$('#nowpw').val()
 	}
 	$.ajax({
-		url:"/user/modifyinfo"
-		dataType:"application/json"
-		contentType:"application/json"
-		data:JSON.stringify(obj)
-		type:"POST"
+		url:"/user/modifyinfo",
+		dataType:"application/json",
+		contentType:"application/json",
+		data:JSON.stringify(obj),
+		type:"POST",
 		success: function (data){
 			if(data=="success"){
 				alert("修改成功，请重新登录")
@@ -163,11 +163,11 @@ updatePw=function(){
 		"newpw":$('#newpw').val()
 	}
 	$.ajax({
-		url: "/user/updatepw"
-		dataType:"application/json"
-		contentType:"application/json"
-		data:JSON.stringify(obj)
-		type:"POST"
+		url: "/user/updatepw",
+		dataType:"application/json",
+		contentType:"application/json",
+		data:JSON.stringify(obj),
+		type:"POST",
 		success: function(data){
 			if(data=="success"){
 				alert("修改密码成功")

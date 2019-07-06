@@ -1,6 +1,6 @@
 $(function(){
-	if(window.sessionStorage.hasOwnProperty("hotelinfo")==true){
-		$('#PhoneOrLogin').append(window.sessionStorage.getItem("hotelinfo"))
+	if(window.sessionStorage.hasOwnProperty("hotelphone")==true){
+		$('#PhoneOrLogin').append(window.sessionStorage.getItem("hotelphone"))
 		$('#LogoutOrRegister').append("退出")
 		$('#LogoutOrRegister').attr('href','/about')
 		init()
@@ -19,11 +19,12 @@ init(){
 		"hotelid":window.sessionStorage.getItem("hotelid")
 	}
 	$.ajax({
-		url:"/hotel/orderdoing"
-		type:"POST"
-		dataType:"application/json"
-		contentType:"application/json"
-		data:JSON.stringify(obj)
+		url:"/hotel/orderdoing",
+		type:"POST",
+		dataType:"json",
+		contentType:"application/json",
+		data:JSON.stringify(obj),
+		async: true,
 		success:function(data){//这个必须一次返回完毕
 			//返回是orderlist的data
 			/*<tr>//用户
@@ -41,7 +42,7 @@ init(){
             			$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear()+'-'+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+'-'+new Date(parseInt(item.timestart+"000")).getDate()),
             			$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear()+'-'+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+'-'+new Date(parseInt(item.timeend+"000")).getDate()),
             			$('<td>').append(item.roomtype),
-            			$('<td>').append(item.commentstar),
+            			$('<td>').append(item.roomnum),
             			$('<td>').append(item.price)
             			))
             })
