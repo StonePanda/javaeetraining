@@ -39,4 +39,7 @@ public class Jumpcontroller {
 
     @RequestMapping("clientaccount")
     public String getClientAccount(){return "clientaccount.html";}
+
+    @RequestMapping("map")
+    public String getMap(){return "map.html";}
 }

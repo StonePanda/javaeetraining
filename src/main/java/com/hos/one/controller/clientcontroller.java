@@ -161,10 +161,15 @@ public class Clientcontroller {
     @ResponseBody
     @PostMapping("ctclientemail")
     public String postCtClientEmail(@RequestBody Map<String,String> map){
+        System.out.println(map.get("hotelid"));
+        System.out.println(orderservice.findTwoCommentClientByHotelid(23));
+        System.out.println(orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid"))).toString());
         if(orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid")))==null){
+            System.out.println(orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid"))));
             return JSON.toJSONString("null");
         }
         else{
+            System.out.println("不是空");
             List<Integer> twoctemial=orderservice.findTwoCommentClientByHotelid(Integer.parseInt(map.get("hotelid")));
             //可能一个评论也没有
             List<String> returneamil=new ArrayList(2);
@@ -189,17 +194,19 @@ public class Clientcontroller {
         "discount":discount
     }*/
         //City
-        List<Integer> hotelidlist=cityhotelservice.selectByCityName(map.get("city").toString());
+        List<Integer> hotelidlist=cityhotelservice.selectByCityName(map.get("city"));
+        System.out.println(JSON.toJSONString(hotelidlist));
         List<Hotel> hotellist=new ArrayList<>();
         List<Integer> hotelidbybrand=new ArrayList<>();
         //city里面选择品牌
-        if(map.get("brand")=="ALL"||map.get("brand")=="品牌筛选"){
+        if(map.get("brand").equals("ALL")||map.get("brand").equals("品牌筛选")){
             //品牌没有筛选
         }
         else{
+            System.out.println("品牌被筛选");
             hotelidbybrand=hotelbrandservice.findHotelByBrandName(map.get("brand"));
             //倒序删除不会出现大小变化问题
-            for(int i=hotelidlist.size()-1;i>=0;i++){
+            for(int i=hotelidlist.size()-1;i>=0;i--){//i的初始化已经定了！！
                 if(!hotelidbybrand.contains(hotelidlist.get(i))){
                     hotelidlist.remove(i);
                 }
@@ -207,28 +214,29 @@ public class Clientcontroller {
             //品牌筛选完毕
         }
         //查看price,这个price是平均价格
-        if(map.get("price")=="ALL"||map.get("price")=="价格筛选"){
+        if(map.get("price").equals("ALL")||map.get("price").equals("价格筛选")){
             //价格不做筛选
         }
         else{
+            System.out.println("价格筛选");
             switch (map.get("price")){
-                case "0-200元/日":
-                    for(int i=hotelidlist.size()-1;i>=0;i++){
+                case "0-200元/日"://<=200
+                    for(int i=hotelidlist.size()-1;i>=0;i--){
                         if(roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))>200){
                             hotelidlist.remove(i);
                         }
                     }
                     break;
                 case "200-500元/日":
-                    for(int i=hotelidlist.size()-1;i>=0;i++){
+                    for(int i=hotelidlist.size()-1;i>=0;i--){
                         if(roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))>500||
-                                roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))<200){
+                                roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))<=200){
                             hotelidlist.remove(i);
                         }
                     }
                     break;
                 case ">500元/日":
-                    for(int i=hotelidlist.size()-1;i>=0;i++){
+                    for(int i=hotelidlist.size()-1;i>=0;i--){
                         if(roomtypeservice.getAvgPriceByHotelid(hotelidlist.get(i))<=500){
                             hotelidlist.remove(i);
                         }
@@ -240,19 +248,20 @@ public class Clientcontroller {
             //价格筛选完毕
         }
         //有无优惠筛选
-        if(map.get("discount")=="优惠筛选"||map.get("discount")=="ALL"){
+        if(map.get("discount").equals("优惠筛选")||map.get("discount").equals("ALL")){
             //什么都不做
         }
         else{
-            if(map.get("discount")=="有优惠"){
-                for(int i=hotelidlist.size()-1;i>=0;i++){
+            System.out.println("优惠筛选");
+            if(map.get("discount").equals("有优惠")){
+                for(int i=hotelidlist.size()-1;i>=0;i--){
                     if(roomtypeservice.getDiscountByHotelid(hotelidlist.get(i))==0){//==0是无优惠
                         hotelidlist.remove(i);
                     }
                 }
             }
             else{//只要没有优惠的
-                for(int i=hotelidlist.size()-1;i>=0;i++){
+                for(int i=hotelidlist.size()-1;i>=0;i--){
                     if(roomtypeservice.getDiscountByHotelid(hotelidlist.get(i))>0){//==0是无优惠
                         hotelidlist.remove(i);
                     }
@@ -262,6 +271,8 @@ public class Clientcontroller {
         for (int i=0;i<hotelidlist.size();i++){
             hotellist.add(hotelservice.findHotelByPrimaryKey(hotelidlist.get(i)));
         }
+        System.out.println(JSON.toJSONString(hotelidlist));
+        System.out.println(JSON.toJSONString(hotellist));
         return JSON.toJSONString(hotellist);
     }
     @ResponseBody

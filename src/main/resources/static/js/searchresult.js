@@ -14,13 +14,33 @@ window.onload=function(){
     }
 	initialize()
 }
+$(".selemenu").click(function(){
+    $(this).next().slideToggle();
+    $(this).parents().siblings().find(".citylist,.citylist2").slideUp();
+})
+/*$(".citylist span").click(function(){
+    var text=$(this).text();
+    $(this).parent().prev().html(text);
+    $(this).parent().prev().css("color","#666")
+    $(this).parent().fadeOut();
+    
+})*/
+
+$(function(){
+    $(document).not($(".selectbox")).click(function(){
+        $(".citylistdistance,.citylist,.citylist2").slideUp();
+     })
+     $(".selectbox").click(function(event){
+        event.stopPropagation();
+    })
+})
+
 
 function getParams(key) {
             var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
             if (r != null) {
-                //console.log(r[2]);
-                return decodeURI(r[2]);//unescape()
+               return decodeURI(r[2]);//unescape()
             }
             return null;
 }
@@ -59,7 +79,6 @@ function initialize(){
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
             show(data)
-            console.log(data)
         }
 	})
 	}
@@ -69,10 +88,6 @@ function initialize(){
         async: true,
         type: "GET",
         success: function (data) {//这里仅仅是post成功,返回的应该是替代了的。包括评论内容，用户名，酒店名，酒店id，评论星
-            console.log(data)
-            console.log(data[0])
-            console.log(data[1])
-            console.log(data[2])
             /*酒店id，酒店名字，酒店图片的url,酒店优惠后的平均价格，还是要用一下替代的方法*/
             /*temHotel.setHotelid(hasDtHotelid.get(i));
             temHotel.setHotelname(hotelservice.findHotelByPrimaryKey(hasDtHotelid.get(i)).getHotelname());
@@ -93,23 +108,21 @@ function initialize(){
             $('#fthotel3img').attr('alt',data[2].hotelname)
             $('#fthotel3name').append(data[2].hotelname)
             $('#fthotel3avgprice').append('平均每日'+data[2].brandid+'元')
-            console.log("第三个为什不现实？"+data[2].brandid)
         },
         error: function(data) {
-            console.log(data)
         }
     })
 }
 
 function show(data){//这时候是这个城市里的全部酒店
-
-  window.sessionStorage.setItem("hotellist",data)
   var hotellist =data
   $('#showlist').html('')
-  console.log("append失败？")
   $.each(hotellist, function (index,item) {
-    console.log(item.hotelname)
-    $('#showlist').append(
+    if(item==null){
+        //do nothing
+    }
+    else{
+      $('#showlist').append(
     	$('<div>').attr('class','col-12 col-sm-6 col-md-6 col-lg-4').append(
     		$('<div>').attr('class','single-hotels-2').append(
     			$('<div>').attr('class','hotel-image').append($('<img>').attr('src',item.photourl).attr('class','border-raduis-3').attr('style','height:260px;width:100%;')),
@@ -122,75 +135,158 @@ function show(data){//这时候是这个城市里的全部酒店
       		)
  		)
     )
-  })
+  }
+})
 }
 
-function
-distanceselectlist(){
-    if($('#searchsousuok').value==null){
-        //console.log("没有输入")如果没有输入就没办法使用地点筛选
+$("#citylistdistance span").click(function(){//距离筛选
+    var text=$(this).text();
+    $(this).parent().prev().html(text);
+    $(this).parent().prev().css("color","#666")
+    $(this).parent().fadeOut()
+})
+
+$("#citylistdistance span").on("click",function(){
+    var hotellist=JSON.parse(window.sessionStorage.getItem("hotellist"))
+    if($('#starsselect').text()=="ALL"||$('#starsselect').text()=="星级筛选"){
+                //do nothing
+                }
+            else{
+          
+         $.each(hotellist, function (index, item) {
+            if(item==null){
+
+            }
+            else{
+            if($('#starsselect').text()=="五星酒店"){
+                if(item.getstars==5){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+            //因为splice后后面那个就被忽略了
+                }
+            }
+            else if($('#starsselect').text()=="四星酒店"){
+                if(item.getstars==4){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="三星酒店"){
+                if(item.getstars==3){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="二星酒店"){
+                if(item.getstars==2){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(item.getstars==1){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+            })
+                }
+
+
+
+    if(window.sessionStorage.hasOwnProperty("clientpoint")==false||$('#searchsousuok').val()==""){
             alert("需要输入目的地才能使用距离筛选！")
     }
-    else if($('#distanceselect').value=="ALL"){
+    else if($('#distanceselect').text()=="ALL"){
     	//do nothing
+        show(hotellist)
     }
     else{
-    	var map = new BMap.Map("l-map");
-    	map.centerAndZoom(getParams("city"),12);  //初始化地图,设置城市和地图级别。
+    	var map = new BMap.Map("l-map");//因为不是每次都重新获取，所以不能更改存储的
+    	map.centerAndZoom(getParams("city"),12) //初始化地图,设置城市和地图级别。
         //需要计算两点之间的距离了
         //在现在的data里筛选出来符合距离
-        hotellist=window.sessionStorage.getItem("hotellist")
-    	$.each(hotellist, function (index, item) {
+        var clientpp=JSON.parse(window.sessionStorage.getItem("clientpoint"))
+    	$.each(hotellist, function(index, item) {
+            if(item==null){
+                // do nothing
+            }
+            else{
     		var hotelpoint=new BMap.Point(item.positionjing,item.positionwei)
-    		if($('#distanceselect').value=="<1000m"){
-    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)<1000){
+            var clientpoint=new BMap.Point(clientpp.lng,clientpp.lat)
+    		if($('#distanceselect').text()=="<1000m"){
+    			if(map.getDistance(clientpoint,hotelpoint)<1000){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
-    		else if(('#distanceselect').value=="1000-2000m"){
-    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)<2000&&
-    				map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)>1000){
+    		else if($('#distanceselect').text()=="1000-2000m"){
+    			if(map.getDistance(clientpoint,hotelpoint)<2000&&
+    				map.getDistance(clientpoint,hotelpoint)>1000){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
-    		else if(('#distanceselect').value=="2000-5000m"){
-    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)>=2000&&
-    				map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)<=5000){
+    		else if($('#distanceselect').text()=="2000-5000m"){
+    			if(map.getDistance(clientpoint,hotelpoint)>=2000&&
+    				map.getDistance(clientpoint,hotelpoint)<=5000){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
     		else{
-    			if(map.getDistance(window.sessionStorage.getItem("clientpoint"),hotelpoint)>5000){
+    			if(map.getDistance(clientpoint,hotelpoint)>5000){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
-  })
+            }
+        })
     	show(hotellist)
-    	window.sessionStorage.setItem("hotellist",hotellist)
-}
+    }
+})
 
-function
-brandselectlist(){
-	$(".shangquan li").removeClass("active")
-    $(this).addClass("active")
-    var text1=$(this).text();
-    $(".sqinput").html(text1)
-	var city=getParams("city")
-    var brand=$('#brandselect').value
-    var price=$('#priceselect').value
-    var discount=$('#discountlist').value
+/*onclick,click,on()的优先关系：onclick>click>on()；
+
+onclick和click绑定的事件，彼此之间遵守事件冒泡规则，从内到外触发；
+
+on()绑定的事件，总是晚于onclick和click绑定的事件触发；
+
+由此可以得到，使用on()绑定的事件与onclick和click绑定的事件，判断触发先后顺序时，不能只考虑事件冒泡规则。
+*/
+$(".shangquan li").click(function(){
+    
+    $(".shangquan li").removeClass("active")
+        $(this).addClass("active")
+        var text1=$(this).text();
+        $("#brandselect").html('')
+        $("#brandselect").append(text1)
+})
+
+$(".shangquan li").on("click",function(){//品牌筛选
+    var city=getParams("city")
+    var brand=$('#brandselect').text()
+    var price=$('#priceselect').text()
+    var discount=$('#discountlist').text()
     obj={
         "city":city,
         "brand":brand,
@@ -205,19 +301,133 @@ brandselectlist(){
         type: "POST",
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
-            show(data)
-            window.sessionStorage.setItem("hotellist",data);
+            /*show(data)*/
+            window.sessionStorage.setItem("hotellist",JSON.stringify(data))
+             var hotellist=JSON.parse(window.sessionStorage.getItem("hotellist"))
+            if($('#starsselect').text()=="ALL"||$('#starsselect').text()=="星级筛选"){
+                //do nothing
+                }
+            else{
+                $.each(hotellist, function (index, item) {
+            if(item==null){
+
+            }
+            else{
+            if($('#starsselect').text()=="五星酒店"){
+                if(item.getstars==5){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+            //因为splice后后面那个就被忽略了
+                }
+            }
+            else if($('#starsselect').text()=="四星酒店"){
+                if(item.getstars==4){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="三星酒店"){
+                if(item.getstars==3){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="二星酒店"){
+                if(item.getstars==2){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(item.getstars==1){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+            })
+                }
+            if($('#distanceselect').text()=="ALL"||$('#distanceselect').text()=="距离筛选"){
+        //do nothing
+            }
+            else{
+                var map = new BMap.Map("l-map");//因为不是每次都重新获取，所以不能更改存储的
+                map.centerAndZoom(getParams("city"),12) //初始化地图,设置城市和地图级别。
+        //需要计算两点之间的距离了
+        //在现在的data里筛选出来符合距离
+                  var clientpp=JSON.parse(window.sessionStorage.getItem("clientpoint"))
+                $.each(hotellist, function(index, item) {
+                    if(item==null){
+                // do nothing
+                    }
+                    else{
+            var hotelpoint=new BMap.Point(item.positionjing,item.positionwei)
+            var clientpoint=new BMap.Point(clientpp.lng,clientpp.lat)
+            if($('#distanceselect').text()=="<1000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="1000-2000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<2000&&
+                    map.getDistance(clientpoint,hotelpoint)>1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="2000-5000m"){
+                if(map.getDistance(clientpoint,hotelpoint)>=2000&&
+                    map.getDistance(clientpoint,hotelpoint)<=5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(map.getDistance(clientpoint,hotelpoint)>5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+        })    
+            }
+            show(hotellist)
         }
     })
-    }
-}
+})
 
-function
-priceselectlist(){
+$("#citylistprice span").click(function(){//价格筛选
+    var text=$(this).text();
+    $(this).parent().prev().html(text);
+    $(this).parent().prev().css("color","#666")
+    $(this).parent().fadeOut();
+    
+})
+
+$("#citylistprice span").on("click",function(){//价格筛选
 	var city=getParams("city")
-    var brand=$('#brandselect').value
-    var price=$('#priceselect').value
-    var discount=$('#discountlist').value
+    var brand=$('#brandselect').text()
+    var price=$('#priceselect').text()
+    var discount=$('#discountlist').text()
     obj={
         "city":city,
         "brand":brand,
@@ -232,50 +442,223 @@ priceselectlist(){
         type: "POST",
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
-            show(data)
-            window.sessionStorage.setItem("hotellist",data);
+            /*show(data)*/
+            window.sessionStorage.setItem("hotellist",JSON.stringify(data))
+            var hotellist=JSON.parse(window.sessionStorage.getItem("hotellist"))
+            if($('#starsselect').text()=="ALL"||$('#starsselect').text()=="星级筛选"){
+                //do nothing
+                }
+            else{
+         $.each(hotellist, function (index, item) {
+            if(item==null){
+
+            }
+            else{
+            if($('#starsselect').text()=="五星酒店"){
+                if(item.getstars==5){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+            //因为splice后后面那个就被忽略了
+                }
+            }
+            else if($('#starsselect').text()=="四星酒店"){
+                if(item.getstars==4){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="三星酒店"){
+                if(item.getstars==3){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="二星酒店"){
+                if(item.getstars==2){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(item.getstars==1){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+            })
+                }
+            if($('#distanceselect').text()=="ALL"||$('#distanceselect').text()=="距离筛选"){
+        //do nothing
+            }
+            else{
+            var map = new BMap.Map("l-map");//因为不是每次都重新获取，所以不能更改存储的
+            map.centerAndZoom(getParams("city"),12) //初始化地图,设置城市和地图级别。
+        //需要计算两点之间的距离了
+        //在现在的data里筛选出来符合距离
+            var clientpp=JSON.parse(window.sessionStorage.getItem("clientpoint"))
+            $.each(hotellist, function(index, item) {
+             if(item==null){
+                  // do nothing
+                }
+            else{
+            var hotelpoint=new BMap.Point(item.positionjing,item.positionwei)
+            var clientpoint=new BMap.Point(clientpp.lng,clientpp.lat)
+            if($('#distanceselect').text()=="<1000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="1000-2000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<2000&&
+                    map.getDistance(clientpoint,hotelpoint)>1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="2000-5000m"){
+                if(map.getDistance(clientpoint,hotelpoint)>=2000&&
+                    map.getDistance(clientpoint,hotelpoint)<=5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(map.getDistance(clientpoint,hotelpoint)>5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+            })
+            }
+            show(hotellist)
         }
     })
-}
+})
 
-function
-starsselectlist(){
-	if($('#starsselect').value=="ALL"){
+$("#cityliststar span").click(function(){//星级筛选
+    var text=$(this).text();
+    $(this).parent().prev().html(text);
+    $(this).parent().prev().css("color","#666")
+    $(this).parent().fadeOut();
+    
+})
+
+$('#cityliststar span').on("click",function(){//星级筛选
+    var hotellist=JSON.parse(window.sessionStorage.getItem("hotellist"))
+    if($('#distanceselect').text()=="ALL"||$('#distanceselect').text()=="距离筛选"){
+        //do nothing
+            }
+            else{
+            var map = new BMap.Map("l-map");//因为不是每次都重新获取，所以不能更改存储的
+            map.centerAndZoom(getParams("city"),12) //初始化地图,设置城市和地图级别。
+        //需要计算两点之间的距离了
+        //在现在的data里筛选出来符合距离
+            var clientpp=JSON.parse(window.sessionStorage.getItem("clientpoint"))
+            $.each(hotellist, function(index, item) {
+             if(item==null){
+                  // do nothing
+                }
+            else{
+            var hotelpoint=new BMap.Point(item.positionjing,item.positionwei)
+            var clientpoint=new BMap.Point(clientpp.lng,clientpp.lat)
+            if($('#distanceselect').text()=="<1000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="1000-2000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<2000&&
+                    map.getDistance(clientpoint,hotelpoint)>1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="2000-5000m"){
+                if(map.getDistance(clientpoint,hotelpoint)>=2000&&
+                    map.getDistance(clientpoint,hotelpoint)<=5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(map.getDistance(clientpoint,hotelpoint)>5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+            })
+            }
+	if($('#starsselect').text()=="ALL"){
     	//do nothing
     }
     else{
-        hotellist=window.sessionStorage.getItem("hotellist")
     	$.each(hotellist, function (index, item) {
-    		if($('#starsselect').value=="五星酒店"){
+            if(item==null){
+
+            }
+            else{
+    		if($('#starsselect').text()=="五星酒店"){
     			if(item.getstars==5){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
+            //因为splice后后面那个就被忽略了
     			}
     		}
-    		else if($('#starsselect').value=="四星酒店"){
+    		else if($('#starsselect').text()=="四星酒店"){
     			if(item.getstars==4){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
-    		else if($('#starsselect').value=="三星酒店"){
+    		else if($('#starsselect').text()=="三星酒店"){
     			if(item.getstars==3){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
-    		else if($('#starsselect').value=="二星酒店"){
-    			if(item.getstars==2){
+    		else if($('#starsselect').text()=="二星酒店"){
+        			if(item.getstars==2){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
     		else{
@@ -283,27 +666,33 @@ starsselectlist(){
     				//donothing
     			}
     			else{
-    				hotellist.remove(item)
+    				hotellist.splice(index,1,null)
     			}
     		}
-  })
+        }
+    })
     	show(hotellist)
-    	window.sessionStorage.setItem("hotellist",hotellist)
-}
+    }
+})
 
-function
-discountselectlist(){
+$("#citylistdiscount span").click(function(){//优惠筛选
+    var text=$(this).text();
+    $(this).parent().prev().html(text);
+    $(this).parent().prev().css("color","#666")
+    $(this).parent().fadeOut();
+})
+$('#citylistdiscount span').on("click",function(){
 	var city=getParams("city")
-    var brand=$('#brandselect').value
-    var price=$('#priceselect').value
-    var discount=$('#discountlist').value
+    var brand=$('#brandselect').text()
+    var price=$('#priceselect').text()
+    var discount=$('#discountlist').text()
     obj={
         "city":city,
         "brand":brand,
         "price":price,
         "discount":discount
     }
-    $.ajax({
+ $.ajax({
         url: "/user/searchselect",
         dataType: "json",
         contentType: "application/json",//传过去的值的类型
@@ -311,19 +700,132 @@ discountselectlist(){
         type: "POST",
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
-            show(data)
-            window.sessionStorage.setItem("hotellist",data);
-        }
-    })
-    }
-}
+            /*show(data)*/
+            window.sessionStorage.setItem("hotellist",JSON.stringify(data))
+            var hotellist=JSON.parse(window.sessionStorage.getItem("hotellist"))
+            if($('#starsselect').text()=="ALL"||$('#starsselect').text()=="星级筛选"){
+                //do nothing
+                }
+            else{
+          
+         $.each(hotellist, function (index, item) {
+            if(item==null){
 
-function
-showselectedlist(){
-	if($('#showselected').value=="列表模式"){
+            }
+            else{
+            if($('#starsselect').text()=="五星酒店"){
+                if(item.getstars==5){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+            //因为splice后后面那个就被忽略了
+                }
+            }
+            else if($('#starsselect').text()=="四星酒店"){
+                if(item.getstars==4){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="三星酒店"){
+                if(item.getstars==3){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#starsselect').text()=="二星酒店"){
+                if(item.getstars==2){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(item.getstars==1){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+            })
+                }
+            if($('#distanceselect').text()=="ALL"||$('#distanceselect').text()=="距离筛选"){
+        //do nothing
+            }
+            else{
+        var map = new BMap.Map("l-map");//因为不是每次都重新获取，所以不能更改存储的
+        map.centerAndZoom(getParams("city"),12) //初始化地图,设置城市和地图级别。
+        //需要计算两点之间的距离了
+        //在现在的data里筛选出来符合距离
+        var clientpp=JSON.parse(window.sessionStorage.getItem("clientpoint"))
+        $.each(hotellist, function(index, item) {
+            if(item==null){
+                // do nothing
+            }
+            else{
+            var hotelpoint=new BMap.Point(item.positionjing,item.positionwei)
+            var clientpoint=new BMap.Point(clientpp.lng,clientpp.lat)
+            if($('#distanceselect').text()=="<1000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="1000-2000m"){
+                if(map.getDistance(clientpoint,hotelpoint)<2000&&
+                    map.getDistance(clientpoint,hotelpoint)>1000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else if($('#distanceselect').text()=="2000-5000m"){
+                if(map.getDistance(clientpoint,hotelpoint)>=2000&&
+                    map.getDistance(clientpoint,hotelpoint)<=5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            else{
+                if(map.getDistance(clientpoint,hotelpoint)>5000){
+                    //donothing
+                }
+                else{
+                    hotellist.splice(index,1,null)
+                }
+            }
+            }
+        })    
+            }
+            show(hotellist)
+        }
+    })})
+
+$("#citylistshow span").click(function(){
+    var text=$(this).text();
+    $(this).parent().prev().html(text);
+    $(this).parent().prev().css("color","#666")
+    $(this).parent().fadeOut();
+})
+
+$("#citylistshow span").on("click",function(){
+	if($('#showselected').attr('value')=="列表模式"){
 		//donothing
 	}
 	else{
 		window.location.href="/map"
 	}
-}
+})
