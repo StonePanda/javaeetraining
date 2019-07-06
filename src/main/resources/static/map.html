@@ -176,7 +176,7 @@
         }
         else{
         var marker = new BMap.Marker(new BMap.Point(data_info[i].positionjing,data_info[i].positionwei));  // 创建标注
-        var content = '<img src='+data_info[i].photourl+' style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +'<div>'+data_info[i].hotelname+'</div>'+'<div>酒店简介:'+data_info[i].overview.substr(0,20)+'...</div><a href=/hoteldetails?hotelid='+data_info[i].hotelid+' >酒店详情</a>';
+        var content = '<img src='+data_info[i].photourl+' style="float:right;zoom:1;overflow:hidden;width:100px;height:100px;margin-left:3px;"/>' +'<div>'+data_info[i].hotelname+'</div><br>'+'<div>酒店简介:'+data_info[i].overview.substr(0,20)+'...</div><a href=/hoteldetails?hotelid='+data_info[i].hotelid+' >酒店详情</a>';
         }
         map.addOverlay(marker);               // 将标注添加到地图中
         addClickHandler(content,marker);

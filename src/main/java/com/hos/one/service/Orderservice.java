@@ -14,4 +14,8 @@ List<Integer> findTwoCommentClientByHotelid(int hotelid);
     List<Order> findHasCtOrderByHotelid(int hotelid);
 
     List<Order> findHasCommentOrder();
+
+    List<Order> selectAllOrderByClientid(int clientid);
+
+    void updateOrderStatus(int timenow);
 }

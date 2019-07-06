@@ -4,7 +4,6 @@ window.onload=function(){
         $('#clientemail').attr('href','/clientdetail');
         $('#exitOrRegister').text('退出')
         $('#exitOrRegister').attr('href','/about')
-
     }
     else{
         $('#clientemail').text("登录");

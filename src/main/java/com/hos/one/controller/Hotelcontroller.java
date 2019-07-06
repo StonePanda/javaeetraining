@@ -16,12 +16,10 @@ import java.util.Map;
 @Controller
 @RequestMapping("/hotel")
 public class Hotelcontroller {
-
     @Autowired
     private Hotelservice hotelservice;
     @Autowired
     private Hotelmanservice hotelmanservice;
-
     @ResponseBody
     @PostMapping("/login")
     public String postLogin(@RequestBody Map<String,Object> map){//不要用void,不然前端会报4040错误
@@ -33,7 +31,6 @@ public class Hotelcontroller {
             return JSON.toJSONString("fail");
         }
     }
-
     @ResponseBody
     @PostMapping("/register")
     public String postregister(@RequestBody Map<String,Object> map){//不要用void,不然前端会报4040错误

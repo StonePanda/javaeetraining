@@ -29,4 +29,14 @@ public class Clientserviceimpl implements Clientservice{
     public Client findClientById(Integer clientid){
         return clientmapper.selectByPrimaryKey(clientid);
     }
+
+    @Override
+    public void updateClient(Client updateclient){
+        clientmapper.updateByPrimaryKey(updateclient);
+    }
+
+    @Override
+    public void updateCtPassword(Client newpwclient){
+        clientmapper.updateByPrimaryKeySelective(newpwclient);
+    }
 }

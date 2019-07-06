@@ -8,6 +8,7 @@ import com.hos.one.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import sun.java2d.pipe.OutlineTextRenderer;
 
 import java.util.*;
 
@@ -359,6 +360,67 @@ public class Clientcontroller {
             returnHotel.add(temHotel);
         }
         return JSON.toJSONString(returnHotel);
+    }
+    @ResponseBody
+    @PostMapping("allorder")
+    public String postAllOrder(@RequestBody Map<String,String> map){
+        /*	var obj={
+		"clientid":window.sessionStorage.getItem("id")
+	    }*/
+        //根据用户id找出和这个用户相关的所有order
+        return JSON.toJSONString(orderservice.selectAllOrderByClientid(Integer.parseInt(map.get("clientid"))));
+    }
+    @ResponseBody
+    @PostMapping("modifyinfo")
+    public String postModiftInfo(@RequestBody Map<String,String> map){
+        /*var obj={
+		"id":window.sessionStorage.getItem("id"),
+		"phone":$('#xiugaiphone').val(),
+		"email":$('#xiugaiemail').val(),
+		"password":$('#nowpw').val()
+	}*/
+        if(clientservice.findClientById(Integer.parseInt(map.get("id"))).getAccountpw().equals(map.get("password"))){
+            //密码相同
+            //检查手机号和邮箱有没有被注册过
+            if(clientservice.findClientByPhone(map.get("phone"))==null&&clientservice.findClientByEmail(map.get("email"))==null){
+                //都没有被注册过
+                //执行更新操作
+                Client updateClient=new Client();
+                updateClient.setClientid(Integer.parseInt(map.get("id")));
+                updateClient.setPhone(map.get("phone"));
+                updateClient.setEmail(map.get("email"));
+                updateClient.setAccountpw(map.get("password"));
+                clientservice.updateClient(updateClient);
+                return JSON.toJSONString("success");
+            }
+            else{
+                return JSON.toJSONString("手机号或邮箱已被注册！");
+            }
+        }
+        else{
+            return JSON.toJSONString("当前密码不对！");
+        }
+    }
+    @ResponseBody
+    @PostMapping("updatepw")
+    public String postUpdatePw(@RequestBody Map<String,String> map){
+        /*	var obj={
+		"id":window.sessionStorage.getItem("id"),
+		"nowpw":$('#mfnpw').val()
+		"newpw":$('#newpw').val()
+	}*/
+        if(clientservice.findClientById(Integer.parseInt(map.get("id"))).getAccountpw().equals(map.get("nowpw"))){
+            //当前密码正确
+            Client newclient=new Client();
+            newclient.setClientid(Integer.parseInt(map.get("id")));
+            newclient.setAccountpw(map.get("newpw"));
+            clientservice.updateCtPassword(newclient);
+            return JSON.toJSONString("success");
+        }
+        else{
+            //当前密码不正确
+            return JSON.toJSONString("当前密码不正确！");
+        }
     }
 }
 

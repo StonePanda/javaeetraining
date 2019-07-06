@@ -5,6 +5,7 @@ import com.hos.one.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,4 +35,17 @@ public class Orderserviceimpl implements Orderservice{
 
     @Override
     public List<Order> findHasCommentOrder(){return ordermapper.selectHasCommentOrder();}
+
+    @Override
+    public void updateOrderStatus(int timenow){
+        ordermapper.updateOrderStatus(timenow);
+    }
+    @Override
+    public List<Order> selectAllOrderByClientid(int clientid){
+        Date nowdate=new Date();//获取当前时间
+        String timestamp = String.valueOf(nowdate.getTime()/1000);
+        int timenow=Integer.valueOf(timestamp);
+        ordermapper.updateOrderStatus(timenow);
+        return ordermapper.selectAllOrderByClientid(clientid);
+    }
 }

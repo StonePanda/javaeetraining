@@ -40,13 +40,13 @@ function checkAll() {
         return false;
     } else {
         //ajax submit
-        let phone = $("#phone").val();
+        let phone = $("#phone").val();//js中的let
         let pass = $("#pass").val();
         var obj= {
                 "phone": phone,
                 "password": pass
             }
-        $.ajax({
+        $.ajax({//后端重写
             url: "/hotel/login",
             dataType: "json",
             async: true,
@@ -58,9 +58,11 @@ function checkAll() {
                 if(status=="fail"){
                     console.log(status)
                     setError("酒店电话或密码错误！")
-                } else {//这个时候返回的酒店的所有信息
+                } else {//这个时候返回的酒店的所有信息,返回的是success
                     console.log(status)
-                    window.sessionStorage.setItem("hotelinfo",data)
+                    window.sessionStorage.setItem("hotelphone",data.hotelphone)
+                    window.sessionStorage.setItem("hotelid",data.hotelid)
+                    window.sessionStorage.setItem("hotelname",data.hotelname)
                     window.location.href = "/index-admin";
                 }
             }

@@ -1,6 +1,7 @@
 package com.hos.one.dao;
 
 import com.hos.one.entity.Order;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,6 +21,10 @@ public interface OrderMapper {
     List<Order> selectHasCtOrderByHotelid(Integer hotelid);
 
     List<Order> selectHasCommentOrder();
+
+    List<Order> selectAllOrderByClientid(Integer clientid);
+
+    void updateOrderStatus(@Param("timenow") int timenow);
 
     int updateByPrimaryKeySelective(Order record);
 

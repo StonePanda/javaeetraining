@@ -10,4 +10,8 @@ public interface Clientservice {
     Client findClientByPhone(String email);
 
     Client findClientById(Integer clientid);
+
+    void updateClient(Client updateclient);
+
+    void updateCtPassword(Client newpwclient);
 }
