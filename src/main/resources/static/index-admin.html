@@ -29,11 +29,9 @@
         <nav class="templatemo-left-nav">
           <ul>
           <li><a href="#" class="active"><i class="fa fa-sliders fa-fw"></i>酒店信息更新</a></li>
-
             <li><a href="/orderdone"><i class="fa fa-users fa-fw"></i>未完成订单</a></li>
             <li><a href="/orderdoing"><i class="fa fa-users fa-fw"></i>进行中订单</a></li>
             <li><a href="/orderdone"><i class="fa fa-users fa-fw"></i>已完成订单</a></li>
-
           </ul>
         </nav>
       </div>
@@ -54,14 +52,14 @@
             <h2 class="margin-bottom-10">房型信息录入与更新</h2>
             <!--<p>Here goes another form and form controls.</p>-->
               <div id="roomtype">
-              <div class="row form-group">
+              <!--<div class="row form-group">
                 <div class="col-lg-3 col-md-3 form-group">
                     <label for="inputUsername">房间类型</label>
                     <div type="text" class="form-control" id="roomnum" align="center" style="border-color: transparent;box-shadow:none;" id="price1">大床房</div>
                 </div>
                 <div class="col-lg-3 col-md-3 form-group">                  
                     <label for="inputEmail">今日定价(优惠后价格)</label>
-                    <input type="price" class="form-control" id="inputPrice"  id="price1">
+                    <input type="price" class="form-control" id="inputPrice" >
                 </div>
                 <div class="col-lg-3 col-md-3 form-group">                  
                     <label for="inputEmail">今日剩余房间数量</label>
@@ -74,12 +72,12 @@
                     <option value="无优惠">无优惠</option>
                   </select>
                 </div>
+                <div class="form-group text-right">
+                <button type="button" class="templatemo-white-button" id="gengxinroomtype" onclick="updateRoomtype()">更新</button>
               </div>
+            	-->
               </div>
-              <div class="form-group text-right">
-                
-                <button type="reset" class="templatemo-white-button">更新</button>
-              </div>
+              
             
               <h5 class="margin-bottom-10"><strong>---------------------------------------------------------------------------------------------------------------------------------------------</strong></h5>
               <!--基本信息-->
@@ -110,11 +108,11 @@
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">
                     <label for="inputUsername">房型名称</label>
-                    <input type="text" class="form-control"  id="basebrand">
+                    <input type="text" class="form-control"  id="roomtypename">
                 </div>
                 <div class="col-lg-6 col-md-6 form-group">
-                    <label for="inputEmail">房间数目</label>
-                    <input type="email" class="form-control"  id="basephone">
+                    <label for="inputEmail">增加或减少房间数目</label>
+                    <input type="email" class="form-control"  id="roomtypenum" placeholder="增加十间房填写+10,减少填写-10">
                 </div>    
               </div>
               <div class="form-group text-right">

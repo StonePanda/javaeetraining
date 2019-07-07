@@ -45,4 +45,8 @@ public class Roomtypeserviceimpl implements Roomtypeservice{
     public void setAddNum(Integer hotelid,String roomtype,Integer addnum){
         roomtypemapper.updateByOrderTui(hotelid,roomtype,addnum);
     }
+    @Override
+    public void updateRoomtypeByPrimaryKey(Roomtype record){
+        roomtypemapper.updateByPrimaryKeySelective(record);
+    }
 }

@@ -45,6 +45,7 @@ initHotel(){
             showHotel(data)
         },
         error: function(data) {
+        	console.log("roomtype"+data)
     	}
 	})
 	$.ajax({//请求的是房型信息

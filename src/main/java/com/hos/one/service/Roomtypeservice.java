@@ -18,4 +18,6 @@ public interface Roomtypeservice {
     List<Integer> findHasDiscountHotel();
 
     List<Roomtype> selectAllRoomTypeByHotelid(int hotelid);
+
+    void updateRoomtypeByPrimaryKey(Roomtype record);
 }

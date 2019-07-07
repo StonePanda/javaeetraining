@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.hos.one.entity.Hotel;
 import com.hos.one.entity.Hotelman;
 import com.hos.one.entity.Order;
+import com.hos.one.entity.Roomtype;
 import com.hos.one.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -128,5 +129,20 @@ public class Hotelcontroller {
     @PostMapping("/brandname")
     public String postBrandname(@RequestBody Map<String,String> map){
         return JSON.toJSONString(hotelbrandservice.findBrandnameByHotelid(Integer.parseInt(map.get("hotelid"))));
+    }
+    @ResponseBody
+    @PostMapping("updateroomtype")
+    public String postUpdateRoomtype(@RequestBody Map<String,String> map){
+/*"hotelid":window.sessionStorage.getItem("hotelid"),
+		"roomtype":$('#roomtype'+data).text(),
+		"price":$('#price'+data).val(),
+		"discount":$('#discount'+data+' option:selected').value*/
+        Roomtype neworder=new Roomtype();
+        neworder.setPrice(Double.parseDouble(map.get("price")));
+        neworder.setHotelid(Integer.parseInt(map.get("hotelid")));
+        neworder.setRoomtype(map.get("roomtype"));
+        neworder.setDiscount(Integer.parseInt(map.get("discount")));
+        roomtypeservice.updateRoomtypeByPrimaryKey(neworder);
+        return JSON.toJSONString("更新成功");
     }
 }
