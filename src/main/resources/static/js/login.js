@@ -1,8 +1,9 @@
 $(function () {
-    document.getElementById('email').value=window.sessionStorage.getItem("email");
-    console.log(window.sessionStorage.getItem("email"))
-    console.log($("#email").val())
-    $("#pass").value="";
+    if(window.sessionStorage.hasOwnProperty("email")==true){
+        document.getElementById('email').value=window.sessionStorage.getItem("email");
+        console.log(window.sessionStorage.getItem("email"))
+        console.log($("#email").val())
+    }
     $("#email, #pass").focus(restore);
     $("#email").blur(checkEmail);
     $("#pass").blur(checkPass);
@@ -38,13 +39,12 @@ function checkPass() {
 }
 
 function checkAll() {
-
     if(!(checkEmail() && checkPass())){
         return false;
     } else {
         //ajax submit
-        let email = $("#email").val();
-        let pass = $("#pass").val();
+        var email = $("#email").val();
+        var pass = $("#pass").val();
         var obj= {
                 "email": email,
                 "password": pass
@@ -60,9 +60,13 @@ function checkAll() {
                 //sessionStorage.user = JSON.stringify(data);
                 //session存储账户名
                 var status=data
-                if(status=="fail"){
+                if(status=="输入密码错误！请重新输入密码！"){
                     console.log(data)
-                    setError("邮箱或密码错误！")
+                    setError("密码错误！请重新输入！")
+                }
+                else if(status=="没有该用户！请先注册！"){
+                    console.log(data)
+                    setError("没有该用户！请先注册！")
                 }
                 else{
                     console.log(data)

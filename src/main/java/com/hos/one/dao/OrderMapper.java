@@ -30,7 +30,11 @@ public interface OrderMapper {
 
     List<Order> selectAllDoingOrderByHotelid(Integer hotelid);
 
-    void updateOrderStatus(@Param("timenow") int timenow);
+    void updateOrderStatusDone(@Param("timenow") int timenow);
+
+    void updateOrderStatusTodo(@Param("timenow") int timenow);
+
+    void updateOrderStatusDoing(@Param("timenow") int timenow);
 
     int updateByPrimaryKeySelective(Order record);
 

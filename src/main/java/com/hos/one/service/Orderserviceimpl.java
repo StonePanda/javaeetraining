@@ -38,14 +38,18 @@ public class Orderserviceimpl implements Orderservice{
 
     @Override
     public void updateOrderStatus(int timenow){
-        ordermapper.updateOrderStatus(timenow);
+        ordermapper.updateOrderStatusDone(timenow);//这个将所有的订单结束时间>今天是已完成
+        ordermapper.updateOrderStatusTodo(timenow);
+        ordermapper.updateOrderStatusDoing(timenow);
     }
     @Override
     public List<Order> selectAllOrderByClientid(int clientid){
         Date nowdate=new Date();//获取当前时间
         String timestamp = String.valueOf(nowdate.getTime()/1000);
         int timenow=Integer.valueOf(timestamp);
-        ordermapper.updateOrderStatus(timenow);
+        ordermapper.updateOrderStatusDone(timenow);
+        ordermapper.updateOrderStatusTodo(timenow);
+        ordermapper.updateOrderStatusDoing(timenow);
         return ordermapper.selectAllOrderByClientid(clientid);
     }
     @Override
@@ -54,7 +58,9 @@ public class Orderserviceimpl implements Orderservice{
         Date nowdate=new Date();//获取当前时间
         String timestamp = String.valueOf(nowdate.getTime()/1000);
         int timenow=Integer.valueOf(timestamp);
-        ordermapper.updateOrderStatus(timenow);
+        ordermapper.updateOrderStatusDone(timenow);
+        ordermapper.updateOrderStatusTodo(timenow);
+        ordermapper.updateOrderStatusDoing(timenow);
         return ordermapper.selectAllDoneOrderByHotelid(hotelid);
     }
     @Override
@@ -63,7 +69,9 @@ public class Orderserviceimpl implements Orderservice{
         Date nowdate=new Date();//获取当前时间
         String timestamp = String.valueOf(nowdate.getTime()/1000);
         int timenow=Integer.valueOf(timestamp);
-        ordermapper.updateOrderStatus(timenow);
+        ordermapper.updateOrderStatusDone(timenow);
+        ordermapper.updateOrderStatusTodo(timenow);
+        ordermapper.updateOrderStatusDoing(timenow);
         return ordermapper.selectAllTodoOrderByHotelid(hotelid);
     }
     @Override
@@ -72,7 +80,21 @@ public class Orderserviceimpl implements Orderservice{
         Date nowdate=new Date();//获取当前时间
         String timestamp = String.valueOf(nowdate.getTime()/1000);
         int timenow=Integer.valueOf(timestamp);
-        ordermapper.updateOrderStatus(timenow);
+        ordermapper.updateOrderStatusDone(timenow);
+        ordermapper.updateOrderStatusTodo(timenow);
+        ordermapper.updateOrderStatusDoing(timenow);
         return ordermapper.selectAllDoingOrderByHotelid(hotelid);
+    }
+    @Override
+    public Order selectOrderByPrimaryKey(int orderid){
+        return ordermapper.selectByPrimaryKey(orderid);
+    }
+    @Override
+    public void updateOrderByOrderidSelectice(Order order){
+        ordermapper.updateByPrimaryKeySelective(order);
+    }
+    @Override
+    public void deleteOrderByOrderid(Integer orderid){
+        ordermapper.deleteByPrimaryKey(orderid);
     }
 }

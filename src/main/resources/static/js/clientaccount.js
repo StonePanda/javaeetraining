@@ -1,4 +1,4 @@
-$(function{
+$(function(){
 	if(window.sessionStorage.hasOwnProperty("email")==true){//已经登录
         $('#clientemail').text(window.sessionStorage.getItem("email"));
         $('#clientemail').attr('href','/clientdetail');
@@ -31,6 +31,9 @@ init(){
         type: "POST",
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
+            console.log(data)
+            console.log(data.timeend)
+            console.log(data.timestart)
             show(data)
         }
 	})
@@ -40,7 +43,8 @@ function
 show(data){
 	var orderlist=data
 	$.each(orderlist,function(index,item){
-		if(item.status==0){//未完成
+        console.log(item)
+		if(item.status=="0"){//未完成
 			/*<tr>
                                                                     <td>房型</td>
                                                                     <td>开始时间</td>
@@ -52,16 +56,17 @@ show(data){
                                                                 </tr>*/
             $('#weiwancheng').append(
             	$('<tr>').append(
+                    $('<td>').append(item.commentcontent),
             		$('<td>').append(item.roomtype),
-            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
-            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
+                    $('<td>').append(item.roomnum),
+            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear()+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
+            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear()+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
             		$('<td>').append(item.price),
             		$('<td>').append(
-            			$('<a>').attr('href','/cart?orderid='+item.orderid).attr('class','btn btn-sqr').append('查看'),
-            			$('<a>').attr('class','btn btn-sqr').append('退单'))
+            			$('<a>').attr('class','btn btn-sqr').attr('onclick','tuiorder('+JSON.stringify(item)+')').append('退单'))
             		))
 		}
-		else if(item.status==1){//进行中
+		else if(item.status=="1"){//进行中
 			/*<tr>
                                                                     <td>房型</td>
                                                                     <td>开始时间</td>
@@ -73,16 +78,14 @@ show(data){
                                                                 </tr>*/
             $('#jinxingzhong').append(
             	$('<tr>').append(
+                    $('<td>').append(item.commentcontent),
             		$('<td>').append(item.roomtype),
-            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
-            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
-            		$('<td>').append(item.price),
-            		$('<td>').append(
-            			$('<a>').attr('href','/cart?orderid='+item.orderid).attr('class','btn btn-sqr').append('查看'))
-            		))
-
+                    $('<td>').append(item.roomnum),
+            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear()+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
+            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear()+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
+            		$('<td>').append(item.price)))
 		}
-		else{
+		else if(status=="2"){
 			/*<!--<tr>
                                                                     <td>房型</td>
                                                                     <td>Aug 22, 2018</td>
@@ -92,28 +95,28 @@ show(data){
                                                                     <a href="cart.html" class="btn btn-sqr">评论</a>
                                                                     </td>
                                                                 </tr>*/
-            if(item.commentcontent!=null){
+            if(item.commentstar!=null){//已经评论过了
             	//不能加评论按钮
             	$('#yiwancheng').append(
             	$('<tr>').append(
+                    $('<td>').append(item.commentcontent),
             		$('<td>').append(item.roomtype),
-            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
-            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
-            		$('<td>').append(item.price),
-            		$('<td>').append(
-            			$('<a>').attr('href','/cart?orderid='+item.orderid).attr('class','btn btn-sqr').append('查看'),
-            			$('<a>').attr('class','btn btn-sqr').attr('href','/comment?orderid='+item.orderid).append('评论'))
-            		))
+                    $('<td>').append(item.roomnum),
+            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear()+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
+            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear()+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
+            		$('<td>').append(item.price)))
             }
             else{
             	$('#yiwancheng').append(
             	$('<tr>').append(
+                    $('<td>').append(item.commentcontent),
             		$('<td>').append(item.roomtype),
-            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
-            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
+                    $('<td>').append(item.roomnum),
+            		$('<td>').append(new Date(parseInt(item.timestart+"000")).getFullYear()+"-"+(new Date(parseInt(item.timestart+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timestart+"000")).getDate()),
+            		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear()+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
             		$('<td>').append(item.price),
             		$('<td>').append(
-            			$('<a>').attr('href','/cart?orderid='+item.orderid).attr('class','btn btn-sqr').append('查看'))
+            			$('<a>').attr('class','btn btn-sqr').attr('href','/comment?orderid='+item.orderid).append('评论'))
             		))
             }
 		}
@@ -177,4 +180,28 @@ updatePw=function(){
 			}
 		}
 	})
+}
+
+tuiorder=function(data){
+    var order=data
+    //data就是orderid
+    //data就是传回来的order，首先hotelid，roomtype，roomnum都是准确的，所以房型表可以更新，然后就是order表里的删除
+    var obj={
+        "orderid":order.orderid,
+        "hotelid":order.hotelid,
+        "roomtype":order.roomtype,
+        "roomnum":order.roomnum
+    }
+    $.ajax({
+        url:"/user/tuiorder",
+        async:true,
+        dataType:"json",
+        contentType:"application/json",
+        data:JSON.stringify(obj),
+        success:function(data){
+            if(data=="success"){
+                alert("退单成功")
+            }
+        }
+    })
 }

@@ -60,6 +60,7 @@ function initialize(){
             data: JSON.stringify(obj),
             success: function (data) {//这里仅仅是post成功
                show(data)
+               window.sessionStorage.setItem("hotellist",JSON.stringify(data))
         }
 	})
 	}
@@ -78,6 +79,7 @@ function initialize(){
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
             show(data)
+            window.sessionStorage.setItem("hotellist",JSON.stringify(data))
         }
 	})
 	}
@@ -114,8 +116,13 @@ function initialize(){
 }
 
 function show(data){//这时候是这个城市里的全部酒店
+    console.log(data)
+    $('#showlist').html('')
+    if(data.length==0){
+        $('#showlist').append("当前条件下暂时没有宾馆注册哦！~")
+        console.log("看看是不是空")
+    }
   var hotellist =data
-  $('#showlist').html('')
   $.each(hotellist, function (index,item) {
     if(item==null){
         //do nothing

@@ -25,4 +25,9 @@ List<Integer> findTwoCommentClientByHotelid(int hotelid);
 
     List<Order> selectAllDoingOrderByHotelid(int hotelid);
 
+    Order selectOrderByPrimaryKey(int orderid);
+
+    void updateOrderByOrderidSelectice(Order order);
+
+    void deleteOrderByOrderid(Integer orderid);
 }

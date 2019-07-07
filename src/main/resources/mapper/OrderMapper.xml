@@ -69,21 +69,21 @@
     <include refid="Base_Column_List" />
     from `order`
     where status=2
-    and hotelid={#hotelid,jdbcType=INTEGER}
+    and hotelid=#{hotelid,jdbcType=INTEGER}
   </select>
   <select id="selectAllTodoOrderByHotelid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from `order`
     where status=0
-    and hotelid={#hotelid,jdbcType=INTEGER}
+    and hotelid=#{hotelid,jdbcType=INTEGER}
   </select>
   <select id="selectAllDoingOrderByHotelid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from `order`
     where status=0
-    and hotelid = {#hotelid,jdbcType=INTEGER}
+    and hotelid = #{hotelid,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from `order`
@@ -208,12 +208,27 @@
     </set>
     where orderid = #{orderid,jdbcType=INTEGER}
   </update>
-  <update id="updateOrderStatus" parameterType="java.lang.Integer">
+  <update id="updateOrderStatusDone" parameterType="java.lang.Integer">
+  update `order`
+  <set>
+    status=2
+  </set>
+  where #{timenow,jdbcType=INTEGER} > timeend
+</update>
+  <update id="updateOrderStatusTodo" parameterType="java.lang.Integer">
     update `order`
     <set>
-      status=2
+      status=0
     </set>
-    where timeend > #{timenow,jdbcType=INTEGER}
+    where timestart > #{timenow,jdbcType=INTEGER}
+  </update>
+  <update id="updateOrderStatusDoing" parameterType="java.lang.Integer">
+    update `order`
+    <set>
+      status=1
+    </set>
+    where #{timenow,jdbcType=INTEGER}>=timestart
+    and timeend>=#{timenow,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hos.one.entity.Order">
     update `order`

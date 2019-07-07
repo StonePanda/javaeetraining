@@ -31,6 +31,9 @@ public class Hotelcontroller {
     @PostMapping("/login")
     public String postLogin(@RequestBody Map<String,Object> map){//不要用void,不然前端会报4040错误
         Hotelman hotellogin=hotelmanservice.findHotelManByPhone(map.get("phone").toString());
+        if(hotellogin==null){
+            return JSON.toJSONString("无此用户，请先注册！");
+        }
         if (hotellogin.getHotelpw().equals(map.get("password").toString())){
             //return JSON.toJSONString("success");
             //返回从hotelman里取出的除了hotelid的其他数据
@@ -39,7 +42,7 @@ public class Hotelcontroller {
             return JSON.toJSONString(returnhotelman);
         }
         else{
-            return JSON.toJSONString("fail");
+            return JSON.toJSONString("密码错误！请重新输入！");
         }
     }
     @ResponseBody

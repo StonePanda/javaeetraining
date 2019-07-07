@@ -55,10 +55,15 @@ function checkAll() {
             data: JSON.stringify(obj),
             success: function (data) {
                 var status=data
-                if(status=="fail"){
+                if(status=="密码错误！请重新输入！"){
                     console.log(status)
-                    setError("酒店电话或密码错误！")
-                } else {//这个时候返回的酒店的所有信息,返回的是success
+                    setError("密码错误！请重新输入！")
+                } 
+                else if(status=="无此用户，请先注册！"){
+                    console.log(status)
+                    setError("无此用户，请先注册！")
+                }
+                else {//这个时候返回的酒店的所有信息,返回的是success
                     console.log(status)
                     window.sessionStorage.setItem("hotelphone",data.hotelphone)
                     window.sessionStorage.setItem("hotelid",data.hotelid)

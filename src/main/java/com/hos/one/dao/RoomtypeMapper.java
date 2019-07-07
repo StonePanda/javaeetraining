@@ -16,6 +16,8 @@ public interface RoomtypeMapper {
 
     int updateByOrder(@Param("hotelid") Integer hotelid,@Param("roomtype") String roomtype, @Param("minusnum") Integer minusnum);
 
+    int updateByOrderTui(@Param("hotelid") Integer hotelid,@Param("roomtype") String roomtype, @Param("addnum") Integer addnum);
+
     List<Roomtype> selectByHotelId(Integer hotelid);
 
     List<Integer> selectHasDiscountHotel();

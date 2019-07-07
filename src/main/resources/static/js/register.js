@@ -1,6 +1,5 @@
 var time = 3;
 $(function () {
-
     $("#phone, #email, #pass, #pass-ag").focus(restore);
     $("#email").blur(checkEmail);
     $("#phone").blur(checkPhone);
@@ -80,8 +79,9 @@ function checkAll() {
                var status=data
                if(status=="success"){
                console.log(data)
-               window.sessionStorage.setItem("email",email);
-               window.location.href="/login";
+               window.sessionStorage.setItem("email",email)
+               window.sessionStorage.setItem("phone",phone)
+               window.location.href="/login"
                }
                else{
                	console.log(data)

@@ -9,6 +9,8 @@ public interface Roomtypeservice {
 
     void setNewNum(Integer hotelid,String roomtype,Integer minusnum);
 
+    void setAddNum(Integer hotelid,String roomtype,Integer addnum);
+
     int getAvgPriceByHotelid(Integer hotelid);
 
     int getDiscountByHotelid(Integer hotelid);

@@ -3,7 +3,7 @@ $(function(){
      $('#discountendtime').attr('data-countdown',tomorrow.getFullYear()+'/'+(parseInt(tomorrow.getMonth())+1)+'/'+(parseInt(tomorrow.getDate())+1))
 	if(window.sessionStorage.hasOwnProperty("email")==true){
 		$('#clientemail').text(window.sessionStorage.getItem("email"));
-		$('#clientemail').attr('href','/clientdetail');
+		$('#clientemail').attr('href','/clientaccount');
 		$('#exitOrRegister').text('退出')
 		$('#exitOrRegister').attr('href','/about')
 		$('#footeremail').attr('value',window.sessionStorage.getItem("email"))

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <!-- Google Fonts Includes -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">-->
     <!-- Favi icon -->
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
     <!-- bootstrap v3.3.6 css -->
@@ -47,11 +47,10 @@
     </style>
 </head>
 <body>
-<!-- header area start here -->
 <header>
     <div class="col-md-2 col-sm-2 col-xs-12 tap-v-responsive">
                     <div class="logo-area">
-                        <a href="index.html"><img src="images/logo2.png" alt="">
+                        <a><img src="images/logo.png" alt=""><!-- href="index.html"-->
                         </a>
         </div>
     </div>
@@ -82,14 +81,14 @@
             <!-- single package tab with details -->
             <div class="col-md-8 col-sm-12">
                 <div class="package_banner">
-                    <img src="images/hotel/hotel01.jpg" width="470" height="570" alt="" class="img-fluid">
+                    <img src="" width="470" height="570" alt="" class="img-fluid" id="hotelphoto"><!--images/hotel/hotel01.jpg-->
                 </div>
                 <div class="single-package-details">
                     <div class="single-package-title">
                     <br>
-                        <h2>Daydream Hotel</h2>
+                        <h2 id="hotelname"></h2>
                     </div>
-                </div><!-- tab menu strat -->
+                </div><!-- tab menu stratDaydream Hotel -->
             
             </div><!-- single package tab with details -->
 
@@ -100,8 +99,7 @@
                         <div class="booking-title">
                             <h2>对此次订单进行评论：</h2>
                             <div class="starability-container">
-                                <form>
-                                <fieldset class="starability-basic">
+                                <fieldset class="starability-basic" id="commentstar">
                                       <input type="radio" id="rate5-1" name="rating" value="5" />
                                       <label for="rate5-1" title="Amazing">5星</label>
                                       <input type="radio" id="rate4-1" name="rating" value="4" />
@@ -113,19 +111,15 @@
                                       <input type="radio" id="rate1-1" name="rating" value="1" />
                                       <label for="rate1-1" title="Terrible">1星</label>
                                     </fieldset>
-                                </form>
                                 </div>
                         </div>
-                        <form action="#" method="post">
-                            
                             <div class="form-group">
-                                <textarea name="messgae" id="message" cols="30" rows="7" class="form-control" placeholder="评论内容"></textarea>
+                                <textarea name="messgae" id="commentcontent" cols="30" rows="7" class="form-control" placeholder="评论内容(100字以内)..."></textarea>
                             </div>
                             <div class="form-group form_btn">
-                                <button type="submit" class="booking-confirm hvr-shutter-out-horizontal">进行评论</button>
+                                <button type="button" class="booking-confirm hvr-shutter-out-horizontal" id="commentnow" onclick="commentnow()">进行评论</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
                 </aside><!-- adverestment start here-->
             </div><!-- booking form end here -->
         </div>
@@ -139,14 +133,14 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-3">
                 <div class="single-footer">
                     <div class="footer-title">
-                        <h3><a href="#"><img src="images/logo.png" alt=""></a></h3>
+                        <h3><a><img src="images/logo.png" alt=""></a></h3>
                     </div>
                     <div class="footer-left">
                         <div class="footer-logo">
-                            <p>Yep.I'm wondering if you will give all yourself to me when I need you.</p>
+                            <p>如果有任何问题，请联系我们</p>
                         </div>
                         <ul class="footer-contact">
-                            <li><img class="map" src="images/icon/map.png" alt="">ChengDu , China</li>
+                            <li><img class="map" src="images/icon/map.png" alt="">中国四川省成都市</li>
                             <li><img class="map" src="images/icon/phone.png" alt="">+183-8019-8292</li>
                             <li><img class="map" src="images/icon/gmail.png" alt="">1104595810@qq.com</li>
                         </ul>
@@ -158,16 +152,15 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-2">
                 <div class="single-footer">
                     <div class="footer-title">
-                        <h3>Quick Link</h3>
+                        <h3>快速连接</h3>
                     </div>
                     <ul class="list-unstyled">
-                        <li><a href="" title="">Home</a></li>
-                        <li><a href="" title="">Information</a></li>
-                        <li><a href="" title="">order</a></li>
-                        <li><a href="" title="">Login</a></li>
-                        <li><a href="" title="">Registered</a></li>
-                    <!--    <li><a href="" title="">Pages</a></li>
-                        <li><a href="" title="">Contact</a></li>-->
+                        <li><a href="/index" title="">首页</a></li>
+                        <li><a href="/login" title="">用户登录</a></li>
+                        <li><a href="/register" title="">用户注册</a></li>
+                        <li><a href="/login-admin" title="">酒店登录</a></li>
+                        <li><a href="/register-admin" title="">酒店注册</a></li>
+                        <li><a href="/about" title="">关于我们</a></li>
                     </ul>
                 </div>
             </div>  <!-- footer destination -->
@@ -176,42 +169,39 @@
                 <div class="single-footer">
                     <div class="single-recent-post">
                         <div class="footer-title">
-                            <h3>近日新闻</h3>
+                            <h3>最近优惠</h3>
                         </div>
                         <ul class="recent-post">
                             <li>
-                                <a href="#">
+                                <a id="fthotel1url"><!-- href="#" 酒店详情连接-->
                                     <div class="post-thum">
-                                        <img src="images/blog/f4.jpg" alt="" class="img-rounded">
+                                        <img class="img-rounded" id="fthotel1img" style="width: 60px;height: 60px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字-->
                                     </div>
                                     <div class="post-content">
-                                        <p>为您推荐的5星级酒店：点我查看
-                                        </p>
-                                        <span>27 July, 2019</span>
+                                        <p id="fthotel1name"></p><!--酒店名字-->
+                                        <span id="fthotel1avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a id="fthotel2url"><!-- href="#" 酒店详情连接-->
                                     <div class="post-thum">
-                                        <img src="images/blog/f5.jpg" alt="" class="img-rounded">
+                                        <img class="img-rounded" id="fthotel2img" style="width: 60px;height: 60px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字和酒店的地址 -->
                                     </div>
                                     <div class="post-content">
-                                        <p>为您推荐的4星级酒店：点我查看
-                                        </p>
-                                        <span>27 July, 2019</span>
+                                        <p id="fthotel2name"></p><!--酒店名字-->
+                                        <span id="fthotel2avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
                                     </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a id="fthotel3url"><!-- href="#" 酒店详情连接-->
                                     <div class="post-thum">
-                                        <img src="images/blog/f6.jpg" alt="" class="img-rounded">
+                                        <img class="img-rounded" id="fthotel3img" style="width: 60px;height: 60px;"><!-- src="images/blog/f4.jpg" alt=""酒店的名字和酒店的地址 -->
                                     </div>
                                     <div class="post-content">
-                                        <p>为您推荐的3星级酒店：点我查看
-                                        </p>
-                                        <span>27 July, 2019</span>
+                                        <p id="fthotel3name"></p><!--酒店名字-->
+                                        <span id="fthotel3avgprice"></span><!--27 July, 2019 酒店优惠后的平均价格-->
                                     </div>
                                 </a>
                             </li>
@@ -224,16 +214,16 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 f-phone-responsive">
                 <div class="single-footer">
                     <div class="footer-title">
-                        <h3>Quick Contact</h3>
+                        <h3>快速联系我们</h3>
                     </div>
                     <div class="footer-contact-form">
                         <form action="#">
                             <ul class="footer-form-element">
                                 <li>
-                                    <input type="text" name="email" id="email" placeholder="" value="Email Address" onblur="if(this.value==''){this.value='Email Address'}" onfocus="if(this.value=='Email Address'){this.value=''}">
+                                    <input type="text" name="email" id="footeremail" placeholder="" value="" onblur="if(this.value==''){this.value='Email Address'}" onfocus="if(this.value=='Email Address'){this.value=''}">
                                 </li>
                                 <li class="text_area">
-                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="我们将尽快给您回信"></textarea>
                                     <button type="submit">Send</button>
                                 </li>
                                 <li>
@@ -241,18 +231,6 @@
                                 </li>
                             </ul>
                         </form>
-                    </div>
-                    <div class="footer-social-media">
-                        <div class="social-footer-title">
-                            <h3>Follow Us</h3>
-                        </div>
-                        <ul class="footer-social-link">
-                            <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li class="gplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>  <!-- footer contact -->
@@ -264,7 +242,7 @@
                 <div class="col-12 col-sm-12 col-md-12">
                     <div class="copy_right_wrapper">
                         <div class="copyright">
-                            <p>Copyright &copy; 2019.HOS All rights reserved.<a target="_blank"></a></p>
+                            <p>Copyright &copy; 2019.Team10-HOS All rights reserved.<a target="_blank"></a></p>
                         </div>
                     </div>
                 </div>
@@ -282,7 +260,8 @@
     
     <!-- jquery latest version -->
     <script src="js/vendor/jquery-3.2.0.min.js"></script>
-    <script src="js/vendor/modernizr-2.8.3.min.js"></script>  
+    <script src="js/comment.js"></script>
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- bootstrap js -->
     <script src="js/bootstrap.min.js"></script>
     <!-- owl.carousel js -->

@@ -1,7 +1,7 @@
 $(function(){
 	if(window.sessionStorage.hasOwnProperty("email")==true){//已经登录
 		$('#clientemail').text(window.sessionStorage.getItem("email"));
-		$('#clientemail').attr('href','/clientdetail');
+		$('#clientemail').attr('href','/clientaccount');
 		$('#exitOrRegister').text('退出')
 		$('#exitOrRegister').attr('href','/about')
 		$('#bookOrLoginBt').append("现在预定")
@@ -129,6 +129,7 @@ bookOrLogin(){
 	console.log(data)
 	console.log(data[0])
 	if(window.sessionStorage.hasOwnProperty("email")==true){//已经登录
+		var canpost=true
 		//根据email得到电话信息，如果被修改就提示请用户重新确认
 		if($('#clientphone').attr('value')!=window.sessionStorage.getItem("phone")||$('#clientname').attr('value')!=window.sessionStorage.getItem("email")){
 			console.log($('#clientphone').attr('value'))//原生js是getElementByid.value，jquery写法是val()
@@ -144,33 +145,37 @@ bookOrLogin(){
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
 					$('<strong>').append('错误！').append('输入电话或邮箱与注册时电话邮箱不符！')))
+			canpost=false;
 		}
 		//检查日期必须是今天之后的，如果不是就修改
 		var nowdate=new Date()
 		var nowdatestr
 		if(nowdate.getMonth()<9){
 			if(nowdate.getDate()<10){
-				nowdatestr='0'+nowdate.getMonth()+1+'/'+'0'+nowdate.getDate()+'/'+nowdate.getFullYear()
+				nowdatestr='0'+(nowdate.getMonth()+1)+'/'+'0'+nowdate.getDate()+'/'+nowdate.getFullYear()
+				console.log("今天日期"+nowdatestr)
 			}
 			else{
-				nowdatestr='0'+nowdate.getMonth()+1+'/'+nowdate.getDate()+'/'+nowdate.getFullYear()
+				nowdatestr='0'+(nowdate.getMonth()+1)+'/'+nowdate.getDate()+'/'+nowdate.getFullYear()
 			}
 		}
 		else{
 			if(nowdate.getDate()<10){
-				nowdatestr=nowdate.getMonth()+1+'/'+'0'+nowdate.getDate()+'/'+nowdate.getFullYear()
+				nowdatestr=(nowdate.getMonth()+1)+'/'+'0'+nowdate.getDate()+'/'+nowdate.getFullYear()
 			}
 			else{
-				nowdatestr=nowdate.getMonth()+1+'/'+nowdate.getDate()+'/'+nowdate.getFullYear()
+				nowdatestr=(nowdate.getMonth())+1+'/'+nowdate.getDate()+'/'+nowdate.getFullYear()
 			}
 		}
 		//为true时时间才是对的
 		var status=0//0表示未进行，1进行中，2已完成
-		if($('#datepicker2').attr('value')<$('#datepicker1').attr('value')&&$('#datepicker2').attr('value')>nowdatestr){//=
+		console.log("今天的时间"+nowdatestr)
+		console.log($('#datepicker2').attr('value')>nowdatestr)
+		if($('#datepicker2').val()<$('#datepicker1').val()&&$('#datepicker2').val()>nowdatestr){//=
 			//do nothing
 			status=0
 		}
-		else if($('#datepicker2').attr('value')<$('#datepicker1').attr('value')&&$('#datepicker2').attr('value')==nowdatestr){
+		else if($('#datepicker2').val()<$('#datepicker1').val()&&$('#datepicker2').val()==nowdatestr){
 			status=1
 		}
 		else{
@@ -178,6 +183,7 @@ bookOrLogin(){
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
 					$('<strong>').append('错误！').append('输入时间不正确！')))
+			canpost=false
 		}
 		//检查房间数量够不够，如果不够就提示重新选择
 		/*jquery ajax遍历集合的for循环两种形式：
@@ -196,6 +202,7 @@ list[item].属性
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
 					$('<strong>').append('错误！').append('该房型剩余数量不足！')))
+				canpost=false
 			}
 		}
 		var whichtype=0
@@ -212,7 +219,7 @@ list[item].属性
 			"hotelid":getParams("hotelid"),
 			"roomtype":$('#roomtype').val(),//这里只能用val()
 			"timestart":(Math.round(new Date($('#datepicker2').val()).getTime())/1000).toString(),
-			"timeend":(Math.round(new Date($('#datepicker2').val()).getTime())/1000).toString(),
+			"timeend":(Math.round(new Date($('#datepicker1').val()).getTime())/1000).toString(),
 			"status":status,
 			"num":$('#roomnum').val(),
 			"price":parseInt($('#roomnum').val())*parseInt(data[whichtype].price)
@@ -220,7 +227,8 @@ list[item].属性
 		console.log(data[whichtype].price)
 		console.log(parseInt(data[whichtype].price))
 		console.log(parseInt($('#roomnum').val())*parseInt(data[whichtype].price))
-		$.ajax({//请求的是酒店信息
+		if(canpost==true){
+			$.ajax({//请求的是酒店信息
 		url: "/user/bookhotel",
         dataType: "json",
         contentType: "application/json",//传过去的值的类型
@@ -232,11 +240,12 @@ list[item].属性
 				$('<div>').attr('class','alert alert-success').append(
 					$('<a>').attr('class','close').attr('data-dismiss','alert').append('x'),
 					$('<strong>').append('成功！').append('预定成功，请留意日期安排行程！')))
-            setTimeOut("window.location.href='/clientaccount?clientid='"+window.sessionStorage.getItem('id'),2000)
+            window.location.href="/clientaccount"
         },
         error: function(data) {
     	}
 		})
+		}
 	}
 	else{
 		window.location.href='/login'

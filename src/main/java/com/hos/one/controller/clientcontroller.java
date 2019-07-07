@@ -32,14 +32,17 @@ public class Clientcontroller {
     @PostMapping("/login")
     public String postLogin(@RequestBody Map<String,Object> map){//不要用void,不然前端会报4040错误
         Client clientlogin=clientservice.findClientByEmail(map.get("email").toString());
-        if (clientlogin.getAccountpw().equals(map.get("password").toString())){
-            clientlogin.setAccountpw("null");//为了设置密码不可显示
+        if(clientlogin==null){
+            return JSON.toJSONString("没有该用户！请先注册！");
+        }
+        else if (clientlogin.getAccountpw().equals(map.get("password").toString())){
+            clientlogin.setAccountpw("*****");//为了设置密码不可显示
             return JSON.toJSONString(clientlogin);
         }
         else{
             //全都忘光的JAVA语法！！！！字符串用==比较是比较的内存地址
             //字符串比较应该用A.equals(B)
-            return JSON.toJSONString("fail");
+            return JSON.toJSONString("输入密码错误！请重新输入密码！");
         }
     }
     //用户注册
@@ -49,7 +52,8 @@ public class Clientcontroller {
         Client clientregister =new Client();
         //email和phone都要求是唯一的！！所以要加判断！！
         if(clientservice.findClientByEmail(map.get("email").toString())!= null
-                && clientservice.findClientByPhone(map.get("phone").toString())!=null){
+                || clientservice.findClientByPhone(map.get("phone").toString())!=null){
+            System.out.println(clientservice.findClientByPhone(map.get("phone").toString()).toString());
             return JSON.toJSONString("fail");
         }
         clientregister.setAccountpw(map.get("accountpw").toString());
@@ -67,7 +71,6 @@ public class Clientcontroller {
         for (int i = 0; i < hotelidlist.size(); i++) {
             hotellist.add(hotelservice.findHotelByPrimaryKey(hotelidlist.get(i)));
         }
-
         return JSON.toJSONString(hotellist);
     }
     //根据品牌名查找hotel
@@ -139,6 +142,7 @@ public class Clientcontroller {
         neworder.setTimestart(Integer.parseInt(map.get("timestart").toString()));
         neworder.setStatus(Integer.parseInt(map.get("status").toString()));
         neworder.setPrice(Double.parseDouble((map.get("price").toString())));
+        neworder.setRoomnum(Integer.parseInt(map.get("num").toString()));
         orderservice.addOrder(neworder);
         roomtypeservice.setNewNum(Integer.parseInt(map.get("hotelid").toString()),map.get("roomtype").toString(),Integer.parseInt(map.get("num").toString()));
         return JSON.toJSONString("success");
@@ -368,7 +372,11 @@ public class Clientcontroller {
 		"clientid":window.sessionStorage.getItem("id")
 	    }*/
         //根据用户id找出和这个用户相关的所有order
-        return JSON.toJSONString(orderservice.selectAllOrderByClientid(Integer.parseInt(map.get("clientid"))));
+        List<Order> commentorder=orderservice.selectAllOrderByClientid(Integer.parseInt(map.get("clientid")));
+        for(int i=0;i<commentorder.size();i++){
+            commentorder.get(i).setCommentcontent(hotelservice.findHotelByPrimaryKey(commentorder.get(i).getHotelid()).getHotelname());
+        }
+        return JSON.toJSONString(commentorder);
     }
     @ResponseBody
     @PostMapping("modifyinfo")
@@ -421,6 +429,34 @@ public class Clientcontroller {
             //当前密码不正确
             return JSON.toJSONString("当前密码不正确！");
         }
+    }
+    @ResponseBody
+    @PostMapping("commentyemian")
+    public String postCommentYeMian(@RequestBody Map<String,String> map){
+        return JSON.toJSONString(hotelservice.findHotelByPrimaryKey(orderservice.selectOrderByPrimaryKey(Integer.parseInt(map.get("orderid"))).getHotelid()));
+    }
+    @ResponseBody
+    @PostMapping("updatecomment")
+    public String postUpdataComment(@RequestBody Map<String,String> map){
+        Order newOrder=new Order();
+        newOrder.setCommentcontent(map.get("commentcontent"));
+        newOrder.setCommentstar(Integer.parseInt(map.get("commentstar")));
+        orderservice.updateOrderByOrderidSelectice(newOrder);
+        return JSON.toJSONString("success");
+    }
+    @ResponseBody
+    @PostMapping("tuiorder")
+    public String postTuiOrder(@RequestBody Map<String,String> map){
+        /*var obj={
+        "orderid":order.orderid,
+        "hotelid":order.hotelid,
+        "roomtype":order.roomtype,
+        "roomnum":order.roomnum
+    }*/
+        //先更新房型表
+        roomtypeservice.setAddNum(Integer.parseInt(map.get("orderid")),map.get("roomtype"),Integer.parseInt(map.get("roomnum")));
+        orderservice.deleteOrderByOrderid(Integer.parseInt(map.get("orderid")));
+        return JSON.toJSONString("success");
     }
 }
 

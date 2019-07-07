@@ -41,4 +41,8 @@ public class Roomtypeserviceimpl implements Roomtypeservice{
     public List<Roomtype> selectAllRoomTypeByHotelid(int hotelid){
         return roomtypemapper.selectAllRoomtypeByHotelid(hotelid);
     }
+    @Override
+    public void setAddNum(Integer hotelid,String roomtype,Integer addnum){
+        roomtypemapper.updateByOrderTui(hotelid,roomtype,addnum);
+    }
 }
