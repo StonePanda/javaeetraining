@@ -28,10 +28,12 @@
           </div>
         <nav class="templatemo-left-nav">
           <ul>
-            <li><a href="#" class="active"><i class="fa fa-sliders fa-fw"></i>酒店信息录入</a></li>
-            <li><a href="/ordertodo"><i class="fa fa-users fa-fw"></i>未完成订单</a></li>
+          <li><a href="#" class="active"><i class="fa fa-sliders fa-fw"></i>酒店信息更新</a></li>
+
+            <li><a href="/orderdone"><i class="fa fa-users fa-fw"></i>未完成订单</a></li>
             <li><a href="/orderdoing"><i class="fa fa-users fa-fw"></i>进行中订单</a></li>
             <li><a href="/orderdone"><i class="fa fa-users fa-fw"></i>已完成订单</a></li>
+
           </ul>
         </nav>
       </div>
@@ -52,36 +54,39 @@
             <h2 class="margin-bottom-10">房型信息录入与更新</h2>
             <!--<p>Here goes another form and form controls.</p>-->
               <div id="roomtype">
-              <!--<div class="row form-group">
-                <div class="col-lg-4 col-md-4 form-group">
+              <div class="row form-group">
+                <div class="col-lg-3 col-md-3 form-group">
                     <label for="inputUsername">房间类型</label>
-                    <input type="text" class="form-control" id="inputUsername"  id="roomtype1">
+                    <div type="text" class="form-control" id="roomnum" align="center" style="border-color: transparent;box-shadow:none;" id="price1">大床房</div>
                 </div>
-                <div class="col-lg-4 col-md-4 form-group">                  
-                    <label for="inputEmail">今日定价(若有优惠，为优惠后价格)</label>
+                <div class="col-lg-3 col-md-3 form-group">                  
+                    <label for="inputEmail">今日定价(优惠后价格)</label>
                     <input type="price" class="form-control" id="inputPrice"  id="price1">
                 </div>
-                <div class="col-lg-4 col-md- form-group"> 
+                <div class="col-lg-3 col-md-3 form-group">                  
+                    <label for="inputEmail">今日剩余房间数量</label>
+                    <div type="text" class="form-control" id="roomnum" align="center" style="border-color: transparent;box-shadow:none;" id="price1">30</div>
+                </div>
+                <div class="col-lg-3 col-md-3 form-group"> 
                   <label class="control-label templatemo-block">优惠设置</label>
                   <select class="form-control" id="discount1">
                     <option value="有优惠">有优惠</option>
                     <option value="无优惠">无优惠</option>
                   </select>
                 </div>
-              </div>-->
+              </div>
               </div>
               <div class="form-group text-right">
-                <button type="submit" class="templatemo-blue-button">添加</button>
+                
                 <button type="reset" class="templatemo-white-button">更新</button>
               </div>
             
-
-
+              <h5 class="margin-bottom-10"><strong>---------------------------------------------------------------------------------------------------------------------------------------------</strong></h5>
               <!--基本信息-->
               <div id="basicinfo">
               <h2 class="margin-bottom-10">基本信息录入与更新(只有信息完整时才能被检索到，请务必完善信息！)</h2>
               <div class="row form-group">
-                <div class="col-lg-6 col-md-6 form-group">                  
+                <div class="col-lg-6 col-md-6 form-group">
                     <label for="inputFirstName">名称</label>
                     <input type="text" class="form-control"  id="basename">
                 </div>
@@ -100,6 +105,21 @@
                     <input type="email" class="form-control"  id="basephone">
                 </div>    
               </div>
+              <h5 class="margin-bottom-10"><strong>房型信息录入</strong></h5>
+              <h5 class="margin-bottom-10">''''''''''''''''''''''''</h5>
+              <div class="row form-group">
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputUsername">房型名称</label>
+                    <input type="text" class="form-control"  id="basebrand">
+                </div>
+                <div class="col-lg-6 col-md-6 form-group">
+                    <label for="inputEmail">房间数目</label>
+                    <input type="email" class="form-control"  id="basephone">
+                </div>    
+              </div>
+              <div class="form-group text-right">
+                <button type="submit" class="templatemo-blue-button">添加</button>
+              </div>
                  
               <div class="row form-group">
                 <div class="col-lg-12 form-group">
@@ -115,6 +135,11 @@
                   <img src="" style="max-height:100px;" id="basepicurl"/><!--如果上传的有图片，可以展示出来-->
                 </div>
               </div>
+              <div class="form-group text-right">
+                <button type="" class="templatemo-white-button">确认更改</button>
+              </div>
+              <h5 class="margin-bottom-10"><strong>---------------------------------------------------------------------------------------------------------------------------------------------</strong></h5>
+              <h2 class="margin-bottom-10">更改密码</h2>
               <div class="row form-group">
                 <div class="col-lg-6 col-md-6 form-group">
                     <label for="inputCurrentPassword">当前密码</label>
