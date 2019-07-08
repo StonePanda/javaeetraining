@@ -1,7 +1,7 @@
 $(function(){
 	if(window.sessionStorage.hasOwnProperty("email")==true){//已经登录
         $('#clientemail').text(window.sessionStorage.getItem("email"));
-        $('#clientemail').attr('href','/clientdetail');
+        $('#clientemail').attr('href','/clientaccount');
         $('#exitOrRegister').text('退出')
         $('#exitOrRegister').attr('href','/about')
         $('#xiugaiemail').attr('value',window.sessionStorage.getItem("email"))
@@ -31,9 +31,7 @@ init(){
         type: "POST",
         data: JSON.stringify(obj),
         success: function (data) {//这里仅仅是post成功
-            console.log(data)
-            console.log(data.timeend)
-            console.log(data.timestart)
+        	console.log(data)
             show(data)
         }
 	})
@@ -43,7 +41,7 @@ function
 show(data){
 	var orderlist=data
 	$.each(orderlist,function(index,item){
-        console.log(item)
+		console.log(item)
 		if(item.status=="0"){//未完成
 			/*<tr>
                                                                     <td>房型</td>
@@ -85,7 +83,7 @@ show(data){
             		$('<td>').append(new Date(parseInt(item.timeend+"000")).getFullYear()+"-"+(new Date(parseInt(item.timeend+"000")).getMonth()+1)+"-"+new Date(parseInt(item.timeend+"000")).getDate()),
             		$('<td>').append(item.price)))
 		}
-		else if(status=="2"){
+		else if(item.status=="2"){
 			/*<!--<tr>
                                                                     <td>房型</td>
                                                                     <td>Aug 22, 2018</td>
@@ -132,15 +130,19 @@ modifyInfo=function(){
 		"email":$('#xiugaiemail').val(),
 		"password":$('#nowpw').val()
 	}
+	console.log(JSON.stringify(obj))
 	$.ajax({
 		url:"/user/modifyinfo",
-		dataType:"application/json",
+		dataType:"json",
 		contentType:"application/json",
 		data:JSON.stringify(obj),
 		type:"POST",
+		async:true,
 		success: function (data){
 			if(data=="success"){
 				alert("修改成功，请重新登录")
+				window.sessionStorage.setItem("email",$('#xiugaiemail').val())
+                window.sessionStorage.setItem("phone",$('#xiugaiphone').val())
 				window.location.href="/login"
 			}
 			else{
@@ -149,6 +151,7 @@ modifyInfo=function(){
 			}
 		}
 	})
+	return false
 }
 
 updatePw=function(){
@@ -167,13 +170,16 @@ updatePw=function(){
 	}
 	$.ajax({
 		url: "/user/updatepw",
-		dataType:"application/json",
+		dataType:"json",
 		contentType:"application/json",
 		data:JSON.stringify(obj),
 		type:"POST",
+		async:true,
 		success: function(data){
 			if(data=="success"){
-				alert("修改密码成功")
+				alert("修改密码成功,请重新登录")
+				window.location.href="/login"
+
 			}
 			else{
 				alert(data)
@@ -194,6 +200,7 @@ tuiorder=function(data){
     }
     $.ajax({
         url:"/user/tuiorder",
+        type:"POST",
         async:true,
         dataType:"json",
         contentType:"application/json",

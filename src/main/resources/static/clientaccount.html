@@ -219,30 +219,30 @@
                                             <div class="myaccount-content">
                                                     <h5>修改个人信息</h5>
                                                     <div class="account-details-form">
-                                                        <form action="#">
+                                                        <form onsubmit="return modifyInfo()">
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
-                                                                        <label for="first-name" class="required">邮箱</label>
-                                                                        <input type="email" id="first-name" placeholder="邮箱" id="xiugaiemail"/>
+                                                                        <label for="xiugaiemail" class="required">邮箱</label>
+                                                                        <input type="email" placeholder="邮箱" id="xiugaiemail"/>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
-                                                                        <label for="last-name" class="required">电话号码</label>
-                                                                        <input type="text" id="last-name" placeholder="电话号码" id="xiugaiphone"/>
+                                                                        <label for="xiugaiphone" class="required">电话号码</label>
+                                                                        <input type="text" placeholder="电话号码" id="xiugaiphone"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <fieldset>
                                                                 
                                                                 <div class="single-input-item">
-                                                                    <label for="current-pwd" class="required">请输入密码</label>
-                                                                    <input type="password" id="current-pwd" placeholder="当前密码" id="nowpw" />
+                                                                    <label for="nowpw" class="required">请输入密码</label>
+                                                                    <input type="password" placeholder="当前密码" id="nowpw" />
                                                                 </div>
                                                             </fieldset>
                                                             <div class="single-input-item">
-                                                                <button class="btn btn-sqr" onclick="modifyInfo()">保存更改</button>
+                                                                <button class="btn btn-sqr" type="submit">保存更改</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -253,20 +253,20 @@
                                                 <div class="myaccount-content">
                                                     <h5>修改密码</h5>
                                                                 <div class="single-input-item">
-                                                                    <label for="current-pwd" class="required">当前密码</label>
-                                                                    <input type="password" id="current-pwd2" placeholder="当前密码" id="mfnpw"/>
+                                                                    <label for="mfnpw" class="required">当前密码</label>
+                                                                    <input type="password" placeholder="当前密码" id="mfnpw"/>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
-                                                                            <label for="new-pwd" class="required">新密码</label>
-                                                                            <input type="password" id="new-pwd" placeholder="新密码" id="newpw" />
+                                                                            <label for="newpw" class="required">新密码</label>
+                                                                            <input type="password" placeholder="新密码" id="newpw" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-lg-6">
                                                                         <div class="single-input-item">
-                                                                            <label for="confirm-pwd" class="required">再次输入</label>
-                                                                            <input type="password" id="confirm-pwd" placeholder="再次输入" id="newpw2"/>
+                                                                            <label for="newpw2" class="required">再次输入</label>
+                                                                            <input type="password"  placeholder="再次输入" id="newpw2"/>
                                                                         </div>
                                                                     </div>
                                                                 </div>

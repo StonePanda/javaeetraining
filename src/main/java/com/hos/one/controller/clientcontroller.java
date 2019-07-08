@@ -439,6 +439,7 @@ public class Clientcontroller {
     @PostMapping("updatecomment")
     public String postUpdataComment(@RequestBody Map<String,String> map){
         Order newOrder=new Order();
+        newOrder.setOrderid(Integer.parseInt(map.get("orderid")));
         newOrder.setCommentcontent(map.get("commentcontent"));
         newOrder.setCommentstar(Integer.parseInt(map.get("commentstar")));
         orderservice.updateOrderByOrderidSelectice(newOrder);

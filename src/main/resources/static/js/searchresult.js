@@ -832,6 +832,11 @@ $("#citylistshow span").on("click",function(){
 		//donothing
 	}
 	else{
-		window.location.href="/map"
+        if(window.sessionStorage.hasOwnProperty("clientpoint")==false||$('#searchsousuok').val()==""){
+            alert("需要输入目的地才能使用地图模式！")
+        }
+        else{
+            window.location.href="/map"
+        }
 	}
 })

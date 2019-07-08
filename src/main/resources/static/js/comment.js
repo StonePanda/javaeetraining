@@ -85,8 +85,10 @@ commentnow=function(){
 		"commentcontent":$('#commentcontent').val(),//评论内容
 		"commentstar":$('#commentstar input[name="rating"]:checked').val()//得到的就是数字
 	}
+	console.log(obj)
 	$.ajax({
 		url:"/user/updatecomment",
+		type:"POST",
 		dataType:"json",
 		contentType:"application/json",
 		async:true,

@@ -113,7 +113,7 @@
   <update id="updateByOrderTui" parameterType="map">
     update roomtype
     <set>
-      num = num + #{minusnum,jdbcType=INTEGER},
+      num = num + #{addnum,jdbcType=INTEGER},
     </set>
     where hotelid = #{hotelid,jdbcType=INTEGER}
     and roomtype = #{roomtype,jdbcType=VARCHAR}
